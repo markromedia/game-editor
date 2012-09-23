@@ -1,0 +1,12 @@
+div#fpscontainer span
+{
+	font-size: 20;
+	font-family: Oloron Tryout;
+	font-face: Oloron Tryout;
+	font-weight: bold;
+	color: white;
+
+	darken-font-effect: shadow;
+    darken-offset: 1px 1px;
+    darken-color: blue;
+}

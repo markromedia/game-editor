@@ -1,0 +1,17 @@
+<rml>
+  <head>
+    <link type="text/css" href="style.rcss"/>
+    <style>
+      body
+      {
+        width: 1024px;
+        height: 960px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fpscontainer">
+      <span>FPS:</span><span id="framerate"></span>
+    </div>
+  </body>
+</rml>
