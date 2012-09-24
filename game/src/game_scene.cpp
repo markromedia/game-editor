@@ -27,23 +27,25 @@ Graphics::RenderOperation* render_wire_frame;
 
 void initModels()
 {
-	int model = 4;
-	render_wire_frame = Graphics::RenderOperationManager::GetDrawWireframeOp(model);
+	Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
+
+	int model = 0;
 	render_cube_op = Graphics::RenderOperationManager::GetDrawModelOp(model);
 	render_cube_op->Color.rbga(1, 0, 0, 1);
-	render_cube_op->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon.bmp");
+	//render_cube_op->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon.bmp");
 	//render_cube_op->Toon_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
 
-	float x_pos = 0, y_pos = 0, z_pos = 100;
+	float x_pos = 0, y_pos = 0, z_pos = 0;
 	float x_rot = 30, y_rot = 0, z_rot = 0;
-	glm::mat4 model_matrix;
-	glm::translate(model_matrix, glm::vec3(x_pos, y_pos, z_pos));
+	
+	glm::vec3 t_vec = glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, z_pos);
+	glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
+	model_matrix = glm::rotate(model_matrix, -30.0f, glm::vec3(1, 0, 0));
+	
 	render_cube_op->ModelMatrix = model_matrix;
-	render_wire_frame->ModelMatrix = model_matrix;
 	//render_cube_op->ModelMatrix.SetTranslation(x_pos, y_pos, z_pos);
 	//render_wire_frame->ModelMatrix.SetTranslation(x_pos, y_pos, z_pos);
 
-	Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
 }
 
 void GameScene::Init()
@@ -73,7 +75,7 @@ void GameScene::Update(float dt)
 	Logger::GetInstance()->StartLogPreformance();
 
 	//move camera
-	Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
+	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
 	
 	//update background
 	Background.Update(dt);

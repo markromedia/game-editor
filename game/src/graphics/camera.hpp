@@ -46,11 +46,11 @@ namespace Graphics {
 
 		/// Gets the view matrix.
 		/// @return	The view matrix.
-		glm::mat4& ViewMatrix();
+		glm::mat4 ViewMatrix();
 
 		/// Gets the projection matrix.
 		/// @return	The projection matrix.
-		glm::mat4& ProjectionMatrix();
+		glm::mat4 ProjectionMatrix();
 
 		/// Sets a world position.
 		/// @param	x	(optional) the  float to process.

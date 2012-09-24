@@ -77,13 +77,11 @@ calc_directional_light(vec3 normal)
 	computed_color += (u_light.ambient_color * u_material.ambient_color);
 	computed_color += (ndotl * u_light.diffuse_color * u_material.diffuse_color);
 
-	/*
 	float ndoth = max(c_zero, dot(normal, u_light.halfplane));
 	if (ndoth > c_zero)
 	{
 		computed_color += (pow(ndoth, u_material.specular_exponent) * u_material.specular_color * u_light.specular_color);
 	}
-	*/
 	
 	return computed_color;
 }	
@@ -109,8 +107,8 @@ apply_linear_fog_factor(vec4 color)
 void main()									
 {												
 	vec3 normal = normalize(v_normal); //renormalize incase interpolating screws up our lengths
-	//vec4 color = calc_directional_light(normal);
-	vec4 color = calc_toon_shading(normal);
+	vec4 color = calc_directional_light(normal);
+	//vec4 color = calc_toon_shading(normal);
 	
 	if (u_has_diffuse_texture) 
 	{

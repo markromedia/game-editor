@@ -16,23 +16,25 @@ void Graphics::Camera::InitAsOrtho( int width, int height )
 void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_ratio, float near, float far )
 {
 	world_x = world_y = world_z = 0;
-	projection_matrix = glm::perspective(Math::DegreeToRadian(fov_angle_in_deg), aspect_ratio, near, far);
+	projection_matrix = glm::perspective(fov_angle_in_deg, aspect_ratio, near, far);
 	//figure out the fullscreen z
 	fullscreen_z = 1 / (tan(Math::DegreeToRadian(fov_angle_in_deg / 2))) * (Constants::SCREEN_HEIGHT / 4);
 }
 
-glm::mat4& Graphics::Camera::ViewMatrix()
+glm::mat4 Graphics::Camera::ViewMatrix()
 {
-	glm::vec3 translation = glm::vec3( -world_x, -world_y, -world_z);
-	glm::vec3 lookat = glm::vec3(world_x, world_y, world_z);
-	return glm::lookAt(
+	glm::vec3 translation = glm::vec3( world_x, world_y, world_z);
+	glm::vec3 lookat = glm::vec3(world_x, world_y, 0);
+	glm::mat4 view_matrix =  glm::lookAt(
 		translation,
 		lookat,
 		glm::vec3( 0.0f, 1.0f, 0.0f )
 	);
+
+	return view_matrix;
 }
 
-glm::mat4& Graphics::Camera::ProjectionMatrix()
+glm::mat4 Graphics::Camera::ProjectionMatrix()
 {
 	return projection_matrix;
 }

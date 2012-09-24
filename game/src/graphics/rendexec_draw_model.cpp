@@ -157,9 +157,13 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	//send the matrices
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
 	glUniformMatrix4fv(model_view_matrix_uniform, 1, 0, glm::value_ptr(model_view_mat));
+	
+	//bools
 	glUniform1f(has_diffuse_texture_uniform, render->Diffuse_Texture != NULL ? 1 : 0);
 	glUniform1f(has_toon_texture_uniform, render->Toon_Texture != NULL ? 1 : 0);
 	glUniform1f(has_illumination_texture_uniform, render->Illumination_Texture != NULL ? 1 : 0);
+	
+	//the primary color
 	glUniform4f(primary_color_uniform, render->Color.r, render->Color.g, render->Color.b, render->Color.a);
 
 	//set fog
@@ -167,12 +171,10 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	glUniform1f(fog_max_distance_uniform, 1500);
 
 	//set the transformed light vector
-	//glm::mat4 transformed_light = render->Camera->ViewMatrix() * light.light_direction;
-	//glm::normalize(transformed_light);
+	glm::vec4 transformed_light = render->Camera->ViewMatrix() * light.light_direction;
+	transformed_light = glm::normalize(transformed_light);
+	glUniform4f(light_uniform_direction, transformed_light.x, transformed_light.y, transformed_light.z, 0);
 	
-	//glUniform4f(light_uniform_direction, transformed_light.x, transformed_light.y, transformed_light.z, 0);
-	glUniform4f(light_uniform_halfplane, light.light_half_plane.x, light.light_half_plane.y, light.light_half_plane.z, 0); 
-
 	glUniform3f(light_uniform_halfplane, light.light_half_plane.x, light.light_half_plane.y, light.light_half_plane.z); //????
 
 	//send the light colors
