@@ -25,9 +25,12 @@
 Graphics::RenderOperation* render_cube_op;
 Graphics::RenderOperation* render_wire_frame;
 
+float rot;
 void initModels()
 {
+	rot = 0;
 	Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
+	Game::PerspectiveCamera->orient(0 , 0, 0);
 
 	int model = 0;
 	render_cube_op = Graphics::RenderOperationManager::GetDrawModelOp(model);
@@ -76,6 +79,8 @@ void GameScene::Update(float dt)
 
 	//move camera
 	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
+	rot += dt / 1000 * 2;
+	Game::PerspectiveCamera->orient(rot, rot, rot);
 	
 	//update background
 	Background.Update(dt);

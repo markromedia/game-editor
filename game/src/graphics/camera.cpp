@@ -31,7 +31,7 @@ glm::mat4 Graphics::Camera::ViewMatrix()
 		glm::vec3( 0.0f, 1.0f, 0.0f )
 	);
 
-	return view_matrix;
+	return view_matrix * rotation_matrix;
 }
 
 glm::mat4 Graphics::Camera::ProjectionMatrix()
@@ -49,5 +49,11 @@ void Graphics::Camera::SetWorldPosition( float x /*= 0*/, float y /*= 0*/, float
 float Graphics::Camera::FullScreenZ()
 {
 	return fullscreen_z;
+}
+
+void Graphics::Camera::orient(float x, float y, float z)
+{
+	//rotation_matrix = glm::toMat4(glm::quat(glm::vec3(Math::DegreeToRadian(x), Math::DegreeToRadian(y), Math::DegreeToRadian(z))));
+	rotation_matrix = glm::toMat4(glm::quat(glm::vec3(x, y, z)));
 }
 

@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "../math/matrix3.hpp"
 #include "../math/matrix4.hpp"
@@ -23,6 +24,9 @@ namespace Graphics {
 
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
+
+		/// @summary	The rotation matrix
+		glm::mat4 rotation_matrix;
 
 		/// @summary	this is the internal variable which holds the z value that will cause a plane of 
 		/// 			SCREENWIDTH x SCREENHEIGHT dimensions to completely fill the screen using this
@@ -61,6 +65,8 @@ namespace Graphics {
 		/// Gets the full screen z value
 		/// @return the full screen z value
 		float FullScreenZ();
+
+		void orient(float x, float y, float z);
 	};
 }
 #endif  // __CAMERA_hpp
