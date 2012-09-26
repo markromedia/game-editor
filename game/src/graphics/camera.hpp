@@ -18,15 +18,20 @@ namespace Graphics {
 	class Camera
 	{
 	private:
-
-		/// @summary	The view matrix.
-		glm::mat4 view_matrix;
-
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
 
 		/// @summary	The rotation matrix
 		glm::mat4 rotation_matrix;
+
+		/// @summary	The translation matrix.
+		glm::mat4 translation_matrix;
+
+		/// @summary	the translation vector
+		glm::vec3 translation_vec;
+
+		/// @summary	The rotation vec.
+		glm::vec3 rotation_vec;
 
 		/// @summary	this is the internal variable which holds the z value that will cause a plane of 
 		/// 			SCREENWIDTH x SCREENHEIGHT dimensions to completely fill the screen using this

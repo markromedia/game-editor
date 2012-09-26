@@ -32,13 +32,13 @@ void initModels()
 	Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
 	Game::PerspectiveCamera->orient(0 , 0, 0);
 
-	int model = 0;
+	int model = 2;
 	render_cube_op = Graphics::RenderOperationManager::GetDrawModelOp(model);
 	render_cube_op->Color.rbga(1, 0, 0, 1);
 	//render_cube_op->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon.bmp");
 	//render_cube_op->Toon_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
 
-	float x_pos = 0, y_pos = 0, z_pos = 0;
+	float x_pos = 0, y_pos = 0, z_pos = 200;
 	float x_rot = 30, y_rot = 0, z_rot = 0;
 	
 	glm::vec3 t_vec = glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, z_pos);
@@ -79,8 +79,8 @@ void GameScene::Update(float dt)
 
 	//move camera
 	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
-	rot += dt / 1000 * 2;
-	Game::PerspectiveCamera->orient(rot, rot, rot);
+	//rot += dt / 1000 * 2;
+	Game::PerspectiveCamera->orient(0, 0, rot);
 	
 	//update background
 	Background.Update(dt);

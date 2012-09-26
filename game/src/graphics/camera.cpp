@@ -23,15 +23,16 @@ void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_r
 
 glm::mat4 Graphics::Camera::ViewMatrix()
 {
-	glm::vec3 translation = glm::vec3( world_x, world_y, world_z);
-	glm::vec3 lookat = glm::vec3(world_x, world_y, 0);
-	glm::mat4 view_matrix =  glm::lookAt(
-		translation,
-		lookat,
-		glm::vec3( 0.0f, 1.0f, 0.0f )
-	);
+	translation_matrix = glm::mat4();
+	//update the position
+	translation_vec.x = world_x;
+	translation_vec.y = world_y;
+	translation_vec.z = world_z;
+	translation_matrix = glm::translate(translation_matrix, translation_vec);
 
-	return view_matrix * rotation_matrix;
+	//view matrix is just premultiplied rotation (so we rotate first) and a translation, inversed
+	translation_matrix = glm::inverse(translation_matrix * rotation_matrix);
+	return translation_matrix;
 }
 
 glm::mat4 Graphics::Camera::ProjectionMatrix()
@@ -53,7 +54,7 @@ float Graphics::Camera::FullScreenZ()
 
 void Graphics::Camera::orient(float x, float y, float z)
 {
-	//rotation_matrix = glm::toMat4(glm::quat(glm::vec3(Math::DegreeToRadian(x), Math::DegreeToRadian(y), Math::DegreeToRadian(z))));
-	rotation_matrix = glm::toMat4(glm::quat(glm::vec3(x, y, z)));
+	rotation_vec.x = x; rotation_vec.y = y; rotation_vec.z = z;
+	rotation_matrix = glm::toMat4(glm::quat(rotation_vec));
 }
 
