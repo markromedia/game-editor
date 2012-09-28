@@ -2,6 +2,8 @@
 #ifndef __RENDER_OPERATION__hpp
 #define __RENDER_OPERATION__hpp
 
+#include <vector>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -19,7 +21,7 @@ namespace Graphics {
 	class RenderOperation
 	{
 	public:
-		enum OperationType { DRAW_TEXTURE, DRAW_STAR_FIELD, DRAW_MODEL, DRAW_WIREFRAME };
+		enum OperationType { DRAW_TEXTURE, DRAW_STAR_FIELD, DRAW_MODEL, DRAW_WIREFRAME, DRAW_SKYBOX };
 
 		/// Default constructor.
 		RenderOperation(void);
@@ -44,6 +46,9 @@ namespace Graphics {
 
 		/// @summary	Possible illumination texture
 		Texture* Illumination_Texture;
+
+		/// @summary	The skybox textures.
+		std::vector<Texture*> Skybox_Textures;
 
 		/// @summary	Global translation to apply to the VBO
 		float translation_x, translation_y, translation_z;

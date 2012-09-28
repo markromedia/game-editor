@@ -18,14 +18,11 @@ namespace Graphics {
 	class Camera
 	{
 	private:
+		/// @summary	the basic view frame
+		glm::mat3 view_frame;
+
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
-
-		/// @summary	The rotation matrix
-		glm::mat4 rotation_matrix;
-
-		/// @summary	The translation matrix.
-		glm::mat4 translation_matrix;
 
 		/// @summary	the translation vector
 		glm::vec3 translation_vec;
@@ -38,6 +35,12 @@ namespace Graphics {
 		/// 			perspective
 		float fullscreen_z;
 	public:
+		/// @summary	The rotation matrix
+		glm::mat3 rotation_matrix;
+
+		/// @summary	The translation matrix.
+		glm::mat4 translation_matrix;
+
 		/// the world space coordinates of the camera
 		float world_x, world_y, world_z;
 

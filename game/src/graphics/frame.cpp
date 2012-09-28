@@ -10,6 +10,7 @@
 #include "rendexec_star_field.hpp"
 #include "rendexec_draw_model.hpp"
 #include "rendexec_draw_wireframe.hpp"
+#include "rendexec_draw_skybox.hpp"
 #include "vertex_buffer.hpp"
 #include "camera.hpp"
 
@@ -22,6 +23,7 @@ Frame::Frame(void)
 	executors.push_back(new StarFieldExecutor);
 	executors.push_back(new DrawModelExecutor);
 	executors.push_back(new DrawWireframeExecutor);
+	executors.push_back(new DrawSkyboxExecutor);
 }
 
 void Frame::Init()

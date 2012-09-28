@@ -94,6 +94,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\data\model\cube2.h" />
     <ClInclude Include="src\data\model\enemy.h" />
     <ClInclude Include="src\data\model\falcon.h" />
+    <ClInclude Include="src\data\model\skybox.h" />
     <ClInclude Include="src\data\model\station.h" />
     <ClInclude Include="src\data\model\teapot.h" />
     <ClInclude Include="src\data\model\torus.h" />
@@ -111,6 +112,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\graphics\glstate.hpp" />
     <ClInclude Include="src\graphics\renderexecutor.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_model.hpp" />
+    <ClInclude Include="src\graphics\rendexec_draw_skybox.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_wireframe.hpp" />
     <ClInclude Include="src\graphics\rendexec_star_field.hpp" />
     <ClInclude Include="src\graphics\render_operation.hpp" />
@@ -131,6 +133,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\math\vector4.hpp" />
     <ClInclude Include="src\opengl.h" />
     <ClInclude Include="src\sdl_app.hpp" />
+    <ClInclude Include="src\skybox.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\background.cpp" />
@@ -148,6 +151,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClCompile Include="src\graphics\gllogger.cpp" />
     <ClCompile Include="src\graphics\glstate.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_model.cpp" />
+    <ClCompile Include="src\graphics\rendexec_draw_skybox.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_texture.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_wireframe.cpp" />
     <ClCompile Include="src\graphics\rendexec_star_field.cpp" />
@@ -167,6 +171,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClCompile Include="src\graphics\texture.cpp" />
     <ClCompile Include="src\math\vector4.cpp" />
     <ClCompile Include="src\sdl_app.cpp" />
+    <ClCompile Include="src\skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -190,6 +195,8 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <None Include="resources\rocket\Oloron.TTF" />
     <None Include="resources\shader\draw_model.frag" />
     <None Include="resources\shader\draw_model.vert" />
+    <None Include="resources\shader\draw_skybox.frag" />
+    <None Include="resources\shader\draw_skybox.vert" />
     <None Include="resources\shader\draw_texture.frag" />
     <None Include="resources\shader\draw_texture.vert" />
     <None Include="resources\shader\fragment.frag" />

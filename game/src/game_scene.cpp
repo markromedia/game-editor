@@ -21,43 +21,56 @@
 #include "graphics/vertex_buffer_manager.hpp"
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/vertex_data.hpp"
+#include "data/model_loader.hpp"
 
-Graphics::RenderOperation* render_cube_op;
+Graphics::RenderOperation* render_model1;
+Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
+bool render1Enabled = true;
+bool render2Enabled = true;
+
+int render_1_model = ModelLoader::TEAPOT;
+int render_2_model = ModelLoader::TORUS;
+
 void initModels()
 {
 	rot = 0;
-	Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
+	//Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
+	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
 	Game::PerspectiveCamera->orient(0 , 0, 0);
 
-	int model = 2;
-	render_cube_op = Graphics::RenderOperationManager::GetDrawModelOp(model);
-	render_cube_op->Color.rbga(1, 0, 0, 1);
-	//render_cube_op->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon.bmp");
-	//render_cube_op->Toon_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
+	if (render1Enabled) {
+		float x_pos = 0, y_pos = 100, z_pos = -400;
+		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
+		render_model1->Color.rbga(1, 0, 0, 1);
+		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
+		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
+		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
+		render_model1->ModelMatrix = model_matrix;
+		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\enemy_text02.bmp");
+	}
 
-	float x_pos = 0, y_pos = 0, z_pos = 200;
-	float x_rot = 30, y_rot = 0, z_rot = 0;
-	
-	glm::vec3 t_vec = glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, z_pos);
-	glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
-	model_matrix = glm::rotate(model_matrix, -30.0f, glm::vec3(1, 0, 0));
-	
-	render_cube_op->ModelMatrix = model_matrix;
-	//render_cube_op->ModelMatrix.SetTranslation(x_pos, y_pos, z_pos);
-	//render_wire_frame->ModelMatrix.SetTranslation(x_pos, y_pos, z_pos);
-
+	if (render2Enabled) {
+		float x_pos = 0, y_pos = 0, z_pos = -200;
+		render_model2 = Graphics::RenderOperationManager::GetDrawModelOp(render_2_model);
+		render_model2->Color.rbga(1, 0, 0, 1);
+		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
+		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
+		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
+		render_model2->ModelMatrix = model_matrix;
+		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
+	}
 }
 
 void GameScene::Init()
 {
-	//init background
-	Background.Prepare(1);
-
 	initModels();
-	
+
+	//init skybox
+	Skybox.Setup();
+
 	//load textures
 	Graphics::TextureManager::LoadTextures();
 	//create vbos
@@ -79,26 +92,23 @@ void GameScene::Update(float dt)
 
 	//move camera
 	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
-	//rot += dt / 1000 * 2;
-	Game::PerspectiveCamera->orient(0, 0, rot);
+	rot += dt / 1000 * 50;
+	Game::PerspectiveCamera->orient(0, 0, 0);
 	
-	//update background
-	Background.Update(dt);
-
+	//draw skybox
+	Skybox.Update();
+	
 	//set FPS and draw librocket stuff
 	int fps = ((Game::FrameRate + 0.5f) * 100) / 100;
 	const std::string s = boost::lexical_cast<std::string>(fps);
 	document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(s.c_str()));
 	Game::LibRocketContext->Update();
 
-	//draw model
-	/*
-	render_cube_op->ModelMatrix.data[13] = Game::PerspectiveCamera->world_y;
-	render_wire_frame->ModelMatrix.data[13] = Game::PerspectiveCamera->world_y;
-	*/
-	//Game::ScreenFrame->QueueRenderOperation(render_wire_frame, Game::PerspectiveCamera);
-	Game::ScreenFrame->QueueRenderOperation(render_cube_op, Game::PerspectiveCamera);
-
+	//draw models
+	if (render1Enabled)
+		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
+	if (render2Enabled)
+		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
 
 	Logger::GetInstance()->LogPreformance("GameScene::Render");
 	Render();

@@ -8,6 +8,7 @@
 
 #include "game.hpp"
 #include "background.hpp"
+#include "skybox.hpp"
 
 //forward declarations
 namespace Graphics
@@ -25,6 +26,7 @@ class GameScene : public Scene
 public:
 	Rocket::Core::ElementDocument* document;
 	Background Background;
+	Skybox Skybox;
 
 	void Init();
 	void Update(float dt);
