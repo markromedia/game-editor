@@ -58,6 +58,7 @@ public:
 	/// the cameras
 	static Graphics::Camera				*PerspectiveCamera;
 	static Graphics::Camera				*OrthoCamera;
+	static Graphics::Camera				*SkyboxCamera;
 };
 
 ///-----------------------------------------------------------------------------------------------

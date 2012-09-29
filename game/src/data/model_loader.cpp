@@ -97,10 +97,12 @@ Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 	{
 		int idx = NUM_ELEMENTS * i;
 
+		int multipier = model == SKYBOX ? 10 : 1;
+
 		//x, y, z
-		buf->iva_data.push_back((float) vertices[idx]);
-		buf->iva_data.push_back((float) vertices[idx + 1]);
-		buf->iva_data.push_back((float) vertices[idx + 2]);
+		buf->iva_data.push_back((float) vertices[idx] * multipier);
+		buf->iva_data.push_back((float) vertices[idx + 1] * multipier);
+		buf->iva_data.push_back((float) vertices[idx + 2] * multipier);
 		//u, v
 		buf->iva_data.push_back((float) vertices[idx + 3]);
 		buf->iva_data.push_back((float) vertices[idx + 4]);

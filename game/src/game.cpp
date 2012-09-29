@@ -13,6 +13,7 @@ Rocket::Core::Context* Game::LibRocketContext = NULL;
 Graphics::Frame* Game::ScreenFrame = NULL;
 Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
+Graphics::Camera* Game::SkyboxCamera = NULL;
 
 float Game::FrameRate = 0, Game::update_time =0, Game::render_time = 0;
 
@@ -24,8 +25,10 @@ Game::Game(void)
 
 	Game::PerspectiveCamera = new Graphics::Camera();
 	Game::OrthoCamera = new Graphics::Camera();
+	Game::SkyboxCamera = new Graphics::Camera();
 
 	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 5000.0f);
+	Game::SkyboxCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 5000.0f);
 	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
 } 
 

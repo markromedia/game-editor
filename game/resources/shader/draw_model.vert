@@ -34,9 +34,5 @@ void main ()
 	vec3 eye_pos = vec3(0, 0, 0);
 	vec4 view_space_vert = u_modelview_matrix * a_position;
 	v_eye_distance = abs(view_space_vert.z);
-	
-	//sqrt( (view_space_vert.x - eye_pos.x) * (view_space_vert.x - eye_pos.x) +
-   //							(view_space_vert.y - eye_pos.y) * (view_space_vert.y - eye_pos.y) +
-	//					   (view_space_vert.z - eye_pos.z) * (view_space_vert.z - eye_pos.z));
 }	
 						

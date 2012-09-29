@@ -28,8 +28,8 @@ Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
-bool render1Enabled = true;
-bool render2Enabled = true;
+bool render1Enabled = false;
+bool render2Enabled = false;
 
 int render_1_model = ModelLoader::TEAPOT;
 int render_2_model = ModelLoader::TORUS;
@@ -93,8 +93,14 @@ void GameScene::Update(float dt)
 	//move camera
 	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
 	rot += dt / 1000 * 50;
-	Game::PerspectiveCamera->orient(0, 0, 0);
+	float rot_x = rot; float rot_y = rot; float rot_z = rot;
 	
+	//update orientations of camera
+	Game::PerspectiveCamera->orient(rot_x, rot_y, rot_z);
+	Game::SkyboxCamera->orient(rot_x, rot_y, rot_z);
+	Game::PerspectiveCamera->update(dt);
+	Game::SkyboxCamera->update(dt);
+
 	//draw skybox
 	Skybox.Update();
 	

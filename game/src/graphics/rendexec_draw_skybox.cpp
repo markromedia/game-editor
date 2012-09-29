@@ -79,25 +79,29 @@ void DrawSkyboxExecutor::Execute(RenderOperation* renderOp)
 
 	//point to the vertices
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
 
 	//point to the texture
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->texture_offset);
 
 	//bind texture
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderOp->Diffuse_Texture->texture_id);
-	CHECK_GL_ERROR();
-
 	glUniform1i(texture_sampler_uniform, 0);
 	CHECK_GL_ERROR();
 
 	//bind ibo/draw
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
-	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
 	CHECK_GL_ERROR();
 
-	//enable depth testing
-	GLState::Enable(GL_DEPTH_TEST);
+	for (int i = 0; i < 6; i++)
+	{
+		//bind texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, renderOp->Skybox_Textures[i]->texture_id);
+		CHECK_GL_ERROR();
+
+		//bind ibo/draw
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const GLvoid*)((6 * i) * sizeof(GLushort)));
+		CHECK_GL_ERROR();
+	}
 }

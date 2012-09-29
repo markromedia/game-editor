@@ -4,9 +4,6 @@
 #include "../math/vector4.hpp"
 #include "../constants.cpp"
 
-using namespace Graphics;
-
-
 void Graphics::Camera::InitAsOrtho( int width, int height )
 {
 	world_x = world_y = world_z = fullscreen_z = 0;
@@ -26,14 +23,19 @@ void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_r
 	view_frame[2][0] = 0; view_frame[2][1] = 0; view_frame[2][2] = 1;
 }
 
-glm::mat4 Graphics::Camera::ViewMatrix()
+void Graphics::Camera::update(float dt)
 {
 	glm::mat3 orientation = glm::inverse(view_frame * rotation_matrix);
-	glm::mat4 inverse_view_frame = glm::mat4(orientation);
+	inverse_view_frame = glm::mat4(orientation);
 	translation_vec.x = -world_x;
 	translation_vec.y = -world_y;
 	translation_vec.z = -world_z;
-	return glm::translate(inverse_view_frame, translation_vec);
+	view_matrix = glm::translate(inverse_view_frame, translation_vec);
+}
+
+glm::mat4 Graphics::Camera::ViewMatrix()
+{
+	return view_matrix;
 }
 
 glm::mat4 Graphics::Camera::ProjectionMatrix()

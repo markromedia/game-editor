@@ -20,6 +20,8 @@ class Skybox
 private:
 	/// @summary	The render operation.
 	Graphics::RenderOperation* renderOperation;
+
+	glm::mat4 model_matrix;
 public:
 	/// Default constructor.
 	Skybox(void);

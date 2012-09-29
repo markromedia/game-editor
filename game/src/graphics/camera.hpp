@@ -21,8 +21,14 @@ namespace Graphics {
 		/// @summary	the basic view frame
 		glm::mat3 view_frame;
 
+		/// @summary	The matrix that takes world into camera space
+		glm::mat4 view_matrix;
+
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
+
+		/// @summary	The rotation matrix
+		glm::mat3 rotation_matrix;
 
 		/// @summary	the translation vector
 		glm::vec3 translation_vec;
@@ -35,11 +41,8 @@ namespace Graphics {
 		/// 			perspective
 		float fullscreen_z;
 	public:
-		/// @summary	The rotation matrix
-		glm::mat3 rotation_matrix;
-
-		/// @summary	The translation matrix.
-		glm::mat4 translation_matrix;
+		/// @summary	The inverse view frame (used by skybox).
+		glm::mat4 inverse_view_frame;
 
 		/// the world space coordinates of the camera
 		float world_x, world_y, world_z;
@@ -74,6 +77,14 @@ namespace Graphics {
 		/// @return the full screen z value
 		float FullScreenZ();
 
+		/// Updates for the given dt.
+		/// @param	dt	The dt.
+		void update(float dt);
+
+		/// Orients the camera
+		/// @param	x	The float to process.
+		/// @param	y	The float to process.
+		/// @param	z	The float to process.
 		void orient(float x, float y, float z);
 	};
 }
