@@ -93,7 +93,7 @@ void GameScene::Update(float dt)
 	//move camera
 	//Game::PerspectiveCamera->world_y += (dt / 1000 * 1500);
 	rot += dt / 1000 * 50;
-	float rot_x = rot; float rot_y = rot; float rot_z = rot;
+	float rot_x = rot; float rot_y = 0; float rot_z = 0;
 	
 	//update orientations of camera
 	Game::PerspectiveCamera->orient(rot_x, rot_y, rot_z);

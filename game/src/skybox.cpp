@@ -37,29 +37,30 @@ Skybox::Skybox()
 void Skybox::Setup()
 {
 	//back
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_180.bmp"));
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_180.png"));
 	
 	//front
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_0.bmp"));
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_0.png"));
 	
 	//bottom
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_bottom.bmp"));
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_bottom.png"));
 
 	//right
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_90.bmp"));
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_90.png"));
 
 	//top
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_top.bmp"));
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_top.png"));
 	
 	//left
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_270.bmp"));
-	
-	//renderOperation->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_bottom.bmp");
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_270.png"));
 }
 
 void Skybox::Update()
 {
 	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, Game::PerspectiveCamera->world_z));
 	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+
+	//renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0));
+	//Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::SkyboxCamera);
 }
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <stdlib.h>
 #include <sdl2/SDL.h>
+#include <sdl_image/SDL_image.h>
 
 #include "gllogger.hpp"
 #include "../logger.hpp"
@@ -26,7 +27,7 @@ void Texture::LoadTexture()
 	GLenum texture_format;
 	GLint  nOfColors;
 
-	if ( (surface = SDL_LoadBMP(filename.c_str())) ) { 
+	if ( (surface = IMG_Load(filename.c_str())) ) { 
 
 		// Check that the image's width is a power of 2
 		if ( (surface->w & (surface->w - 1)) != 0 ) {
