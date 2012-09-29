@@ -43,6 +43,11 @@ glm::mat4 Graphics::Camera::ProjectionMatrix()
 	return projection_matrix;
 }
 
+glm::mat3 Graphics::Camera::ViewFrame()
+{
+	return view_frame * rotation_matrix;
+}
+
 void Graphics::Camera::SetWorldPosition( float x /*= 0*/, float y /*= 0*/, float z /*= 0*/ )
 {
 	world_x = x;

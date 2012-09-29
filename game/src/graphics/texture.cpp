@@ -27,7 +27,15 @@ void Texture::LoadTexture()
 	GLenum texture_format;
 	GLint  nOfColors;
 
-	if ( (surface = IMG_Load(filename.c_str())) ) { 
+	bool success = false;
+	if (filename.find(".bmp", 0) == std::string::npos)
+	{
+		success = (surface = IMG_Load(filename.c_str())) ;	
+	} else {
+		success = (surface = SDL_LoadBMP(filename.c_str())) ;	
+	}
+	
+	if (success) { 
 
 		// Check that the image's width is a power of 2
 		if ( (surface->w & (surface->w - 1)) != 0 ) {

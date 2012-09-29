@@ -59,6 +59,10 @@ namespace Graphics {
 		/// @param	far					The far.
 		void InitAsPerspective(float fov_angle_in_deg, float aspect_ratio, float near, float far);
 
+		/// Gets the current view matrix(view frame x orientation)
+		/// @return	The view frame.
+		glm::mat3 ViewFrame();
+
 		/// Gets the view matrix.
 		/// @return	The view matrix.
 		glm::mat4 ViewMatrix();

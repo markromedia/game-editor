@@ -22,6 +22,10 @@ private:
 	Graphics::RenderOperation* renderOperation;
 
 	glm::mat4 model_matrix;
+
+	void setupIceField();
+
+	void setupNatural16();
 public:
 	/// Default constructor.
 	Skybox(void);

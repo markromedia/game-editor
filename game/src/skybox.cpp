@@ -36,12 +36,24 @@ Skybox::Skybox()
 
 void Skybox::Setup()
 {
+	setupIceField();
+	//setupNatural16();
+}
+
+void Skybox::Update()
+{
+	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, Game::PerspectiveCamera->world_z));
+	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+}
+
+void Skybox::setupIceField()
+{
 	//back
 	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_180.png"));
-	
+
 	//front
 	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_0.png"));
-	
+
 	//bottom
 	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_bottom.png"));
 
@@ -50,17 +62,30 @@ void Skybox::Setup()
 
 	//top
 	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_top.png"));
-	
+
 	//left
 	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\ice_field_270.png"));
 }
 
-void Skybox::Update()
+void Skybox::setupNatural16()
 {
-	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, Game::PerspectiveCamera->world_z));
-	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+	//back
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_back.png"));
 
-	//renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0));
-	//Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::SkyboxCamera);
+	//front
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_front.png"));
+
+	//bottom
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_bottom.png"));
+
+	//right
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_right.png"));
+
+	//top
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_top.png"));
+
+	//left
+	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources\\skybox\\natural16_left.png"));
 }
+
 

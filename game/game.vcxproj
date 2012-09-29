@@ -214,6 +214,18 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <None Include="resources\station_color.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\skybox\ice_field_0.png" />
+    <Image Include="resources\skybox\ice_field_180.png" />
+    <Image Include="resources\skybox\ice_field_270.png" />
+    <Image Include="resources\skybox\ice_field_90.png" />
+    <Image Include="resources\skybox\ice_field_bottom.png" />
+    <Image Include="resources\skybox\ice_field_top.png" />
+    <Image Include="resources\skybox\natural16_back.png" />
+    <Image Include="resources\skybox\natural16_bottom.png" />
+    <Image Include="resources\skybox\natural16_front.png" />
+    <Image Include="resources\skybox\natural16_left.png" />
+    <Image Include="resources\skybox\natural16_right.png" />
+    <Image Include="resources\skybox\natural16_top.png" />
     <Image Include="resources\station_illumination.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
