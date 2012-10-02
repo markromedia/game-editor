@@ -29,6 +29,9 @@ float camera_orientation_z = 0;
 
 float Game::FrameRate = 0, Game::update_time =0, Game::render_time = 0;
 
+const glm::vec3 x_axis = glm::vec3(1, 0, 0);
+const glm::vec3 y_axis = glm::vec3(0, 1, 0);
+
 Game::Game(void) 
 {
 	Game::ScreenFrame = new Graphics::Frame();
@@ -38,7 +41,7 @@ Game::Game(void)
 	Game::OrthoCamera = new Graphics::Camera();
 	Game::SkyboxCamera = new Graphics::Camera();
 
-	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 5000.0f);
+	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
 	Game::SkyboxCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 5000.0f);
 	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
 
@@ -54,9 +57,6 @@ void Game::Init()
 
 void Game::Update( float dt )
 {
-	current_scene->Update(dt);
-	addFrameTime(dt);
-
 	glm::vec3 camera_forward_vector = glm::vec3(PerspectiveCamera->ViewFrame()[2]);
 	glm::vec3 camera_side_vector = glm::vec3(PerspectiveCamera->ViewFrame()[0]);
 
@@ -72,6 +72,9 @@ void Game::Update( float dt )
 		Game::PerspectiveCamera->world_y += CAMERA_VELOCITY * (dt / 1000) * camera_side_vector.y * camera_sideways_direction;
 		Game::PerspectiveCamera->world_z += CAMERA_VELOCITY * (dt / 1000) * camera_side_vector.z * camera_sideways_direction;
 	}
+
+	current_scene->Update(dt);
+	addFrameTime(dt);
 }
 
 void Game::OnEvent( SDL_Event* Event )
@@ -127,26 +130,16 @@ void Game::OnEvent( SDL_Event* Event )
 		}
 
 		case SDL_MOUSEMOTION : {
-			//WHO KNOWS WHATS GOING ON HERE??!?
-			int dy = Event->motion.xrel;
-			int dx = Event->motion.yrel;
-			camera_orientation_x -= dx;
-			camera_orientation_y -= dy;
+			//-rotations correspond to up and left
+			int dy = -Event->motion.yrel;
+			int dx = -Event->motion.xrel;
 
-			/*
-			if (camera_orientation_x < -90.0f)
-				camera_orientation_x = -90.0f;
-			// Limit looking down to vertically down
-			if (camera_orientation_x > 90.0f)
-				camera_orientation_x = 90.0f;
-			if (camera_orientation_y < -180.0f)
-				camera_orientation_y += 360.0f;
-			if (camera_orientation_y > 180.0f)
-				camera_orientation_y -= 360.0f;
-			*/
+			PerspectiveCamera->Rotate(dy, x_axis);
+			SkyboxCamera->Rotate(dy, x_axis);
 
-			PerspectiveCamera->orient(camera_orientation_x, camera_orientation_y, camera_orientation_z);
-			SkyboxCamera->orient(camera_orientation_x, camera_orientation_y, camera_orientation_z);
+			PerspectiveCamera->Rotate(dx, y_axis);
+			SkyboxCamera->Rotate(dx, y_axis);
+			
 
 			break;
 		}

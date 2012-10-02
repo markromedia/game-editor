@@ -77,12 +77,12 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 
 	//enable various states
 	GLState::Enable(GL_DEPTH_TEST);
-	GLState::Enable(GL_CULL_FACE);
+	//GLState::Enable(GL_CULL_FACE);
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-	glCullFace(GL_FRONT);
+	//glCullFace(GL_FRONT);
 
 	//set line width
-	glLineWidth(4.0f);
+	glLineWidth(2.0f);
 
 	//point to the vertices
 	glEnableVertexAttribArray(0);
@@ -94,7 +94,7 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	CHECK_GL_ERROR();
 
 	//reset state
-	GLState::Disable(GL_DEPTH_TEST);
+	//GLState::Disable(GL_DEPTH_TEST);
 	GLState::Disable(GL_CULL_FACE);
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	glCullFace(GL_BACK);

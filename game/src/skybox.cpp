@@ -36,8 +36,8 @@ Skybox::Skybox()
 
 void Skybox::Setup()
 {
-	setupIceField();
-	//setupNatural16();
+	//setupIceField();
+	setupNatural16();
 }
 
 void Skybox::Update()

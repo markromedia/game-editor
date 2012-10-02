@@ -134,6 +134,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\opengl.h" />
     <ClInclude Include="src\sdl_app.hpp" />
     <ClInclude Include="src\skybox.hpp" />
+    <ClInclude Include="src\terrain.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\background.cpp" />
@@ -172,6 +173,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClCompile Include="src\math\vector4.cpp" />
     <ClCompile Include="src\sdl_app.cpp" />
     <ClCompile Include="src\skybox.cpp" />
+    <ClCompile Include="src\terrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

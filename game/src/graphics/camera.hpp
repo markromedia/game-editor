@@ -27,14 +27,15 @@ namespace Graphics {
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
 
-		/// @summary	The rotation matrix
-		glm::mat3 rotation_matrix;
 
 		/// @summary	the translation vector
 		glm::vec3 translation_vec;
 
 		/// @summary	The rotation vec.
 		glm::vec3 rotation_vec;
+
+		/// @summary	The orientation matrix
+		glm::mat3 orientation_matrix;
 
 		/// @summary	this is the internal variable which holds the z value that will cause a plane of 
 		/// 			SCREENWIDTH x SCREENHEIGHT dimensions to completely fill the screen using this
@@ -89,7 +90,12 @@ namespace Graphics {
 		/// @param	x	The float to process.
 		/// @param	y	The float to process.
 		/// @param	z	The float to process.
-		void orient(float x, float y, float z);
+		void Orient(float x, float y, float z);
+
+		/// Preforms an axis-angle rotation on the cameras rotation matrix
+		/// @param	angle	The angle.
+		/// @param	axis 	The axis.
+		void Rotate(float angle, glm::vec3 axis);
 	};
 }
 #endif  // __CAMERA_hpp

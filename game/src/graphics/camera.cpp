@@ -25,7 +25,7 @@ void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_r
 
 void Graphics::Camera::update(float dt)
 {
-	glm::mat3 orientation = glm::inverse(view_frame * rotation_matrix);
+	glm::mat3 orientation = glm::inverse(view_frame * orientation_matrix);
 	inverse_view_frame = glm::mat4(orientation);
 	translation_vec.x = -world_x;
 	translation_vec.y = -world_y;
@@ -45,7 +45,7 @@ glm::mat4 Graphics::Camera::ProjectionMatrix()
 
 glm::mat3 Graphics::Camera::ViewFrame()
 {
-	return view_frame * rotation_matrix;
+	return view_frame * orientation_matrix;
 }
 
 void Graphics::Camera::SetWorldPosition( float x /*= 0*/, float y /*= 0*/, float z /*= 0*/ )
@@ -60,9 +60,14 @@ float Graphics::Camera::FullScreenZ()
 	return fullscreen_z;
 }
 
-void Graphics::Camera::orient(float x, float y, float z)
+void Graphics::Camera::Orient(float x, float y, float z)
 {
 	rotation_vec.x = glm::radians(x); rotation_vec.y = glm::radians(y); rotation_vec.z = glm::radians(z);
-	rotation_matrix = glm::toMat3(glm::quat(rotation_vec));
+	orientation_matrix = glm::toMat3(glm::quat(rotation_vec));
+}
+
+void Graphics::Camera::Rotate(float angle, glm::vec3 axis)
+{
+	orientation_matrix = glm::mat3(glm::rotate(glm::mat4(orientation_matrix), angle, axis));
 }
 

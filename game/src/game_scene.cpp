@@ -22,6 +22,7 @@
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/vertex_data.hpp"
 #include "data/model_loader.hpp"
+#include "terrain.hpp"
 
 Graphics::RenderOperation* render_model1;
 Graphics::RenderOperation* render_model2;
@@ -34,12 +35,14 @@ bool render2Enabled = true;
 int render_1_model = ModelLoader::TEAPOT;
 int render_2_model = ModelLoader::TORUS;
 
+Terrain terrain;
+
 void initModels()
 {
 	rot = 0;
 	//Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
-	Game::PerspectiveCamera->orient(0 , 0, 0);
+	Game::PerspectiveCamera->Orient(0 , 0, 0);
 
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 100, z_pos = -400;
@@ -62,6 +65,8 @@ void initModels()
 		render_model2->ModelMatrix = model_matrix;
 		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
 	}
+
+	terrain.CreateGrid(32, 32, 100);
 }
 
 void GameScene::Init()
@@ -96,6 +101,9 @@ void GameScene::Update(float dt)
 
 	//draw skybox
 	Skybox.Update();
+
+	//draw terraom
+	terrain.Render();
 	
 	//set FPS and draw librocket stuff
 	int fps = ((Game::FrameRate + 0.5f) * 100) / 100;
