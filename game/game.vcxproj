@@ -206,6 +206,7 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <None Include="resources\shader\wireframe.frag" />
     <None Include="resources\shader\wireframe.vert" />
     <None Include="resources\station_color.bmp" />
+    <None Include="resources\terrain.raw" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\skybox\ice_field_0.png" />
