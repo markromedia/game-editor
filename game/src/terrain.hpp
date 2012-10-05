@@ -2,9 +2,11 @@
 #ifndef __TERRAIN__hpp
 #define __TERRAIN__hpp
 
+#include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 //forward declarations
 namespace Graphics
@@ -20,7 +22,15 @@ class Terrain
 private:
 	/// @summary	The render operation.
 	Graphics::RenderOperation* renderOperation;
+	Graphics::RenderOperation* wireframeRenderOperation;
 
+	std::vector<unsigned char> ReadHeightMapData(char* filename);
+
+	/// Assign color to vertex based on normal angle
+	///
+	/// @param [in,out]	v		 	If non-null, the Graphics::Vertex* to process.
+	/// @param	normalized_normal	The normalized normal.
+	void assignColor(Graphics::Vertex* v, glm::vec3 normalized_normal);
 public:
 	/// Default constructor.
 	Terrain(void);

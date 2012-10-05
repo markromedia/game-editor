@@ -87,7 +87,7 @@ bool SdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	if((SDLWindow = SDL_CreateWindow("The Last Spacefighter",
+	if((SDLWindow = SDL_CreateWindow("Flight",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT,
@@ -108,6 +108,9 @@ bool SdlApp::OnInit()
 	LOG_DEBUG("Initializing GLEW");
 	glewInit();
 	CHECK_GL_ERROR();
+
+	/* set viewport */
+	glViewport(0, 0, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
 	
 	/* This makes our buffer swap synchronized with the monitor's vertical refresh */ 
 	SDL_GL_SetSwapInterval(1);

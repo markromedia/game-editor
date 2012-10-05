@@ -1,24 +1,26 @@
-#ifndef __RENDER_EX_DRAW_WIREFRAME_hpp
-#define __RENDER_EX_DRAW_WIREFRAME_hpp
+#ifndef __RENDER_EX_DRAW_TERRAIN_hpp
+#define __RENDER_EX_DRAW_TERRAIN_hpp
 
 #include "../opengl.h"
 #include "renderexecutor.hpp"
 #include "../math/matrix4.hpp"
 #include "../math/vector4.hpp"
+#include "color4f.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 namespace Graphics {
 	//forward declarations
 	class RenderOperation;
 
-	class DrawWireframeExecutor : public Graphics::RenderExecutor
+	class DrawTerrainExecutor : public Graphics::RenderExecutor
 	{
 	private:
 		GLuint programObject;
-		
+
 		GLuint mvp_matrix_uniform;
 		GLuint model_view_matrix_uniform;
 
@@ -27,8 +29,10 @@ namespace Graphics {
 
 		glm::mat4 model_view_mat;
 		glm::mat4 model_view_projection_mat;
+
+		void SetUniforms(RenderOperation* render);
 	public:
-		DrawWireframeExecutor(void);
+		DrawTerrainExecutor(void);
 
 		void Init();
 
@@ -36,4 +40,4 @@ namespace Graphics {
 	};
 }
 
-#endif  // __RENDER_EX_DRAW_WIREFRAME_hpp
+#endif  // __RENDER_EX_DRAW_TERRAIN_hpp

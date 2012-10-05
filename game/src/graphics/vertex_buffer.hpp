@@ -20,6 +20,9 @@
 #include "../opengl.h"
 #include <vector>
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "vertex_data.hpp"
 
 namespace Graphics {
@@ -105,6 +108,13 @@ namespace Graphics {
 			this->n_x = n_x;
 			this->n_y = n_y;
 			this->n_z = n_z;
+		}
+
+		inline void normal(glm::vec3 vec)
+		{
+			this->n_x = vec.x;
+			this->n_y = vec.y;
+			this->n_z = vec.z;
 		}
 	};
 }

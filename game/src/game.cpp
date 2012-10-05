@@ -15,17 +15,14 @@ Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
 Graphics::Camera* Game::SkyboxCamera = NULL;
 
-const float CAMERA_VELOCITY = 1000.0f;
+const float CAMERA_VELOCITY = 5000.0f;
+const float CAMERA_SMOOTH = 0.7f;
 
 bool is_camera_moving_forward = false;
 int camera_forward_direction = 1;
 
 bool is_camera_moving_sideways = false;
 int camera_sideways_direction = 1;
-
-float camera_orientation_x = 0;
-float camera_orientation_y = 0;
-float camera_orientation_z = 0;
 
 float Game::FrameRate = 0, Game::update_time =0, Game::render_time = 0;
 
@@ -41,8 +38,8 @@ Game::Game(void)
 	Game::OrthoCamera = new Graphics::Camera();
 	Game::SkyboxCamera = new Graphics::Camera();
 
-	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
-	Game::SkyboxCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 5000.0f);
+	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 10.0f, 50000.0f);
+	Game::SkyboxCamera->InitAsPerspective(90,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
 	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
 
 	//sdl mouse stuff
@@ -131,8 +128,8 @@ void Game::OnEvent( SDL_Event* Event )
 
 		case SDL_MOUSEMOTION : {
 			//-rotations correspond to up and left
-			int dy = -Event->motion.yrel;
-			int dx = -Event->motion.xrel;
+			int dy = -Event->motion.yrel * CAMERA_SMOOTH;
+			int dx = -Event->motion.xrel * CAMERA_SMOOTH;
 
 			PerspectiveCamera->Rotate(dy, x_axis);
 			SkyboxCamera->Rotate(dy, x_axis);
@@ -140,7 +137,6 @@ void Game::OnEvent( SDL_Event* Event )
 			PerspectiveCamera->Rotate(dx, y_axis);
 			SkyboxCamera->Rotate(dx, y_axis);
 			
-
 			break;
 		}
 	}

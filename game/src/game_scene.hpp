@@ -7,7 +7,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "game.hpp"
-#include "background.hpp"
 #include "skybox.hpp"
 
 //forward declarations
@@ -25,7 +24,6 @@ class GameScene : public Scene
 {
 public:
 	Rocket::Core::ElementDocument* document;
-	Background Background;
 	Skybox Skybox;
 
 	void Init();

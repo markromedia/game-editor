@@ -9,6 +9,7 @@
 #include <Rocket/Core.h>
 #include <boost/lexical_cast.hpp>
 
+
 #include "constants.cpp"
 #include "logger.hpp"
 #include "game.hpp"
@@ -32,6 +33,9 @@ Skybox::Skybox()
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
 	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_SKYBOX;
 	renderOperation->Skybox_Textures.reserve(6);
+
+	//use identity
+	renderOperation->ModelMatrix = glm::scale(glm::mat4(), glm::vec3(10));
 }
 
 void Skybox::Setup()
@@ -42,8 +46,7 @@ void Skybox::Setup()
 
 void Skybox::Update()
 {
-	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(Game::PerspectiveCamera->world_x, Game::PerspectiveCamera->world_y, Game::PerspectiveCamera->world_z));
-	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::SkyboxCamera);
 }
 
 void Skybox::setupIceField()

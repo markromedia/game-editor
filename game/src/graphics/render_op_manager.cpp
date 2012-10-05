@@ -52,22 +52,6 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	return &(RenderOperationManager::instance->render_operations.back());
 }
 
-RenderOperation* RenderOperationManager::GetDrawStarfieldOp(float point_size, Color4f color, int num_stars)
-{
-	_checkCreateInstance();
-
-	RenderOperation r = RenderOperation();
-
-	//set values
-	r.Operation_Type = RenderOperation::OperationType::DRAW_STAR_FIELD;
-	r.Color = color;
-	r.VertexBuffer = VertexBufferManager::GetBuffer(DISABLE_IBO | ONE_FLOAT_COLOR, num_stars, 0);
-	r.PointSize = point_size;
-
-	RenderOperationManager::instance->render_operations.push_back(r);
-	return &(RenderOperationManager::instance->render_operations.back());
-}
-
 RenderOperation* RenderOperationManager::GetDrawModelOp(int model)
 {
 	_checkCreateInstance();

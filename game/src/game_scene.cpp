@@ -29,8 +29,8 @@ Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
-bool render1Enabled = true;
-bool render2Enabled = true;
+bool render1Enabled = false;
+bool render2Enabled = false;
 
 int render_1_model = ModelLoader::TEAPOT;
 int render_2_model = ModelLoader::TORUS;
@@ -66,7 +66,7 @@ void initModels()
 		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
 	}
 
-	terrain.CreateGrid(32, 32, 100);
+	terrain.CreateGrid(128, 128, 500);
 }
 
 void GameScene::Init()

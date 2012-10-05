@@ -94,8 +94,6 @@ void DrawModelExecutor::Init()
 
 void DrawModelExecutor::Execute(RenderOperation* renderOp)
 {
-	glViewport(0, 0, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
-
 	Camera* camera = renderOp->Camera;
 
 	//set up matrices

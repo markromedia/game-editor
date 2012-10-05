@@ -27,9 +27,6 @@ namespace Graphics {
 		/// Returns a render op which is tied to the draw texture operation
 		static RenderOperation* GetDrawTextureOp(std::string texture, int width, int height, int texture_width, int texture_height);
 
-		/// Returns a render op which is tied to the star field render op
-		static RenderOperation* GetDrawStarfieldOp(float point_size, Color4f color, int num_stars = 128);
-
 		/// Gets a draw model operation.
 		/// @param	model	The model.
 		/// @return	null if it fails, else the draw model operation.

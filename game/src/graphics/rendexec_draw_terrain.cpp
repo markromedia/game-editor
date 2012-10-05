@@ -1,4 +1,4 @@
-#include "rendexec_draw_wireframe.hpp"
+#include "rendexec_draw_terrain.hpp"
 
 #include "gllogger.hpp"
 #include "glstate.hpp"
@@ -7,28 +7,24 @@
 #include "vertex_buffer.hpp"
 #include "texture.hpp"
 #include "render_operation.hpp"
-#include "camera.hpp"
 #include "../math/matrix4.hpp"
 #include "../constants.cpp"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include "camera.hpp"
 
 using namespace Graphics;
 
-DrawWireframeExecutor::DrawWireframeExecutor( void )
+DrawTerrainExecutor::DrawTerrainExecutor()
 {
 }
 
-void DrawWireframeExecutor::Init()
+void DrawTerrainExecutor::Init()
 {
 	GLuint programObject;
 	GLint linked;
 
 	//create the shaders
-	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\wireframe.frag");
-	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\wireframe.vert");
+	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\terrain.frag");
+	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\terrain.vert");
 	CHECK_GL_ERROR();
 
 	programObject = glCreateProgram();
@@ -43,6 +39,8 @@ void DrawWireframeExecutor::Init()
 	CHECK_GL_ERROR();
 
 	glBindAttribLocation(programObject, 0, "a_position");
+	glBindAttribLocation(programObject, 1, "a_color");
+	glBindAttribLocation(programObject, 2, "a_normal");
 
 	glLinkProgram(programObject);
 
@@ -65,15 +63,46 @@ void DrawWireframeExecutor::Init()
 	this->programObject = programObject;
 }
 
-void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
+void DrawTerrainExecutor::Execute(RenderOperation* renderOp)
 {
 	Camera* camera = renderOp->Camera;
+
 	//set up matrices
 	model_view_mat = camera->ViewMatrix() * renderOp->ModelMatrix;
 	model_view_projection_mat = camera->ProjectionMatrix() * model_view_mat;
 
 	glUseProgram(this->programObject);
 
+	SetUniforms(renderOp);
+
+	//bind VBO
+	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
+
+	//point to the vertices
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
+
+	//point to color
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->color_offset);
+
+	//point to normals
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->normal_offset);
+
+	//depth testing
+	GLState::Enable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+
+	//bind ibo/draw
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
+	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
+
+	CHECK_GL_ERROR();
+}
+
+void Graphics::DrawTerrainExecutor::SetUniforms(RenderOperation* render)
+{
 	//send the matrices
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
 	glUniformMatrix4fv(model_view_matrix_uniform, 1, 0, glm::value_ptr(model_view_mat));
@@ -82,33 +111,5 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	glUniform1f(fog_min_distance_uniform,35000);
 	glUniform1f(fog_max_distance_uniform, 50000);
 
-	CHECK_GL_ERROR();
-
-	//bind VBO
-	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
-
-	//enable various states
-	GLState::Enable(GL_DEPTH_TEST);
-	//GLState::Enable(GL_CULL_FACE);
-	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-	//glCullFace(GL_FRONT);
-
-	//set line width
-	glLineWidth(2.0f);
-
-	//point to the vertices
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
-
-	//bind ibo/draw
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
-	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
-	CHECK_GL_ERROR();
-
-	//reset state
-	//GLState::Disable(GL_DEPTH_TEST);
-	GLState::Disable(GL_CULL_FACE);
-	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-	glCullFace(GL_BACK);
 	CHECK_GL_ERROR();
 }

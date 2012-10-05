@@ -7,10 +7,10 @@
 #include "render_operation.hpp"
 #include "renderexecutor.hpp"
 #include "rendexec_draw_texture.hpp"
-#include "rendexec_star_field.hpp"
 #include "rendexec_draw_model.hpp"
 #include "rendexec_draw_wireframe.hpp"
 #include "rendexec_draw_skybox.hpp"
+#include "rendexec_draw_terrain.hpp"
 #include "vertex_buffer.hpp"
 #include "camera.hpp"
 
@@ -20,10 +20,10 @@ Frame::Frame(void)
 {
 	//push executors in order of the OperationType
 	executors.push_back(new DrawTextureExecutor);
-	executors.push_back(new StarFieldExecutor);
 	executors.push_back(new DrawModelExecutor);
 	executors.push_back(new DrawWireframeExecutor);
 	executors.push_back(new DrawSkyboxExecutor);
+	executors.push_back(new DrawTerrainExecutor);
 }
 
 void Frame::Init()

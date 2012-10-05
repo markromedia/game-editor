@@ -27,6 +27,11 @@ bool VertexData::CheckData()
 	return true;
 }
 
+float VertexData::value() 
+{
+	return *iva_value;
+}
+
 VertexData& VertexData::operator= (float a)
 {
 	if (!CheckData()) return *this;

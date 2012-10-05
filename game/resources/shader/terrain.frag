@@ -1,11 +1,12 @@
 #version 420					
-precision mediump float;		
+precision mediump float;						
 
 //fog values
 uniform float u_fog_max_distance;
 uniform float u_fog_min_distance;
 
 //varyings
+varying vec4 v_color;
 varying float v_eye_distance;
 
 vec4
@@ -28,5 +29,5 @@ apply_linear_fog_factor(vec4 color)
 
 void main()									
 {												
-	gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);	
-}	
+	gl_FragColor = v_color;
+}												

@@ -21,7 +21,7 @@ namespace Graphics {
 	class RenderOperation
 	{
 	public:
-		enum OperationType { DRAW_TEXTURE, DRAW_STAR_FIELD, DRAW_MODEL, DRAW_WIREFRAME, DRAW_SKYBOX };
+		enum OperationType { DRAW_TEXTURE, DRAW_MODEL, DRAW_WIREFRAME, DRAW_SKYBOX, DRAW_TERRAIN };
 
 		/// Default constructor.
 		RenderOperation(void);

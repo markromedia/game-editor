@@ -34,9 +34,15 @@ namespace Graphics {
 		/// @summary	ref to the actual iva.
 		float *iva_value;
 
+		/// Gets the value.
+		///
+		/// @return	.
+		float value();
+
 		VertexData&			operator=  (float a);
 		VertexData&			operator-= (float a);
 		VertexData&			operator+= (float a);
+
 	};
 
 	inline float operator+ (VertexData& lhs, float rhs)

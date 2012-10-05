@@ -87,8 +87,6 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\background.hpp" />
-    <ClInclude Include="src\background_elements.hpp" />
     <ClInclude Include="src\constants.cpp" />
     <ClInclude Include="src\data\model\cube.h" />
     <ClInclude Include="src\data\model\cube2.h" />
@@ -113,8 +111,8 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\graphics\renderexecutor.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_model.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_skybox.hpp" />
+    <ClInclude Include="src\graphics\rendexec_draw_terrain.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_wireframe.hpp" />
-    <ClInclude Include="src\graphics\rendexec_star_field.hpp" />
     <ClInclude Include="src\graphics\render_operation.hpp" />
     <ClInclude Include="src\graphics\render_op_manager.hpp" />
     <ClInclude Include="src\graphics\rendexec_draw_texture.hpp" />
@@ -137,8 +135,6 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClInclude Include="src\terrain.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\background.cpp" />
-    <ClCompile Include="src\background_elements.cpp" />
     <ClCompile Include="src\data\model_loader.cpp" />
     <ClCompile Include="src\es\entity.cpp" />
     <ClCompile Include="src\es\entity_manager.cpp" />
@@ -153,9 +149,9 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <ClCompile Include="src\graphics\glstate.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_model.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_skybox.cpp" />
+    <ClCompile Include="src\graphics\rendexec_draw_terrain.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_texture.cpp" />
     <ClCompile Include="src\graphics\rendexec_draw_wireframe.cpp" />
-    <ClCompile Include="src\graphics\rendexec_star_field.cpp" />
     <ClCompile Include="src\graphics\texture_manager.cpp" />
     <ClCompile Include="src\graphics\vertex_buffer_manager.cpp" />
     <ClCompile Include="src\graphics\vertex_data.cpp" />
@@ -201,16 +197,12 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <None Include="resources\shader\draw_skybox.vert" />
     <None Include="resources\shader\draw_texture.frag" />
     <None Include="resources\shader\draw_texture.vert" />
-    <None Include="resources\shader\fragment.frag" />
     <None Include="resources\rocket\icon.rcss" />
     <None Include="resources\rocket\lib_rocket.frag" />
     <None Include="resources\rocket\lib_rocket.vert" />
-    <None Include="resources\shader\star_field.frag" />
-    <None Include="resources\shader\star_field.vert" />
-    <None Include="resources\shader\textured.frag" />
-    <None Include="resources\shader\textured.vert" />
-    <None Include="resources\shader\vertex.vert" />
     <None Include="resources\rocket\style.rcss" />
+    <None Include="resources\shader\terrain.frag" />
+    <None Include="resources\shader\terrain.vert" />
     <None Include="resources\shader\wireframe.frag" />
     <None Include="resources\shader\wireframe.vert" />
     <None Include="resources\station_color.bmp" />
