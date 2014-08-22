@@ -15,7 +15,7 @@ Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
 Graphics::Camera* Game::SkyboxCamera = NULL;
 
-const float CAMERA_VELOCITY = 5000.0f;
+const float CAMERA_VELOCITY = 15000.0f;
 const float CAMERA_SMOOTH = 0.7f;
 
 bool is_camera_moving_forward = false;
@@ -38,12 +38,9 @@ Game::Game(void)
 	Game::OrthoCamera = new Graphics::Camera();
 	Game::SkyboxCamera = new Graphics::Camera();
 
-	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 10.0f, 50000.0f);
+	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 100.0f, 100000.0f);
 	Game::SkyboxCamera->InitAsPerspective(90,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
 	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
-
-	//sdl mouse stuff
-	SDL_ShowCursor(SDL_DISABLE);
 } 
 
 void Game::Init() 
@@ -79,32 +76,43 @@ void Game::OnEvent( SDL_Event* Event )
 	switch(Event->type){
 		case SDL_KEYDOWN:  {
 			switch(Event->key.keysym.sym) {
-			case SDLK_w: 
+				case SDLK_w: 
 				{
 					is_camera_moving_forward = true;
 					camera_forward_direction = -1;
 					break;
 				}
-			case SDLK_s: 
+				case SDLK_s: 
 				{
 					is_camera_moving_forward = true;
 					camera_forward_direction = 1;
 					break;
 				}
-			case SDLK_a: 
+				case SDLK_a: 
 				{
 					is_camera_moving_sideways = true;
 					camera_sideways_direction = -1;
 					break;
 				}
-			case SDLK_d: 
+				case SDLK_d: 
 				{
 					is_camera_moving_sideways = true;
 					camera_sideways_direction = 1;
 
 					break;
 				}
+				case SDLK_0: 
+				{
+					Game::PerspectiveCamera->world_x = 0;
+					Game::PerspectiveCamera->world_y = 0;
+					Game::PerspectiveCamera->world_z = 0;
+					Game::PerspectiveCamera->Orient(0, 0, 0);
+
+					break;
+				}
+				break;
 			}
+
 			break;
 		}
 

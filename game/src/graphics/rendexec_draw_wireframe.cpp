@@ -79,8 +79,8 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	glUniformMatrix4fv(model_view_matrix_uniform, 1, 0, glm::value_ptr(model_view_mat));
 
 	//set fog
-	glUniform1f(fog_min_distance_uniform,35000);
-	glUniform1f(fog_max_distance_uniform, 50000);
+	glUniform1f(fog_min_distance_uniform,25000);
+	glUniform1f(fog_max_distance_uniform, 150000);
 
 	CHECK_GL_ERROR();
 

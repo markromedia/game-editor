@@ -223,6 +223,9 @@ xcopy $(SolutionDir)..\dependencies\dll $(SolutionDir)\..\build\$(Configuration)
     <Image Include="resources\skybox\natural16_top.png" />
     <Image Include="resources\station_illumination.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

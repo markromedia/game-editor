@@ -29,7 +29,7 @@ Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
-bool render1Enabled = false;
+bool render1Enabled = true;
 bool render2Enabled = false;
 
 int render_1_model = ModelLoader::TEAPOT;
@@ -40,7 +40,6 @@ Terrain terrain;
 void initModels()
 {
 	rot = 0;
-	//Game::PerspectiveCamera->SetWorldPosition( 0, Constants::SCREEN_HEIGHT / 2, Game::PerspectiveCamera->FullScreenZ());
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
 	Game::PerspectiveCamera->Orient(0 , 0, 0);
 
@@ -66,7 +65,7 @@ void initModels()
 		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
 	}
 
-	terrain.CreateGrid(128, 128, 500);
+	terrain.CreateGrid(8, 8, 100, 100);
 }
 
 void GameScene::Init()
@@ -104,18 +103,17 @@ void GameScene::Update(float dt)
 
 	//draw terraom
 	terrain.Render();
-	
-	//set FPS and draw librocket stuff
-	int fps = ((Game::FrameRate + 0.5f) * 100) / 100;
-	const std::string s = boost::lexical_cast<std::string>(fps);
-	document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(s.c_str()));
-	Game::LibRocketContext->Update();
 
 	//draw models
 	if (render1Enabled)
 		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
 		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
+
+	//librocket up top of everything
+	Logger::GetInstance()->LogPreformance("GameScene::UpdateLibRocket");
+	UpdateLibRocket();
+	Logger::GetInstance()->StopPreformance("GameScene::UpdateLibRocket");
 
 	Logger::GetInstance()->LogPreformance("GameScene::Render");
 	Render();
@@ -152,4 +150,13 @@ void GameScene::Render()
 	//glFinish();
 	Logger::GetInstance()->StopPreformance("SDL::SwapWindow");
 	CHECK_GL_ERROR();
+}
+
+void GameScene::UpdateLibRocket()
+{
+	//set FPS and draw librocket stuff
+	int fps = ((Game::FrameRate + 0.5f) * 100) / 100; const std::string fps_str = boost::lexical_cast<std::string>(fps);
+	document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(fps_str.c_str()));
+
+	Game::LibRocketContext->Update();
 }

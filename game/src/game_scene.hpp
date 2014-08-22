@@ -29,6 +29,7 @@ public:
 	void Init();
 	void Update(float dt);
 	void Render();
+	void UpdateLibRocket();
 };
 
 #endif  // __GAME_SCENE__hpp

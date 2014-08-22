@@ -29,5 +29,5 @@ apply_linear_fog_factor(vec4 color)
 
 void main()									
 {												
-	gl_FragColor = v_color;
+	gl_FragColor = apply_linear_fog_factor(v_color);
 }												
