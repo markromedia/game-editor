@@ -17,6 +17,6 @@ Flight is a sandbox for graphics/systems testing. Cross platform with a custom S
 ## Installation
 
 For windows the following environment variables must be set for cmake to work
-* CPP_REPOSITORY - location of all the dependencies on list
-* LUA_DIR - the location of the lua 5.1 installation (should be inside the repository)
+- CPP_REPOSITORY - location of all the dependencies on list
+- LUA_DIR - the location of the lua 5.1 installation (should be inside the repository)
 
