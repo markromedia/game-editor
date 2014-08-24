@@ -35,7 +35,7 @@ MESSAGE(STATUS "FLAGS:" ${CMAKE_CXX_FLAGS})
 
 # Look up SDL2 and add the include directory to our include path
 find_package(SDL2 REQUIRED)
-find_package(SDL2_image REQUIRED)
+
 find_package(Lua51 REQUIRED)
 find_package(Boost REQUIRED)
 find_package(GLM REQUIRED)
@@ -47,10 +47,11 @@ IF(WIN32)
 	SET(GLEW_INCLUDE_DIR $ENV{CPP_REPOSITORY}/glew/include)
 	SET(GLEW_LIBRARIES $ENV{CPP_REPOSITORY}/glew/lib/glew32s.lib)
 	
+	SET(SDL2_IMAGE_INCLUDE_DIRS $ENV{CPP_REPOSITORY}/sdl2_image/include)
 	SET(SDL2_IMAGE_LIBRARIES $ENV{CPP_REPOSITORY}/sdl2_image/lib/x86/SDL2_image.lib)
-	
 ELSE()
 	find_package(GLEW REQUIRED)
+	find_package(SDL2_image REQUIRED)
 ENDIF(WIN32)
 
 MESSAGE(STATUS "")

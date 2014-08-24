@@ -3,6 +3,7 @@ project(game)
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/src
 	${CMAKE_CURRENT_SOURCE_DIR}/src/data
+	${CMAKE_CURRENT_SOURCE_DIR}/src/data/model
 	${CMAKE_CURRENT_SOURCE_DIR}/src/es
 	${CMAKE_CURRENT_SOURCE_DIR}/src/graphics
 	${CMAKE_CURRENT_SOURCE_DIR}/src/librocket
@@ -29,6 +30,9 @@ set(SRC_ROOT
 set(SRC_DATA
 	src/data/model_loader.cpp  
 	src/data/model_loader.hpp
+)
+
+set(SRC_MODEL
 	src/data/model/cube.h  
 	src/data/model/cube2.h  
 	src/data/model/enemy.h  
@@ -110,15 +114,47 @@ set(SRC_MATH
 set(core_SRC
 	${SRC_ROOT}
 	${SRC_DATA}
+	${SRC_MODEL}
 	${SRC_ES}
 	${SRC_GRAPHICS}
 	${SRC_LIBROCKET}
 	${SRC_MATH}
 )	
 
-MESSAGE(STATUS ${core_SRC})
+source_group("data"
+  FILES
+    ${SRC_DATA}
+)
 
+source_group("data/model"
+  FILES
+    ${SRC_MODEL}
+)
 
+source_group("es"
+  FILES
+    ${SRC_ES}
+)
+
+source_group("graphics"
+  FILES
+    ${SRC_GRAPHICS}
+)
+
+source_group("librocket"
+  FILES
+    ${SRC_LIBROCKET}
+)
+
+source_group("math"
+  FILES
+    ${SRC_MATH}
+)
+
+source_group(""
+  FILES
+    ${SRC_ROOT}
+)
 
 add_executable(game ${core_SRC})
 target_link_libraries(game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
