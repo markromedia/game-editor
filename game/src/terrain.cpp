@@ -5,7 +5,7 @@
 #include <iterator>
 
 #include "opengl.h"
-#include <sdl2/SDL.h>
+#include <SDL.h>
 
 #include "constants.cpp"
 #include "logger.hpp"

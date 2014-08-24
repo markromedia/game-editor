@@ -116,12 +116,12 @@ bool SdlApp::OnInit()
 	SDL_GL_SetSwapInterval(1);
 
 	// initialize librocket
-	libRocketSystemInterface = new LibRocketSystemInterface();
-	libRocketRenderer = new LibRocketRenderer();
-	Rocket::Core::SetSystemInterface(libRocketSystemInterface);
-	Rocket::Core::SetRenderInterface(libRocketRenderer);
-	Rocket::Core::Initialise();
-	Game::LibRocketContext = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT));
+	//libRocketSystemInterface = new LibRocketSystemInterface();
+	//libRocketRenderer = new LibRocketRenderer();
+	//Rocket::Core::SetSystemInterface(libRocketSystemInterface);
+	//Rocket::Core::SetRenderInterface(libRocketRenderer);
+	//Rocket::Core::Initialise();
+	//Game::LibRocketContext = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT));
 
 	// set game variables
 	Game::SDLWindow = SDLWindow;

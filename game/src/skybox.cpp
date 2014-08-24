@@ -1,12 +1,12 @@
 #include "skybox.hpp"
 
 #include "opengl.h"
-#include <sdl2/SDL.h>
+#include <SDL.h>
 #include <vector>
 #include <set>
 #include <sstream>
 #include <time.h>
-#include <Rocket/Core.h>
+//#include <Rocket/Core.h>
 #include <boost/lexical_cast.hpp>
 
 

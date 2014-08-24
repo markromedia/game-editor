@@ -15,9 +15,8 @@
 //INCLUDES
 #include <Windows.h>
 #include "opengl.h"
-#include <GL/glut.h>
-#include <sdl2/SDL.h>
-#include <Rocket/Core.h>
+#include <SDL.h>
+//#include <Rocket/Core.h>
 #include "librocket/librocket_renderer.hpp"
 #include "librocket/librocket_system.hpp"
 #include "game.hpp"

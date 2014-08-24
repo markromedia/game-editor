@@ -7,8 +7,8 @@
 #define _GAME_hpp
 
 // INCLUDES
-#include <sdl2/SDL.h>
-#include <Rocket/Core.h>
+#include <SDL.h>
+//#include <Rocket/Core.h>
 #include "graphics/frame.hpp"
 #include "graphics/camera.hpp"
 
@@ -47,7 +47,7 @@ public:
 	static SDL_GLContext				OpenGLContext;
 
 	// The librocket context
-	static Rocket::Core::Context*		LibRocketContext;
+	//static Rocket::Core::Context*		LibRocketContext;
 
 	/// @summary	The main drawable frame
 	static Graphics::Frame*				ScreenFrame;

@@ -1,12 +1,12 @@
 #include "game_scene.hpp"
 
 #include "opengl.h"
-#include <sdl2/SDL.h>
+#include <SDL.h>
 #include <vector>
 #include <set>
 #include <sstream>
 #include <time.h>
-#include <Rocket/Core.h>
+//#include <Rocket/Core.h>
 #include <boost/lexical_cast.hpp>
 
 #include "constants.cpp"
@@ -81,13 +81,13 @@ void GameScene::Init()
 	Graphics::VertexBufferManager::CreateBuffers();
 	
 	//load librocket font/document
-	Rocket::Core::FontDatabase::LoadFontFace("resources\\rocket\\Oloron.TTF");
-	document = Game::LibRocketContext->LoadDocument("resources\\rocket\\frame_rate.rml");
+	//Rocket::Core::FontDatabase::LoadFontFace("resources\\rocket\\Oloron.TTF");
+	//document = Game::LibRocketContext->LoadDocument("resources\\rocket\\frame_rate.rml");
 
-	if (document != NULL)
-	{
-		document->Show();	
-	}
+	//if (document != NULL)
+	//{
+	//	document->Show();	
+	//}
 }
 
 void GameScene::Update(float dt)
@@ -141,7 +141,7 @@ void GameScene::Render()
 
 	//tell rocket to render
 	Logger::GetInstance()->LogPreformance("LibRocket::Render");
-	Game::LibRocketContext->Render();
+	//Game::LibRocketContext->Render();
 	Logger::GetInstance()->StopPreformance("LibRocket::Render");
 	
 	//Swap our back buffer to the front
@@ -156,7 +156,7 @@ void GameScene::UpdateLibRocket()
 {
 	//set FPS and draw librocket stuff
 	int fps = ((Game::FrameRate + 0.5f) * 100) / 100; const std::string fps_str = boost::lexical_cast<std::string>(fps);
-	document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(fps_str.c_str()));
+	//document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(fps_str.c_str()));
 
-	Game::LibRocketContext->Update();
+	//Game::LibRocketContext->Update();
 }

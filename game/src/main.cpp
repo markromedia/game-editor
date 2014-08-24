@@ -10,7 +10,7 @@ extern "C" {
 }
 
 // This is the only header we need to include for LuaBind to work
-#include "luabind/luabind.hpp"
+//#include "luabind/luabind.hpp"
 
 #include "sdl_app.hpp"
 
@@ -20,24 +20,24 @@ extern "C" {
 void lua()
 {
 	// Create a new lua state
-	lua_State *myLuaState = luaL_newstate();
+	//lua_State *myLuaState = luaL_newstate();
 
-	// Connect LuaBind to this lua state
-	luabind::open(myLuaState);
+	//// Connect LuaBind to this lua state
+	//luabind::open(myLuaState);
 
-	// Define a lua function that we can call
-	luaL_dostring(
-		myLuaState,
-		"function add(first, second)\n"
-		"  return first + second\n"
-		"end\n"
-		);
+	//// Define a lua function that we can call
+	//luaL_dostring(
+	//	myLuaState,
+	//	"function add(first, second)\n"
+	//	"  return first + second\n"
+	//	"end\n"
+	//	);
 
-	std::cout << "Result: "
-		<< luabind::call_function<int>(myLuaState, "add", 2, 3)
-		<< std::endl;
+	//std::cout << "Result: "
+	//	<< luabind::call_function<int>(myLuaState, "add", 2, 3)
+	//	<< std::endl;
 
-	lua_close(myLuaState);
+	//lua_close(myLuaState);
 }
 
 int main(int argc, char* argv[])

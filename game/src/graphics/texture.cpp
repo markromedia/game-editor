@@ -2,8 +2,8 @@
 
 #include <string>
 #include <stdlib.h>
-#include <sdl2/SDL.h>
-#include <sdl_image/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 #include "gllogger.hpp"
 #include "../logger.hpp"

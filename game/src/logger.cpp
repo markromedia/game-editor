@@ -1,6 +1,6 @@
 #include "logger.hpp"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 Logger* Logger::instance = NULL;
 

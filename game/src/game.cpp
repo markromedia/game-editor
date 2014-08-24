@@ -9,7 +9,7 @@
 
 SDL_Window* Game::SDLWindow = NULL;
 SDL_GLContext Game::OpenGLContext = NULL;
-Rocket::Core::Context* Game::LibRocketContext = NULL;
+//Rocket::Core::Context* Game::LibRocketContext = NULL;
 Graphics::Frame* Game::ScreenFrame = NULL;
 Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
