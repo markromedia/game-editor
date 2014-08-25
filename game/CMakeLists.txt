@@ -1,14 +1,20 @@
 project(game)
 
-include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/src
-	${CMAKE_CURRENT_SOURCE_DIR}/src/data
-	${CMAKE_CURRENT_SOURCE_DIR}/src/data/model
-	${CMAKE_CURRENT_SOURCE_DIR}/src/es
-	${CMAKE_CURRENT_SOURCE_DIR}/src/graphics
-	${CMAKE_CURRENT_SOURCE_DIR}/src/librocket
-	${CMAKE_CURRENT_SOURCE_DIR}/src/math
-)
+#########################################################################################
+#											                                            #
+#				                      SOURCE FILES					                    #
+#											                                            #
+#########################################################################################
+
+#include_directories(
+#	${CMAKE_CURRENT_SOURCE_DIR}/src
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/data
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/data/model
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/es
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/graphics
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/librocket
+#	${CMAKE_CURRENT_SOURCE_DIR}/src/math
+#)
 
 set(SRC_ROOT
 	src/constants.cpp                
@@ -26,10 +32,20 @@ set(SRC_ROOT
 	src/terrain.hpp
 	src/terrain.cpp
 )
-    
+LIST(APPEND core_SRC ${SRC_ROOT})
+SOURCE_GROUP(""
+  FILES
+    ${SRC_ROOT}
+)
+
 set(SRC_DATA
 	src/data/model_loader.cpp  
 	src/data/model_loader.hpp
+)
+LIST(APPEND core_SRC ${SRC_DATA})
+SOURCE_GROUP("data"
+  FILES
+    ${SRC_DATA}
 )
 
 set(SRC_MODEL
@@ -42,6 +58,11 @@ set(SRC_MODEL
 	src/data/model/teapot.h  
 	src/data/model/torus.h
 )
+LIST(APPEND core_SRC ${SRC_MODEL})
+SOURCE_GROUP("data\\model"
+  FILES
+    ${SRC_MODEL}
+)
 
 set(SRC_ES 
 	src/es/entity.cpp  
@@ -49,7 +70,12 @@ set(SRC_ES
 	src/es/entity.hpp  
 	src/es/entity_manager.hpp
 )  
-	
+LIST(APPEND core_SRC ${SRC_ES})
+SOURCE_GROUP("es"
+  FILES
+    ${SRC_ES}
+)
+
 set (SRC_GRAPHICS
 	src/graphics/camera.cpp
 	src/graphics/camera.hpp
@@ -94,12 +120,22 @@ set (SRC_GRAPHICS
 	src/graphics/vertex_data.cpp
 	src/graphics/vertex_data.hpp
 )
+LIST(APPEND core_SRC ${SRC_GRAPHICS})
+SOURCE_GROUP("graphics"
+  FILES
+    ${SRC_GRAPHICS}
+)
 
 set(SRC_LIBROCKET
 	src/librocket/librocket_renderer.cpp  
 	src/librocket/librocket_renderer.hpp  
 	src/librocket/librocket_system.cpp  
 	src/librocket/librocket_system.hpp
+)
+LIST(APPEND core_SRC ${SRC_LIBROCKET})
+SOURCE_GROUP("librocket"
+  FILES
+    ${SRC_LIBROCKET}
 )
 
 set(SRC_MATH
@@ -110,51 +146,40 @@ set(SRC_MATH
 	src/math/vector4.cpp  
 	src/math/vector4.hpp
 )
-
-set(core_SRC
-	${SRC_ROOT}
-	${SRC_DATA}
-	${SRC_MODEL}
-	${SRC_ES}
-	${SRC_GRAPHICS}
-	${SRC_LIBROCKET}
-	${SRC_MATH}
-)	
-
-source_group("data"
-  FILES
-    ${SRC_DATA}
-)
-
-source_group("data/model"
-  FILES
-    ${SRC_MODEL}
-)
-
-source_group("es"
-  FILES
-    ${SRC_ES}
-)
-
-source_group("graphics"
-  FILES
-    ${SRC_GRAPHICS}
-)
-
-source_group("librocket"
-  FILES
-    ${SRC_LIBROCKET}
-)
-
-source_group("math"
+LIST(APPEND core_SRC ${SRC_MATH})
+SOURCE_GROUP("math"
   FILES
     ${SRC_MATH}
 )
+	
 
-source_group(""
-  FILES
-    ${SRC_ROOT}
+#########################################################################################
+#											                                            #
+#				                     RESOURCES    		                    			#
+#										                                            	#
+#########################################################################################
+
+
+set(RES_ROOT
+	resources/enemy_bump.bmp
+	resources/enemy_text02.bmp
+	resources/enemy_text05.bmp
+	resources/falcon_toon.bmp
+	resources/falcon.bmp
 )
+#LIST(APPEND core_SRC ${RES_ROOT})
+
+source_group(“resources”
+  FILES
+    ${RES_ROOT}
+)
+
+
+#########################################################################################
+#											                                            #
+#				                      CONFIG      					                    #
+#											                                            #
+#########################################################################################
 
 add_executable(game ${core_SRC})
 target_link_libraries(game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
