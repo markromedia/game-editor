@@ -22,8 +22,8 @@ void DrawTextureExecutor::Init()
 	GLint linked;
 
 	//create the shaders
-	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\draw_texture.frag");
-	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\draw_texture.vert");
+	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources/shader/draw_texture.frag");
+	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources/shader/draw_texture.vert");
 	CHECK_GL_ERROR();
 
 	programObject = glCreateProgram();

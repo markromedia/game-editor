@@ -51,7 +51,7 @@ void initModels()
 		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
 		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
 		render_model1->ModelMatrix = model_matrix;
-		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\enemy_text02.bmp");
+		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
 	}
 
 	if (render2Enabled) {
@@ -62,7 +62,7 @@ void initModels()
 		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
 		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
 		render_model2->ModelMatrix = model_matrix;
-		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources\\falcon_toon.bmp");
+		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/falcon_toon.bmp");
 	}
 
 	terrain.CreateGrid(8, 8, 100, 100);

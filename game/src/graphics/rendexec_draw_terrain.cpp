@@ -23,8 +23,8 @@ void DrawTerrainExecutor::Init()
 	GLint linked;
 
 	//create the shaders
-	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\terrain.frag");
-	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\terrain.vert");
+	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources/shader/terrain.frag");
+	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources/shader/terrain.vert");
 	CHECK_GL_ERROR();
 
 	programObject = glCreateProgram();

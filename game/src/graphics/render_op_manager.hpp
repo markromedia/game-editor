@@ -30,12 +30,12 @@ namespace Graphics {
 		/// Gets a draw model operation.
 		/// @param	model	The model.
 		/// @return	null if it fails, else the draw model operation.
-		static RenderOperation* RenderOperationManager::GetDrawModelOp(int model);
+		static RenderOperation* GetDrawModelOp(int model);
 
 		/// Gets a draw wireframe operation.
 		/// @param	model	The model.
 		/// @return	null if it fails, else the draw wireframe operation.
-		static RenderOperation* RenderOperationManager::GetDrawWireframeOp(int model);
+		static RenderOperation* GetDrawWireframeOp(int model);
 	};
 }
 

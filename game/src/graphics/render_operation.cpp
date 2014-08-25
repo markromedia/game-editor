@@ -9,7 +9,7 @@ using namespace Graphics;
 
 RenderOperation::RenderOperation()
 {
-	Operation_Type = OperationType::DRAW_TEXTURE;
+	Operation_Type = DRAW_TEXTURE;
 	translation_x = translation_y = translation_z = 0;
 	//null out pointers
 	Camera = NULL;

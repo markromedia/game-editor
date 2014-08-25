@@ -17,7 +17,7 @@ namespace Math {
 		Matrix3(void);
 
 		/// Constructor for all 9 values
-		Matrix3::Matrix3(float v11, float v21, float v31, float v12, float v22, float v32, float v13, float v23, float v33);
+		Matrix3(float v11, float v21, float v31, float v12, float v22, float v32, float v13, float v23, float v33);
 
 		/// Loads the identity matrix.
 		void LoadIdentity();

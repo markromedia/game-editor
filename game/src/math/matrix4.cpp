@@ -108,8 +108,8 @@ Matrix4 Matrix4::ZRotationMat( float angle )
 
 Matrix4 Matrix4::XYZRotationMat( float x_deg, float y_deg, float z_deg )
 {
-	return Matrix4::XRotationMat(Math::DegreeToRadian(x_deg)) 
-		 * Matrix4::YRotationMat(Math::DegreeToRadian(y_deg)) 
-		 * Matrix4::ZRotationMat(Math::DegreeToRadian(z_deg));
+	return Matrix4::XRotationMat(Math::DegreeToRadian(x_deg));
+//		 * Matrix4::YRotationMat(Math::DegreeToRadian(y_deg)))
+//		 * Matrix4::ZRotationMat(Math::DegreeToRadian(z_deg));
 }
 

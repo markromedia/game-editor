@@ -27,8 +27,8 @@ void DrawWireframeExecutor::Init()
 	GLint linked;
 
 	//create the shaders
-	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\wireframe.frag");
-	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\wireframe.vert");
+	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources/shader/wireframe.frag");
+	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources/shader/wireframe.vert");
 	CHECK_GL_ERROR();
 
 	programObject = glCreateProgram();

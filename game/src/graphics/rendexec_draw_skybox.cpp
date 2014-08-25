@@ -23,8 +23,8 @@ void DrawSkyboxExecutor::Init()
 	GLint linked;
 
 	//create the shaders
-	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources\\shader\\draw_skybox.frag");
-	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources\\shader\\draw_skybox.vert");
+	ShaderObject* fragmentShader = ShaderManager::CreateShader(GL_FRAGMENT_SHADER, "resources/shader/draw_skybox.frag");
+	ShaderObject* vertexShader = ShaderManager::CreateShader(GL_VERTEX_SHADER, "resources/shader/draw_skybox.vert");
 	CHECK_GL_ERROR();
 
 	programObject = glCreateProgram();

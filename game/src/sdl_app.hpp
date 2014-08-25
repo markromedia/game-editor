@@ -13,7 +13,7 @@
 #define _SDL_APP_hpp
 
 //INCLUDES
-#include <Windows.h>
+//#include <Windows.h>
 #include "opengl.h"
 #include <SDL.h>
 //#include <Rocket/Core.h>

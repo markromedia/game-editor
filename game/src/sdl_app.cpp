@@ -66,7 +66,8 @@ bool SdlApp::OnInit()
 
 	//Request OpenGL 4.1 context.
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE,            8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE,          8);
@@ -75,12 +76,12 @@ bool SdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,          16);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,            32);
-
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,        8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,        8);
-	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    8);
-
+//
+//	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,        8);
+//	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    8);
+//	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,        8);
+//	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    8);
+//
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
 
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
@@ -97,6 +98,10 @@ bool SdlApp::OnInit()
 
 	/* Create our opengl context and attach it to our window */ 
 	ctx = SDL_GL_CreateContext(SDLWindow);
+    if (!ctx) {
+        LOG_DEBUG("SDL_GL_CreateContext failed with error:");
+        LOG_DEBUG(SDL_GetError());
+    }
 
 	LOG_DEBUG("Using OpenGL Version:");
 	LOG_DEBUG((char*) glGetString(GL_VERSION));

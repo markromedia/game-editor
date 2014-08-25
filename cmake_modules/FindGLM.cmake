@@ -29,7 +29,9 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
+if (WIN32)
 SET(GLM_ROOT_DIR "$ENV{CPP_REPOSITORY}/glm")
+endif(WIN32)
 
 # default search dirs
 SET(_glm_HEADER_SEARCH_DIRS
