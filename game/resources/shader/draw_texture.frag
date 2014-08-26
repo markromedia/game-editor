@@ -1,4 +1,4 @@
-#version 420					
+#version 410					
 precision mediump float;						
 
 uniform sampler2D s_texture;

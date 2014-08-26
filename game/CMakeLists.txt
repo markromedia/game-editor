@@ -1,4 +1,4 @@
-project(game)
+project(core)
 
 #########################################################################################
 #											                                            #
@@ -16,138 +16,72 @@ project(game)
 #	${CMAKE_CURRENT_SOURCE_DIR}/src/math
 #)
 
-set(SRC_ROOT
-	src/constants.cpp                
-	src/game.cpp
-	src/game.hpp 
-	src/game_scene.hpp
-	src/game_scene.cpp  
-	src/logger.hpp
-	src/logger.cpp      
-	src/main.cpp    
-	src/sdl_app.hpp  
-	src/sdl_app.cpp
-	src/skybox.hpp  
-	src/skybox.cpp
-	src/terrain.hpp
-	src/terrain.cpp
+FILE (GLOB SRC_ROOT
+	src/*.cpp                
+	src/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_ROOT})
-SOURCE_GROUP(""
+SOURCE_GROUP("src"
   FILES
     ${SRC_ROOT}
 )
 
-set(SRC_DATA
-	src/data/model_loader.cpp  
-	src/data/model_loader.hpp
+FILE(GLOB SRC_DATA
+	src/data/*.cpp
+	src/data/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_DATA})
-SOURCE_GROUP("data"
+SOURCE_GROUP("src\\data"
   FILES
     ${SRC_DATA}
 )
 
-set(SRC_MODEL
-	src/data/model/cube.h  
-	src/data/model/cube2.h  
-	src/data/model/enemy.h  
-	src/data/model/falcon.h  
-	src/data/model/skybox.h  
-	src/data/model/station.h  
-	src/data/model/teapot.h  
-	src/data/model/torus.h
+FILE(GLOB SRC_MODEL
+	src/data/model/*.h
+	src/data/model/*.c
 )
 LIST(APPEND core_SRC ${SRC_MODEL})
-SOURCE_GROUP("data\\model"
+SOURCE_GROUP("src\\data\\model"
   FILES
     ${SRC_MODEL}
 )
 
-set(SRC_ES 
-	src/es/entity.cpp  
-	src/es/entity_manager.cpp
-	src/es/entity.hpp  
-	src/es/entity_manager.hpp
+FILE(GLOB SRC_ES 
+	src/es/*.hpp
+	src/es/*.cpp
 )  
 LIST(APPEND core_SRC ${SRC_ES})
-SOURCE_GROUP("es"
+SOURCE_GROUP("src\\es"
   FILES
     ${SRC_ES}
 )
 
-set (SRC_GRAPHICS
-	src/graphics/camera.cpp
-	src/graphics/camera.hpp
-	src/graphics/color4f.cpp
-	src/graphics/color4f.hpp
-	src/graphics/frame.cpp
-	src/graphics/frame.hpp
-	src/graphics/gllogger.cpp
-	src/graphics/gllogger.hpp
-	src/graphics/glstate.cpp
-	src/graphics/glstate.hpp
-	src/graphics/opengl.h
-	src/graphics/quad.cpp
-	src/graphics/quad.hpp
-	src/graphics/render_op_manager.cpp
-	src/graphics/render_op_manager.hpp
-	src/graphics/render_operation.cpp
-	src/graphics/render_operation.hpp
-	src/graphics/renderexecutor.hpp
-	src/graphics/rendexec_draw_model.cpp
-	src/graphics/rendexec_draw_model.hpp
-	src/graphics/rendexec_draw_skybox.cpp
-	src/graphics/rendexec_draw_skybox.hpp
-	src/graphics/rendexec_draw_terrain.cpp
-	src/graphics/rendexec_draw_terrain.hpp
-	src/graphics/rendexec_draw_texture.cpp
-	src/graphics/rendexec_draw_texture.hpp
-	src/graphics/rendexec_draw_wireframe.cpp
-	src/graphics/rendexec_draw_wireframe.hpp
-	src/graphics/shader_manager.cpp
-	src/graphics/shader_manager.hpp
-	src/graphics/shader_object.cpp
-	src/graphics/shader_object.hpp
-	src/graphics/texture.cpp
-	src/graphics/texture.hpp
-	src/graphics/texture_manager.cpp
-	src/graphics/texture_manager.hpp
-	src/graphics/vertex_buffer.cpp
-	src/graphics/vertex_buffer.hpp
-	src/graphics/vertex_buffer_manager.cpp
-	src/graphics/vertex_buffer_manager.hpp
-	src/graphics/vertex_data.cpp
-	src/graphics/vertex_data.hpp
+FILE (GLOB SRC_GRAPHICS
+	src/graphics/*.cpp
+	src/graphics/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS})
-SOURCE_GROUP("graphics"
+SOURCE_GROUP("src\\graphics"
   FILES
     ${SRC_GRAPHICS}
 )
 
-set(SRC_LIBROCKET
-	src/librocket/librocket_renderer.cpp  
-	src/librocket/librocket_renderer.hpp  
-	src/librocket/librocket_system.cpp  
-	src/librocket/librocket_system.hpp
+FILE(GLOB SRC_LIBROCKET
+	src/librocket/*.cpp
+	src/librocket/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_LIBROCKET})
-SOURCE_GROUP("librocket"
+SOURCE_GROUP("src\\librocket"
   FILES
     ${SRC_LIBROCKET}
 )
 
-set(SRC_MATH
-	src/math/matrix3.cpp  
-	src/math/matrix3.hpp  
-	src/math/matrix4.cpp  
-	src/math/matrix4.hpp  
-	src/math/vector4.cpp  
-	src/math/vector4.hpp
+FILE(GLOB SRC_MATH
+	src/math/*.cpp
+	src/math/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_MATH})
-SOURCE_GROUP("math"
+SOURCE_GROUP("src\\math"
   FILES
     ${SRC_MATH}
 )
@@ -160,19 +94,51 @@ SOURCE_GROUP("math"
 #########################################################################################
 
 
-set(RES_ROOT
-	resources/enemy_bump.bmp
-	resources/enemy_text02.bmp
-	resources/enemy_text05.bmp
-	resources/falcon_toon.bmp
-	resources/falcon.bmp
+FILE(GLOB RES_ROOT
+	resources/*.*
 )
-#LIST(APPEND core_SRC ${RES_ROOT})
-
-source_group(“resources”
+LIST(APPEND core_SRC ${RES_ROOT})
+SOURCE_GROUP("resources"
   FILES
     ${RES_ROOT}
 )
+
+FILE(GLOB RES_ROCKET
+	resources/rocket/*.*
+)
+LIST(APPEND core_SRC ${RES_ROCKET})
+SOURCE_GROUP("resources\\rocket"
+  FILES
+    ${RES_ROCKET}
+)
+
+FILE(GLOB RES_ROCKET_ASSETS
+	resources/rocket/assets/*.*
+)
+LIST(APPEND core_SRC ${RES_ROCKET_ASSETS})
+SOURCE_GROUP("resources\\rocket\\assets"
+  FILES
+    ${RES_ROCKET_ASSETS}
+)
+
+FILE(GLOB RES_SHADER
+	resources/shader/*.*
+)
+LIST(APPEND core_SRC ${RES_SHADER})
+SOURCE_GROUP("resources\\shader"
+  FILES
+    ${RES_SHADER}
+)
+
+FILE(GLOB RES_SKYBOX
+	resources/skybox/*.*
+)
+LIST(APPEND core_SRC ${RES_SKYBOX})
+SOURCE_GROUP("resources\\skybox"
+  FILES
+    ${RES_SKYBOX}
+)
+
 
 
 #########################################################################################
@@ -183,4 +149,19 @@ source_group(“resources”
 
 add_executable(game ${core_SRC})
 target_link_libraries(game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+
+#copy resources
+add_custom_command(TARGET game POST_BUILD 
+					COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:game>/resources)
+
+#copy dll
+IF (WIN32)
+add_custom_command(TARGET game POST_BUILD 
+					COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${PROJECT_SOURCE_DIR}/../win32/dll $<TARGET_FILE_DIR:game>)
+
+					MESSAGE(STATUS "GAME SOURCE " ${CMAKE_SOURCE_DIR})
+ENDIF(WIN32)
+
 install(TARGETS game RUNTIME DESTINATION ${BIN_DIR})

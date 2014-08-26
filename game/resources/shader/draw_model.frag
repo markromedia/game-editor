@@ -1,4 +1,4 @@
-#version 420					
+#version 410					
 precision mediump float;						
 	
 //describes the light

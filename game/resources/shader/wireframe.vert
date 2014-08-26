@@ -1,4 +1,4 @@
-#version 420				
+#version 410				
 	
 //uniforms
 uniform mat4 u_modelview_matrix;

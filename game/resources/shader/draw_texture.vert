@@ -1,4 +1,4 @@
-#version 420				
+#version 410				
 	
 uniform mat4 u_mvp_matrix;
 
