@@ -151,13 +151,13 @@ add_executable(game ${core_SRC})
 target_link_libraries(game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
 
 #copy resources
-add_custom_command(TARGET game POST_BUILD 
+add_custom_command(TARGET game PRE_BUILD 
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
 					${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:game>/resources)
 
 #copy dll
 IF (WIN32)
-add_custom_command(TARGET game POST_BUILD 
+add_custom_command(TARGET game PRE_BUILD  
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
 					${PROJECT_SOURCE_DIR}/../win32/dll $<TARGET_FILE_DIR:game>)
 

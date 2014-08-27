@@ -1,5 +1,5 @@
 #version 420					
-precision mediump float;
+//precision mediump float;
 ///
 /// MENU SHADER
 ///

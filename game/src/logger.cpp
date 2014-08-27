@@ -82,7 +82,7 @@ void Logger::StopLogPreformance()
 	p_total_time = SDL_GetTicks() - p_total_time;
 	if (1000 / p_total_time < PREF_THRESHOLD)
 	{
-		WritePreformanceLog();
+		//WritePreformanceLog();
 	}
 	pLogElements.clear();
 	p_total_time = 0;

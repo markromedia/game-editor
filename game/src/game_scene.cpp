@@ -101,7 +101,6 @@ void GameScene::Update(float dt)
 	//draw skybox
 	Skybox.Update();
 
-/*
 	//draw terraom
 	terrain.Render();
 
@@ -110,7 +109,6 @@ void GameScene::Update(float dt)
 		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
 		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
-*/
 	//librocket up top of everything
 	Logger::GetInstance()->LogPreformance("GameScene::UpdateLibRocket");
 	UpdateLibRocket();

@@ -1,5 +1,6 @@
-#version 330				
-precision mediump float;		
+#version 330
+				
+//precision mediump float;		
 
 //fog values
 uniform float u_fog_max_distance;

@@ -21,6 +21,7 @@ bool ShaderObject::Compile( std::string filename, GLubyte* src )
 	glShaderSource(this->id, 1, (const GLcharARB **)&src, NULL);
 	glCompileShader(this->id);
 	glGetShaderiv(this->id, GL_COMPILE_STATUS, &compiled);
+	this->shader_filename = filename;
 
 	if (!compiled)
 	{

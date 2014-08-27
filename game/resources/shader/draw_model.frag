@@ -1,5 +1,5 @@
 #version 330		
-precision mediump float;						
+//precision mediump float;						
 	
 //describes the light
 struct directional_light 

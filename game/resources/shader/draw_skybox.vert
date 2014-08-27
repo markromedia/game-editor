@@ -1,5 +1,5 @@
 #version 330		
-	
+
 uniform mat4 u_mvp_matrix;
 
 in vec4 a_position;
