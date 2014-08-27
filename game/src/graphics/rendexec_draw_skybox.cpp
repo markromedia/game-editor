@@ -68,11 +68,8 @@ void DrawSkyboxExecutor::Execute(RenderOperation* renderOp)
 	//disable depth testing
 	GLState::Disable(GL_DEPTH_TEST);
 	
-	CHECK_GL_ERROR();
-	
 	//set mvp uniform
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
-	CHECK_GL_ERROR();
 
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
@@ -87,21 +84,17 @@ void DrawSkyboxExecutor::Execute(RenderOperation* renderOp)
 
 	//bind texture
 	glUniform1i(texture_sampler_uniform, 0);
-	CHECK_GL_ERROR();
 
 	//bind ibo/draw
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
-	CHECK_GL_ERROR();
 
 	for (int i = 0; i < 6; i++)
 	{
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, renderOp->Skybox_Textures[i]->texture_id);
-		CHECK_GL_ERROR();
 
 		//bind ibo/draw
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const GLvoid*)((6 * i) * sizeof(GLushort)));
-		CHECK_GL_ERROR();
 	}
 }

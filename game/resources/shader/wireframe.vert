@@ -1,15 +1,15 @@
-#version 410				
+#version 330				
 	
 //uniforms
 uniform mat4 u_modelview_matrix;
 uniform mat4 u_mvp_matrix;
 
 //attributes
-attribute vec4 a_position;	
+in vec4 a_position;
 
 //varyings
-varying vec4 v_color;
-varying float v_eye_distance;
+out vec4 v_color;
+out float v_eye_distance;
 
 
 void main ()					

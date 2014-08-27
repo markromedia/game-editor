@@ -3,6 +3,7 @@
 #define __TERRAIN__hpp
 
 #include <vector>
+#define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -24,7 +25,7 @@ private:
 	Graphics::RenderOperation* renderOperation;
 	Graphics::RenderOperation* wireframeRenderOperation;
 
-	std::vector<unsigned char> ReadHeightMapData(char* filename);
+	std::vector<unsigned char> ReadHeightMapData(std::string filename);
 
 	/// Assign color to vertex based on normal angle
 	///

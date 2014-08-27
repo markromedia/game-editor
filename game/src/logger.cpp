@@ -9,9 +9,8 @@ Logger::Logger()
 	preformance_log = false;
 }
 
-void Logger::writeToLog( const char* msg, bool lineFeed)
+void Logger::writeToLog( std::string msg, bool lineFeed)
 {
-	if (msg == NULL) msg = "(null)";
 	if (lineFeed)
 		std::cout << msg << std::endl;
 	else
@@ -33,7 +32,14 @@ void Logger::SetListenerLogLevel( int level )
 	this->logLevel = level;
 }
 
-void Logger::Debug( const char *msg)
+void Logger::NoLevel(std::string msg)
+{
+	if (logLevel >= LOGGER_LEVEL_ERROR) {
+		writeToLog(msg, true);
+	}
+}
+
+void Logger::Debug( std::string msg)
 {
 	if (logLevel >= LOGGER_LEVEL_DEBUG) {
 		writeToLog("DEBUG: ");
@@ -41,7 +47,7 @@ void Logger::Debug( const char *msg)
 	}
 }
 
-void Logger::Info( const char *msg)
+void Logger::Info( std::string msg)
 {
 	if (logLevel >= LOGGER_LEVEL_INFO) {
 		writeToLog("INFO: ");
@@ -49,7 +55,7 @@ void Logger::Info( const char *msg)
 	}
 }
 
-void Logger::Warning( const char *msg)
+void Logger::Warning( std::string msg)
 {
 	if (logLevel >= LOGGER_LEVEL_WARNING) {
 		writeToLog("WARNING: ");
@@ -57,7 +63,7 @@ void Logger::Warning( const char *msg)
 	}
 }
 
-void Logger::Error( const char *msg)
+void Logger::Error( std::string msg)
 {
 	if (logLevel >= LOGGER_LEVEL_ERROR) {
 		writeToLog("ERROR: ");

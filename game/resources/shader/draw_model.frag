@@ -1,4 +1,4 @@
-#version 410					
+#version 330		
 precision mediump float;						
 	
 //describes the light
@@ -46,10 +46,10 @@ uniform sampler2D s_illumination_texture;
 uniform vec4 u_primary_color;
 
 //varyings
-varying vec2 v_text_coord;
-varying vec3 v_normal;
-varying vec4 v_color;
-varying float v_eye_distance;
+in vec2 v_text_coord;
+in vec3 v_normal;
+in vec4 v_color;
+in float v_eye_distance;
 
 
 vec4 

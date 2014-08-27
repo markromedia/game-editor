@@ -1,11 +1,11 @@
-#version 410				
+#version 330		
 	
 uniform mat4 u_mvp_matrix;
 
-attribute vec4 a_position;		
-attribute vec2 a_text_coord;
+in vec4 a_position;
+in vec2 a_text_coord;
 
-varying vec2 v_text_coord;
+out vec2 v_text_coord;
 
 void main ()					
 {								

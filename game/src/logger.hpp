@@ -9,6 +9,7 @@
 #define LOGGER_LEVEL_INFO 3
 #define LOGGER_LEVEL_DEBUG 4
 
+#define LOG_NOLEVEL(msg) Logger::GetInstance()->NoLevel(msg)
 #define LOG_ERROR(msg) Logger::GetInstance()->Error(msg)
 #define LOG_WARNING(msg) Logger::GetInstance()->Warning(msg)
 #define LOG_INFO(msg) Logger::GetInstance()->Info(msg)
@@ -38,7 +39,7 @@ private:
 
 	static Logger* instance;
 
-	void writeToLog(const char* msg, bool lineFeed = false);
+	void writeToLog(std::string msg, bool lineFeed = false);
 
 	std::vector<PLogElement> pLogElements;
 
@@ -52,10 +53,11 @@ public:
 	void SetListenerLogLevel(int level);
 	
 	// different methods for different level of log messages
-	void Debug(const char *msg);
-	void Info(const char *msg);
-	void Warning(const char *msg);
-	void Error(const char *msg);
+    void NoLevel(std::string s);
+	void Debug(std::string s);
+	void Info(std::string s);
+	void Warning(std::string msg);
+	void Error(std::string msg);
 
 	/// start/stop preformance logging
 	void StartLogPreformance();

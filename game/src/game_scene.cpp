@@ -101,6 +101,7 @@ void GameScene::Update(float dt)
 	//draw skybox
 	Skybox.Update();
 
+/*
 	//draw terraom
 	terrain.Render();
 
@@ -109,7 +110,7 @@ void GameScene::Update(float dt)
 		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
 		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
-
+*/
 	//librocket up top of everything
 	Logger::GetInstance()->LogPreformance("GameScene::UpdateLibRocket");
 	UpdateLibRocket();
@@ -125,8 +126,8 @@ void GameScene::Update(float dt)
 void GameScene::Render()
 {
 	//clear the screen
-	//glClearColor(1, 1, 1, 1);
-	glClearColor(0, 0, 0, 1);
+	glClearColor(1, 1, 1, 1);
+	//glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	Logger::GetInstance()->LogPreformance("VertexBufferManager::UpdateBuffers");

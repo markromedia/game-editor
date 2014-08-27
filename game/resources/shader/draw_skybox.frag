@@ -1,9 +1,9 @@
-#version 410					
+#version 330			
 precision mediump float;						
 
 uniform sampler2D s_texture;
 
-varying vec2 v_text_coord;
+in vec2 v_text_coord;
 
 void main()									
 {												

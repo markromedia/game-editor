@@ -168,9 +168,9 @@ bool Terrain::has_triangle(int x, int y, int offset_x1, int offset_y1, int offse
 }
 
 
-std::vector<unsigned char> Terrain::ReadHeightMapData(char* filename) 
+std::vector<unsigned char> Terrain::ReadHeightMapData(std::string file)
 {
-	std::ifstream heightmap_file(filename, std::ios::binary);
+	std::ifstream heightmap_file(file, std::ios::binary);
 	std::vector<unsigned char> file_data((std::istreambuf_iterator<char>(heightmap_file)), std::istreambuf_iterator<char>());
 	heightmap_file.close();
 

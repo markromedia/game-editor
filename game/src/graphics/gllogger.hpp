@@ -22,7 +22,7 @@ public:
 	/// @param	line			The line.
 	///
 	/// @return	the error if any
-	static int CheckGLError(char *file, int line);
+	static int CheckGLError(std::string file, int line);
 
 	/// Check shader error.
 	///
@@ -31,7 +31,7 @@ public:
 	/// @param	line			The line.
 	///
 	/// @return	true, there was something to log, false otherwise
-	static bool CheckShaderError(GLuint &shader, char *file, int line);
+	static bool CheckShaderError(GLuint &shader, std::string file, int line);
 
 	/// Check program error.
 	///
@@ -40,7 +40,7 @@ public:
 	/// @param	line			The line.
 	///
 	/// @return	true, there was something to log, false otherwise
-	static bool CheckProgramError(GLuint &program, char *file, int line);
+	static bool CheckProgramError(GLuint &program, std::string file, int line);
 };
 
 

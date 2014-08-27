@@ -15,7 +15,7 @@ void ShaderObject::Create()
 	CHECK_GL_ERROR();
 }
 
-bool ShaderObject::Compile( GLubyte* src )
+bool ShaderObject::Compile( std::string filename, GLubyte* src )
 {
 	GLint compiled;
 	glShaderSource(this->id, 1, (const GLcharARB **)&src, NULL);
@@ -24,6 +24,8 @@ bool ShaderObject::Compile( GLubyte* src )
 
 	if (!compiled)
 	{
+        LOG_ERROR(filename + " failed to compile");
+        
 		CHECK_GL_SHADER_ERROR(this->id);
 		glDeleteShader(this->id);
 		return false;

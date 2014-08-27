@@ -1,4 +1,4 @@
-#version 410					
+#version 330				
 precision mediump float;						
 
 //fog values
@@ -6,8 +6,8 @@ uniform float u_fog_max_distance;
 uniform float u_fog_min_distance;
 
 //varyings
-varying vec4 v_color;
-varying float v_eye_distance;
+in vec4 v_color;
+in float v_eye_distance;
 
 vec4
 apply_linear_fog_factor(vec4 color)

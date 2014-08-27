@@ -1,25 +1,30 @@
 #include "gllogger.hpp"
 
-int GLLogger::CheckGLError(char *file, int line)
+int GLLogger::CheckGLError(std::string file, int line)
 {
 	GLenum glErr;
 	int retCode = 0;
 	glErr = glGetError();
-	while (glErr != GL_NO_ERROR) 
+    
+    std::stringstream s;
+	while (glErr != GL_NO_ERROR)
 	{
-		std::stringstream s; 
-		s << "GL Error #" << glErr << "(" << gluErrorString(glErr) << ") " << " in File " << file << " at line: " << line << std::endl;
 		retCode = 1;
+        s << "GL Error #" << glErr << ": " << gluErrorString(glErr) << std::endl;
 		
 		//call glGetError until we get no errors
 		glErr = glGetError();
-
-		LOG_ERROR(s.str().c_str());
 	}
+    
+    if (retCode) {
+        LOG_ERROR(file + " at line:" + std::to_string(line));
+        LOG_ERROR(s.str());
+    }
+    
 	return retCode;
 }
 
-bool GLLogger::CheckShaderError(GLuint &shader, char *file, int line)
+bool GLLogger::CheckShaderError(GLuint &shader, std::string file, int line)
 {
 	GLint infoLen = 0;
 
@@ -31,10 +36,8 @@ bool GLLogger::CheckShaderError(GLuint &shader, char *file, int line)
 
 		glGetShaderInfoLog(shader, infoLen, NULL, infoLog);
 
-		std::stringstream s; 
-		s << "Shader Error in File " << file << " at line: " << line << std::endl;
-		LOG_ERROR(s.str().c_str());
-		LOG_ERROR(infoLog);
+//        LOG_ERROR(file + " at line:" + std::to_string(line));
+		LOG_NOLEVEL(infoLog);
 
 		free(infoLog);
 		
@@ -43,7 +46,7 @@ bool GLLogger::CheckShaderError(GLuint &shader, char *file, int line)
 	return false;
 }
 
-bool GLLogger::CheckProgramError(GLuint &program, char *file, int line)
+bool GLLogger::CheckProgramError(GLuint &program, std::string file, int line)
 {
 	GLint infoLen = 0;
 
@@ -54,10 +57,8 @@ bool GLLogger::CheckProgramError(GLuint &program, char *file, int line)
 		char* infoLog = (char*) malloc(sizeof(char) * infoLen);
 		glGetProgramInfoLog(program, infoLen, NULL, infoLog);
 
-		std::stringstream s; 
-		s << "Program Error in File " << file << " at line: " << line << std::endl;
-		LOG_ERROR(s.str().c_str());
-		LOG_ERROR(infoLog);
+        LOG_ERROR(file + " at line:" + std::to_string(line));
+		LOG_NOLEVEL(infoLog);
 		
 		free(infoLog);
 

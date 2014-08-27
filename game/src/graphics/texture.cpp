@@ -66,6 +66,7 @@ void Texture::LoadTexture()
 			else
 				texture_format = GL_BGR;
 		} else {
+            texture_format = 0;
 			LOG_ERROR("warning: the image is not truecolor..  this will probably break\n");
 			// this error should not go unhandled
 		}

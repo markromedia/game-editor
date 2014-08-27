@@ -20,6 +20,7 @@
 #include "../opengl.h"
 #include <vector>
 #include <iostream>
+#define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -52,13 +53,13 @@ namespace Graphics {
 		GLuint										indices_ptr;
 		bool										do_update;   // indicates to buffer that it should update
 		bool										data_is_dirty;
-		unsigned int								max_vertices;
-		unsigned int								max_indices;
-		unsigned int								vertex_size; 
-		unsigned int								position_offset;
-		unsigned int								texture_offset;
-		unsigned int								color_offset;
-		unsigned int								normal_offset;
+		unsigned long								max_vertices;
+		unsigned long								max_indices;
+		unsigned long								vertex_size;
+		unsigned long								position_offset;
+		unsigned long								texture_offset;
+		unsigned long								color_offset;
+		unsigned long								normal_offset;
 
 		/// Constructor.	
 		/// @param	flags			(optional) the flags.

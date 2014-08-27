@@ -27,7 +27,7 @@ private:
 	ShaderManager(void);
 
 	/// internal version of CreateShader
-	ShaderObject* _createShader(GLenum type, const char* filename);
+	ShaderObject* _createShader(GLenum type, std::string filename);
 public:
 	/// Creates a shader from the provided file handle
 	///
@@ -35,7 +35,7 @@ public:
 	/// @param	filename	Filename of the file.
 	///
 	/// @return	The new shader.
-	static ShaderObject* CreateShader(GLenum type, const char* filename);
+	static ShaderObject* CreateShader(GLenum type, std::string filename);
 };
 
 #endif  // __SHADER__MANAGER_hpp

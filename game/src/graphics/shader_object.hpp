@@ -26,15 +26,18 @@ public:
 
 	/// @summary	Type of the shader.
 	GLenum shader_type;
+    
+    // @summary     the shader filename
+    std::string shader_filename;
 
 	/// Creates this shader.
 	void Create();
 
 	/// Compiles the shader
-	///
+	/// @param [in,out]	shader_filename	the filename
 	/// @param [in,out]	src	the source of the shader
 	/// @return true, compile was ok, false otherwise 				
-	bool Compile(GLubyte* src);
+	bool Compile(std::string shader_filename, GLubyte* src);
 
 	/// Deletes this shader.
 	void Delete();

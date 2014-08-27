@@ -4,7 +4,6 @@ unsigned long getFileLength(std::ifstream& file)
 {
 	if(!file.good()) return 0;
 
-	unsigned long pos = file.tellg();
 	file.seekg(0,std::ios::end);
 	unsigned long len = file.tellg();
 	file.seekg(std::ios::beg);
@@ -12,7 +11,7 @@ unsigned long getFileLength(std::ifstream& file)
 	return len;
 }
 
-GLubyte* loadFile(const char* filename)
+GLubyte* loadFile(std::string filename)
 {
 	std::ifstream file;
 	file.open(filename, std::ios::in);
@@ -49,7 +48,7 @@ void ShaderManager::_checkCreateInstance()
 	}
 }
 
-ShaderObject* ShaderManager::_createShader( GLenum type, const char* filename )
+ShaderObject* ShaderManager::_createShader( GLenum type, std::string filename )
 {
 	//get the file contents
 	GLubyte* file_contents = loadFile(filename);
@@ -57,7 +56,9 @@ ShaderObject* ShaderManager::_createShader( GLenum type, const char* filename )
 	//create and compile our shader
 	ShaderObject* shader = new ShaderObject(type);
 	shader->Create();
-	shader->Compile(file_contents);
+	bool compiled = shader->Compile(filename, file_contents);
+    if (!compiled) {
+    }
 
 	//add to managed list and return
 	shaders.push_back(shader);
@@ -68,7 +69,7 @@ ShaderObject* ShaderManager::_createShader( GLenum type, const char* filename )
 	return shader;
 }
 
-ShaderObject* ShaderManager::CreateShader( GLenum type, const char* filename )
+ShaderObject* ShaderManager::CreateShader( GLenum type, std::string filename )
 {
 	ShaderManager::_checkCreateInstance();
 	return ShaderManager::instance->_createShader(type, filename);
