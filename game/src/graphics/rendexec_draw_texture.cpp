@@ -69,6 +69,9 @@ void DrawTextureExecutor::Execute(RenderOperation* renderOp)
 	//set mvp uniform
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
 	CHECK_GL_ERROR();
+    
+    //bind VAO
+    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
 
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);

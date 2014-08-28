@@ -84,22 +84,30 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	glUniform1f(fog_max_distance_uniform, 150000);
 
 	CHECK_GL_ERROR();
+    
+    //bind VAO
+    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
 
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
 
 	//enable various states
 	GLState::Enable(GL_DEPTH_TEST);
+    CHECK_GL_ERROR();
+
 	//GLState::Enable(GL_CULL_FACE);
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 	//glCullFace(GL_FRONT);
+	CHECK_GL_ERROR();
 
 	//set line width
-	glLineWidth(2.0f);
+	glLineWidth(1.0f);
+	CHECK_GL_ERROR();
 
 	//point to the vertices
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
+	CHECK_GL_ERROR();
 
 	//bind ibo/draw
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);

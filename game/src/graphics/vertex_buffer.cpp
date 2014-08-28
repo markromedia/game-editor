@@ -54,7 +54,11 @@ void VertexBuffer::CreateBuffers()
 	{
 		return;
 	}
-	
+    
+    //create and bind the vbo
+    glGenVertexArrays(1, &vao_ptr);
+    glBindVertexArray(vao_ptr);
+    
 	glGenBuffers(1, &iva_ptr);
 	glBindBuffer(GL_ARRAY_BUFFER, iva_ptr);
 	glBufferData(GL_ARRAY_BUFFER, max_vertices * this->vertex_size, NULL, GL_DYNAMIC_DRAW);
@@ -69,6 +73,8 @@ void VertexBuffer::CreateBuffers()
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		CHECK_GL_ERROR();
 	}
+    
+    glBindVertexArray(0);
 
 	buffers_created = true;
 }

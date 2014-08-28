@@ -49,6 +49,7 @@ namespace Graphics {
 		std::vector<float>							iva_data; // the actual data sent to OpenGL
 		std::vector<GLushort>						indices_buffer;
 		std::vector<Vertex*>						vertices; // ref of what's been allocated
+        GLuint                                      vao_ptr;
 		GLuint										iva_ptr;
 		GLuint										indices_ptr;
 		bool										do_update;   // indicates to buffer that it should update

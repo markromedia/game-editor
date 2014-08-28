@@ -74,6 +74,9 @@ void DrawTerrainExecutor::Execute(RenderOperation* renderOp)
 	glUseProgram(this->programObject);
 
 	SetUniforms(renderOp);
+    
+    //bind VAO
+    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
 
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);

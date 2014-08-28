@@ -14,7 +14,7 @@ VertexBufferManager::VertexBufferManager()
 void VertexBufferManager::checkCreateInstance()
 {
 	if (VertexBufferManager::instance == NULL)
-	{
+	{   
 		VertexBufferManager::instance = new VertexBufferManager();
 	}
 }

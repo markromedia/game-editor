@@ -104,6 +104,7 @@ void GameScene::Update(float dt)
 	//draw terraom
 	terrain.Render();
 
+    
 	//draw models
 	if (render1Enabled)
 		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
@@ -135,6 +136,7 @@ void GameScene::Render()
 
 	Logger::GetInstance()->LogPreformance("ScreenFrame::Render");
 	//tell frame to render
+
 	Game::ScreenFrame->Render();
 	Logger::GetInstance()->StopPreformance("ScreenFrame::Render");
 

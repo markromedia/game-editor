@@ -1,10 +1,10 @@
-#version 330		
+#version 150
 //precision mediump float;						
 	
 //describes the light
 struct directional_light 
 {
-	vec4 direction;
+	vec3 direction;
 	vec3 halfplane;
 	vec4 ambient_color;
 	vec4 diffuse_color;
@@ -50,6 +50,8 @@ in vec2 v_text_coord;
 in vec3 v_normal;
 in vec4 v_color;
 in float v_eye_distance;
+
+out vec4 fragColor;
 
 
 vec4 
@@ -112,12 +114,12 @@ void main()
 	
 	if (u_has_diffuse_texture) 
 	{
-		color = 0.7f * texture2D(s_diffuse_texture, v_text_coord) + .3 * color;
+		color = 0.7f * texture(s_diffuse_texture, v_text_coord) + .3 * color;
 	}
 
 	if (u_has_illumination_texture)
 	{
-		vec4 il = texture2D(s_illumination_texture, v_text_coord);
+		vec4 il = texture(s_illumination_texture, v_text_coord);
 		if (il.z > .3)
 		{
 			color += vec4(u_primary_color[3], u_primary_color[3], u_primary_color[3], u_primary_color[3]) * vec4(1, 1, 1, 1);
@@ -125,5 +127,5 @@ void main()
 	}
 
 	color[3] = 1; //make sure alpha is on
-	gl_FragColor = apply_linear_fog_factor(color); //apply any fog
+	fragColor = apply_linear_fog_factor(color); //apply any fog
 }												

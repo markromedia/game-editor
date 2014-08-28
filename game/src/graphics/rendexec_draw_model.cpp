@@ -105,6 +105,9 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	//set uniforms
 	SetUniforms(renderOp);
 
+    //bind VAO
+    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
+    
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
 
@@ -171,7 +174,7 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	//set the transformed light vector
 	glm::vec4 transformed_light = render->Camera->ViewMatrix() * light.light_direction;
 	transformed_light = glm::normalize(transformed_light);
-	glUniform4f(light_uniform_direction, transformed_light.x, transformed_light.y, transformed_light.z, 0);
+	glUniform3f(light_uniform_direction, transformed_light.x, transformed_light.y, transformed_light.z);
 	
 	glUniform3f(light_uniform_halfplane, light.light_half_plane.x, light.light_half_plane.y, light.light_half_plane.z); //????
 

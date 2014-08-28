@@ -70,31 +70,43 @@ void DrawSkyboxExecutor::Execute(RenderOperation* renderOp)
 	
 	//set mvp uniform
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
+    
+    //bind VAO
+    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
 
 	//bind VBO
 	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
+    CHECK_GL_ERROR();
 
 	//point to the vertices
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
+    CHECK_GL_ERROR();
 
 	//point to the texture
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->texture_offset);
+    CHECK_GL_ERROR();
 
 	//bind texture
 	glUniform1i(texture_sampler_uniform, 0);
+    CHECK_GL_ERROR();
 
 	//bind ibo/draw
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
+    CHECK_GL_ERROR();
 
 	for (int i = 0; i < 6; i++)
 	{
 		//bind texture
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, renderOp->Skybox_Textures[i]->texture_id);
+        CHECK_GL_ERROR();
 
 		//bind ibo/draw
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (const GLvoid*)((6 * i) * sizeof(GLushort)));
+        CHECK_GL_ERROR();
 	}
+    
+    CHECK_GL_ERROR();
 }
