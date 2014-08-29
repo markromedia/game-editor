@@ -6,16 +6,6 @@ project(core)
 #											                                            #
 #########################################################################################
 
-#include_directories(
-#	${CMAKE_CURRENT_SOURCE_DIR}/src
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/data
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/data/model
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/es
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/graphics
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/librocket
-#	${CMAKE_CURRENT_SOURCE_DIR}/src/math
-#)
-
 FILE (GLOB SRC_ROOT
 	src/*.cpp                
 	src/*.hpp
@@ -88,9 +78,9 @@ SOURCE_GROUP("src\\math"
 	
 
 #########################################################################################
-#											                                            #
-#				                     RESOURCES    		                    			#
-#										                                            	#
+#										        #
+#			               RESOURCES    		                        #
+#										        #
 #########################################################################################
 
 
@@ -142,26 +132,26 @@ SOURCE_GROUP("resources\\skybox"
 
 
 #########################################################################################
-#											                                            #
-#				                      CONFIG      					                    #
-#											                                            #
+#											#
+#				         CONFIG  				        #
+#							  			        #
 #########################################################################################
 
-add_executable(game ${core_SRC})
-target_link_libraries(game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+add_executable(core ${core_SRC})
+target_link_libraries(core ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
 
 #copy resources
-add_custom_command(TARGET game PRE_BUILD 
+add_custom_command(TARGET core PRE_BUILD 
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
-					${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:game>/resources)
+					${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:core>/resources)
 
 #copy dll
 IF (WIN32)
-add_custom_command(TARGET game PRE_BUILD  
+add_custom_command(TARGET core PRE_BUILD  
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
-					${PROJECT_SOURCE_DIR}/../win32/dll $<TARGET_FILE_DIR:game>)
+					${PROJECT_SOURCE_DIR}/../win32/dll $<TARGET_FILE_DIR:core>)
 
 					MESSAGE(STATUS "GAME SOURCE " ${CMAKE_SOURCE_DIR})
 ENDIF(WIN32)
 
-install(TARGETS game RUNTIME DESTINATION ${BIN_DIR})
+install(TARGETS core RUNTIME DESTINATION ${BIN_DIR})
