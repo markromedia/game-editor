@@ -1,7 +1,7 @@
 project(platform)
 
 INCLUDE_DIRECTORIES(
-	${core_SOURCE_DIR}/src/platform
+	${platform_SOURCE_DIR}/../../core/src/platform
 )
 
 FILE (GLOB SRC_ROOT
