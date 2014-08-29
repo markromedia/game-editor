@@ -1,37 +1,9 @@
 #include "shader_manager.hpp"
-
-unsigned long getFileLength(std::ifstream& file)
-{
-	if(!file.good()) return 0;
-
-	file.seekg(0,std::ios::end);
-	unsigned long len = file.tellg();
-	file.seekg(std::ios::beg);
-
-	return len;
-}
+#include "../platform/FileSystem.hpp"
 
 GLubyte* loadFile(std::string filename)
 {
-	std::ifstream file;
-	file.open(filename, std::ios::in);
-	unsigned long len = getFileLength(file);
-
-	GLubyte* shaderSrc = (GLubyte*) new char[len+1];
-	shaderSrc[len] = 0;  // len isn't always strlen cause some characters are stripped in ascii read...
-						 // it is important to 0-terminate the real length later, len is just max possible value...
-
-	unsigned int i=0;
-	while (file.good())
-	{
-		shaderSrc[i++] = file.get();       // get character from file
-		if (i>len) i=len;				   // coding guidelines...
-	}
-
-	shaderSrc[i] = 0;  // 0 terminate it.
-	file.close();
-
-	return shaderSrc;
+	return (GLubyte*) FileSystem::LoadFileContents(filename);
 }
 
 ShaderManager* ShaderManager::instance = NULL;

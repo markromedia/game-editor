@@ -72,5 +72,17 @@ MESSAGE(STATUS "")
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIRS} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLEW_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
 
-# Look in subdirectories to find its CMakeLists.txt so we can build the executable
+# Add subdirectories
+
+IF(WIN32)
+	add_subdirectory(platform/win32)
+ENDIF(WIN32)
+
+IF(APPLE)
+	add_subdirectory(platform/osx)
+ENDIF(APPLE)
+
 add_subdirectory(core)
+add_subdirectory(game)
+add_subdirectory(editor)
+

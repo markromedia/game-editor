@@ -1,9 +1,9 @@
 project(core)
 
 #########################################################################################
-#											                                            #
-#				                      SOURCE FILES					                    #
-#											                                            #
+#											#
+#				      SOURCE FILES		        		#
+#										        #
 #########################################################################################
 
 FILE (GLOB SRC_ROOT
@@ -75,6 +75,16 @@ SOURCE_GROUP("src\\math"
   FILES
     ${SRC_MATH}
 )
+
+FILE(GLOB SRC_PLATFORM
+	src/platform/*.cpp
+	src/platform/*.hpp
+)
+LIST(APPEND core_SRC ${SRC_PLATFORM})
+SOURCE_GROUP("src\\platform"
+  FILES
+    ${SRC_PLATFORM}
+)
 	
 
 #########################################################################################
@@ -82,7 +92,6 @@ SOURCE_GROUP("src\\math"
 #			               RESOURCES    		                        #
 #										        #
 #########################################################################################
-
 
 FILE(GLOB RES_ROOT
 	resources/*.*
@@ -137,21 +146,7 @@ SOURCE_GROUP("resources\\skybox"
 #							  			        #
 #########################################################################################
 
-add_executable(core ${core_SRC})
-target_link_libraries(core ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+add_library (core ${core_SRC})
+target_link_libraries(core platform ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
 
-#copy resources
-add_custom_command(TARGET core PRE_BUILD 
-					COMMAND ${CMAKE_COMMAND} -E copy_directory
-					${PROJECT_SOURCE_DIR}/resources $<TARGET_FILE_DIR:core>/resources)
-
-#copy dll
-IF (WIN32)
-add_custom_command(TARGET core PRE_BUILD  
-					COMMAND ${CMAKE_COMMAND} -E copy_directory
-					${PROJECT_SOURCE_DIR}/../win32/dll $<TARGET_FILE_DIR:core>)
-
-					MESSAGE(STATUS "GAME SOURCE " ${CMAKE_SOURCE_DIR})
-ENDIF(WIN32)
-
-install(TARGETS core RUNTIME DESTINATION ${BIN_DIR})
+install(TARGETS core ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

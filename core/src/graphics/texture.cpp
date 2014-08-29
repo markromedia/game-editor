@@ -7,6 +7,7 @@
 
 #include "gllogger.hpp"
 #include "../logger.hpp"
+#include "../platform//FileSystem.hpp"
 
 using namespace Graphics;
 
@@ -30,9 +31,9 @@ void Texture::LoadTexture()
 	bool success = false;
 	if (filename.find(".bmp", 0) == std::string::npos)
 	{
-		success = (surface = IMG_Load(filename.c_str())) ;	
+		success = (surface = IMG_Load(FileSystem::GetResourceFilePath(filename).c_str())) ;	
 	} else {
-		success = (surface = SDL_LoadBMP(filename.c_str())) ;	
+		success = (surface = SDL_LoadBMP(FileSystem::GetResourceFilePath(filename).c_str())) ;	
 	}
 	
 	if (success) { 

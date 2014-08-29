@@ -28,8 +28,6 @@
 #include "librocket_renderer.hpp"
 //#include <Rocket/Core.h>
 
-#include "../game.hpp"
-
 #define GL_CLAMP_TO_EDGE 0x812F
 //
 //LibRocketRenderer::LibRocketRenderer()
