@@ -65,7 +65,7 @@ void initModels()
 		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/falcon_toon.bmp");
 	}
 
-	terrain.CreateGrid(8, 8, 100, 100);
+	terrain.CreateGrid(128, 128, 500);
 }
 
 void GameScene::Init()

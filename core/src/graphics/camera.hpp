@@ -28,10 +28,6 @@ namespace Graphics {
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
 
-
-		/// @summary	the translation vector
-		glm::vec3 translation_vec;
-
 		/// @summary	The rotation vec.
 		glm::vec3 rotation_vec;
 
@@ -43,6 +39,9 @@ namespace Graphics {
 		/// 			perspective
 		float fullscreen_z;
 	public:
+        /// @summary	the translation vector
+		glm::vec3 translation_vec;
+        
 		/// @summary	The inverse view frame (used by skybox).
 		glm::mat4 inverse_view_frame;
 
@@ -97,6 +96,9 @@ namespace Graphics {
 		/// @param	angle	The angle.
 		/// @param	axis 	The axis.
 		void Rotate(float angle, glm::vec3 axis);
+        
+        ///Translates the camera
+        void Translate(float x, float y, float z);
 	};
 }
 #endif  // __CAMERA_hpp

@@ -25,6 +25,7 @@ INCLUDE_DIRECTORIES(
 FILE (GLOB SRC_ROOT
 	src/*.cpp                
 	src/*.hpp
+    src/*.h
 )
 LIST(APPEND game_SRC ${SRC_ROOT})
 SOURCE_GROUP("src"

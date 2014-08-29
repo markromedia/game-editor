@@ -15,7 +15,7 @@ Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
 Graphics::Camera* Game::SkyboxCamera = NULL;
 
-const float CAMERA_VELOCITY = 15000.0f;
+const float CAMERA_VELOCITY = 1500.0f;
 const float CAMERA_SMOOTH = 0.7f;
 
 bool is_camera_moving_forward = false;

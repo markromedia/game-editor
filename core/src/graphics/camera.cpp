@@ -71,3 +71,11 @@ void Graphics::Camera::Rotate(float angle, glm::vec3 axis)
 	orientation_matrix = glm::mat3(glm::rotate(glm::mat4(orientation_matrix), angle, axis));
 }
 
+void Graphics::Camera::Translate(float x, float y, float z)
+{
+	translation_vec.x += x;
+	translation_vec.y += y;
+    translation_vec.z += z;
+}
+
+
