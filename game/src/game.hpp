@@ -12,6 +12,8 @@
 #include "graphics/frame.hpp"
 #include "graphics/camera.hpp"
 
+#include "camera_control.hpp"
+
 //forward declaration
 class Scene; 
 
@@ -22,6 +24,8 @@ private:
 	std::vector<float>			frame_times;
 	/// Adds a frame time.
 	void addFrameTime(float f);
+
+	CameraControl* cameraControl;
 public:
 	/// Default constructor.
 	Game(void);
@@ -59,6 +63,8 @@ public:
 	static Graphics::Camera				*PerspectiveCamera;
 	static Graphics::Camera				*OrthoCamera;
 	static Graphics::Camera				*SkyboxCamera;
+
+
 };
 
 ///-----------------------------------------------------------------------------------------------

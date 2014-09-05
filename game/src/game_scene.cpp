@@ -41,7 +41,6 @@ void initModels()
 {
 	rot = 0;
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
-	Game::PerspectiveCamera->Orient(0 , 0, 0);
 
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 100, z_pos = -400;
@@ -65,7 +64,7 @@ void initModels()
 		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/falcon_toon.bmp");
 	}
 
-	terrain.CreateGrid(128, 128, 500);
+	//terrain.CreateGrid(128, 128, 500);
 }
 
 void GameScene::Init()
@@ -102,7 +101,7 @@ void GameScene::Update(float dt)
 	Skybox.Update();
 
 	//draw terraom
-	terrain.Render();
+	//terrain.Render();
 
     
 	//draw models

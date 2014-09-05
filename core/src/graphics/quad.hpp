@@ -7,8 +7,6 @@
 #include "vertex_buffer.hpp"
 
 namespace Graphics {
-	using namespace Graphics;
-
 	class Quad
 	{
 	public:

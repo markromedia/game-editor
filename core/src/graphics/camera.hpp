@@ -28,17 +28,21 @@ namespace Graphics {
 		/// @summary	The projection matrix for this matrix which translates the view space objects into clip space
 		glm::mat4 projection_matrix;
 
-		/// @summary	The rotation vec.
-		glm::vec3 rotation_vec;
-
 		/// @summary	The orientation matrix
 		glm::mat3 orientation_matrix;
+
+		/// @summary	The orientation matrix
+		glm::quat orientation_quaternion;
 
 		/// @summary	this is the internal variable which holds the z value that will cause a plane of 
 		/// 			SCREENWIDTH x SCREENHEIGHT dimensions to completely fill the screen using this
 		/// 			perspective
 		float fullscreen_z;
 	public:
+
+		/// Default constructor.
+		Camera();
+
         /// @summary	the translation vector
 		glm::vec3 translation_vec;
         
@@ -60,10 +64,6 @@ namespace Graphics {
 		/// @param	far					The far.
 		void InitAsPerspective(float fov_angle_in_deg, float aspect_ratio, float near, float far);
 
-		/// Gets the current view matrix(view frame x orientation)
-		/// @return	The view frame.
-		glm::mat3 ViewFrame();
-
 		/// Gets the view matrix.
 		/// @return	The view matrix.
 		glm::mat4 ViewMatrix();
@@ -71,6 +71,18 @@ namespace Graphics {
 		/// Gets the projection matrix.
 		/// @return	The projection matrix.
 		glm::mat4 ProjectionMatrix();
+
+		/// Gets the up vector.
+		/// @return	The up vector.
+		glm::vec3 getUpVector();
+
+		/// Gets the right vector.
+		/// @return	The right vector.
+		glm::vec3 getRightVector();
+
+		/// Gets the forward vector.
+		/// @return	The forward vector.
+		glm::vec3 getForwardVector();
 
 		/// Sets a world position.
 		/// @param	x	(optional) the  float to process.
@@ -86,11 +98,17 @@ namespace Graphics {
 		/// @param	dt	The dt.
 		void update(float dt);
 
-		/// Orients the camera
-		/// @param	x	The float to process.
-		/// @param	y	The float to process.
-		/// @param	z	The float to process.
-		void Orient(float x, float y, float z);
+		/// Rotate x coordinate.
+		/// @param	angle_in_radians	The angle in radians.
+		void RotateX(float angle_in_radians);
+
+		/// Rotate y coordinate.
+		/// @param	angle_in_radians	The angle in radians.
+		void RotateY(float angle_in_radians);
+
+		/// Rotate z coordinate.
+		/// @param	angle_in_radians	The angle in radians.
+		void RotateZ(float angle_in_radians);
 
 		/// Preforms an axis-angle rotation on the cameras rotation matrix
 		/// @param	angle	The angle.
@@ -99,6 +117,12 @@ namespace Graphics {
         
         ///Translates the camera
         void Translate(float x, float y, float z);
+
+		/// Sets a translation.
+		/// @param	x	The float to process.
+		/// @param	y	The float to process.
+		/// @param	z	The float to process.
+		void SetTranslation(float x, float y, float z);
 	};
 }
 #endif  // __CAMERA_hpp

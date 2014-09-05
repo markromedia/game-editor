@@ -89,6 +89,14 @@ Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 			num_indices = skybox_num_indices;
 			break;
 		}
+	default : 
+		{
+			vertices = &skybox_vertices[0];
+			indices = &skybox_indices[0];
+			num_vertices = skybox_num_vertices;
+			num_indices = skybox_num_indices;
+			break;
+		}
 	}
 
 	Graphics::VertexBuffer* buf = Graphics::VertexBufferManager::GetBuffer(USE_TEXTURE | USE_NORMAL, num_vertices, num_indices);

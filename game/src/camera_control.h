@@ -15,8 +15,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class CameraControl
+#define MATH_DEG_TO_RAD(x)          ((x) * 0.0174532925f)
+#define MATH_RAD_TO_DEG(x)          ((x)* 57.29577951f)
 
+class CameraControl
 {
 private:
 	/// Values that represent CAMERA_DIRECTION.
@@ -41,18 +43,15 @@ public:
 	/// Updates the given delta.
 	/// @param	delta	The delta.
 	void Update(float delta);
-    
-	/// The keyboard input event handler
-	/// @param	evt	The event.
-	/// @param	key	The key.
-	void KeyEventHandler(SDL_Event evt, int key);
-    
-	/// Handler, called when the Mouse event.
-	/// @param	evt		  	The event.
-	/// @param	x		  	The x coordinate.
-	/// @param	y		  	The y coordinate.
-	/// @param	wheelDelta	The wheel delta.
-	void HandleMouseEvent(SDL_Event evt, int x, int y, int wheelDelta);
+
+	/// Executes the event action.
+	/// @param [in,out]	evt	If non-null, the event.
+	void OnEvent(SDL_Event* evt);
+
+	inline void Smooth(glm::vec3& source, glm::vec3& target, float delta, float response_time) 
+	{
+		target = (target - source) * (delta / delta + response_time);
+	}
 };
 
 #endif  // __CAMERA_CONTROL__hpp

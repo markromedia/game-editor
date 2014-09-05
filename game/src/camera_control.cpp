@@ -1,6 +1,6 @@
-#include "camera_control.h"
+#include "camera_control.hpp"
 
-const int CAMERA_VELOCITY = 10;
+const float CAMERA_VELOCITY = 100;
 
 CameraControl::CameraControl(Graphics::Camera* camera_node) {
 	this->camera_node = camera_node;
@@ -12,19 +12,6 @@ CameraControl::CameraControl(Graphics::Camera* camera_node) {
 
 void CameraControl::Update(float delta)
 {
-	if (is_looking_at_origin)
-	{
-        glm::mat4 m;
-        m = glm::lookAt(this->camera_node->translation_vec,glm::vec3(0,0,0), glm::vec3(0,1,0));
-        m = glm::transpose(m);
-        
-//		glm::lookAt createLookAt(camera_node->getTranslation(), Vector3::zero(), Vector3::unitY(), &m);
-//		m.transpose();
-//		Quaternion q;
-//		m.getRotation(&q);
-//		camera_node->setRotation(q);
-	}
-    
 	if (camera_move_direction != NONE)
 	{
 		if (camera_move_direction & LEFT)
@@ -42,73 +29,75 @@ void CameraControl::Update(float delta)
 		camera_target.z = (int) camera_target.z;
 	}
     
-	camera_node->translateSmooth(camera_target, delta, 100);
-	camera_node->getMatrix();
-}
-
-void CameraControl::KeyEventHandler(Keyboard::KeyEvent evt, int key)
-{
-	if (evt == Keyboard::KEY_PRESS)
-	{
-		switch (key)
+	if (camera_node->translation_vec != camera_target) {
+		glm::vec3 res = (camera_node->translation_vec - camera_target) * (delta / (delta + 100));
+		if (std::abs(res.x - camera_target.x) <= 1 &&
+			std::abs(res.y - camera_target.y) <= 1 &&
+			std::abs(res.z - camera_target.z) <= 1)
 		{
-            case Keyboard::KEY_W:
-            case Keyboard::KEY_UP_ARROW:
-                camera_move_direction |= FORWARD;
-                break;
-            case Keyboard::KEY_S:
-            case Keyboard::KEY_DOWN_ARROW:
-                camera_move_direction |= BACKWARDS;
-                break;
-            case Keyboard::KEY_A:
-            case Keyboard::KEY_LEFT_ARROW:
-                camera_move_direction |= LEFT;
-                break;
-            case Keyboard::KEY_D:
-            case Keyboard::KEY_RIGHT_ARROW:
-                camera_move_direction |= RIGHT;
-                break;
-            case Keyboard::KEY_SHIFT:
-                is_looking_at_origin = true;
-                break;
+			res = camera_target;		
+			camera_node->SetTranslation(res.x, res.y, res.z);
+		} else {
+			camera_node->Translate(res.x, res.y, res.z);
 		}
 	}
-    
-	if (evt == Keyboard::KEY_RELEASE)
-	{
-		switch (key)
-		{
-            case Keyboard::KEY_W:
-            case Keyboard::KEY_UP_ARROW:
-                camera_move_direction &= ~FORWARD;
-                break;
-            case Keyboard::KEY_S:
-            case Keyboard::KEY_DOWN_ARROW:
-                camera_move_direction &= ~BACKWARDS;
-                break;
-            case Keyboard::KEY_A:
-            case Keyboard::KEY_LEFT_ARROW:
-                camera_move_direction &= ~LEFT;
-                break;
-            case Keyboard::KEY_D:
-            case Keyboard::KEY_RIGHT_ARROW:
-                camera_move_direction &= ~RIGHT;
-                break;
-            case Keyboard::KEY_SHIFT:
-                is_looking_at_origin = false;
-                break;
-		}
-	}
+
 }
 
-void CameraControl::HandleMouseEvent(Mouse::MouseEvent evt, int x, int y, int wheelDelta) 
+void CameraControl::OnEvent(SDL_Event* Event)
 {
-	Vector3 v = Vector3(camera_node->getTranslation());
-	//move to origin
-	camera_node->setTranslation(0, 0, 0);
-	camera_node->rotateX(MATH_DEG_TO_RAD(y));
-	camera_node->rotateY(MATH_DEG_TO_RAD(x));
-	camera_node->getMatrix();//flush changes
-	//reapply translation
-	camera_node->setTranslation(v);
+	switch(Event->type){
+	case SDL_KEYDOWN:  {
+		switch(Event->key.keysym.sym) {
+		case SDLK_w : {
+			camera_move_direction |= FORWARD;
+			break;
+		}
+		case SDLK_s: {
+			camera_move_direction |= BACKWARDS;
+			break;
+		}
+		case SDLK_a: {
+			camera_move_direction |= LEFT;
+			break;
+		}
+		case SDLK_d: {
+			camera_move_direction |= RIGHT;
+			break;
+		}
+		}
+		break;
+	}
+	case SDL_KEYUP:  {
+		switch(Event->key.keysym.sym) {
+			case SDLK_w: {
+				camera_move_direction &= ~FORWARD;
+				break;
+			}
+			case SDLK_s: {
+				camera_move_direction &= ~BACKWARDS;
+				break;
+			}
+			case SDLK_a: {
+				camera_move_direction &= ~LEFT;
+				break;
+			}
+			case SDLK_d: {
+				camera_move_direction &= ~RIGHT;
+				break;
+			}
+		}
+		break;
+	}
+	case SDL_MOUSEMOTION : {
+		//-rotations correspond to up and left
+		int dy = -Event->motion.yrel;
+
+		int dx = -Event->motion.xrel;
+
+		camera_node->RotateX(MATH_DEG_TO_RAD(dx));
+		camera_node->RotateY(MATH_DEG_TO_RAD(dy));
+		break;
+	}
+	}
 }

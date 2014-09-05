@@ -19,6 +19,7 @@ SOURCE_GROUP("src"
 FILE(GLOB SRC_DATA
 	src/data/*.cpp
 	src/data/*.hpp
+	src/data/*.h
 )
 LIST(APPEND core_SRC ${SRC_DATA})
 SOURCE_GROUP("src\\data"
@@ -37,6 +38,7 @@ SOURCE_GROUP("src\\data\\model"
 )
 
 FILE(GLOB SRC_ES 
+	src/es/*.h
 	src/es/*.hpp
 	src/es/*.cpp
 )  
@@ -49,6 +51,7 @@ SOURCE_GROUP("src\\es"
 FILE (GLOB SRC_GRAPHICS
 	src/graphics/*.cpp
 	src/graphics/*.hpp
+	src/graphics/*.h
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS})
 SOURCE_GROUP("src\\graphics"
@@ -59,6 +62,7 @@ SOURCE_GROUP("src\\graphics"
 FILE(GLOB SRC_LIBROCKET
 	src/librocket/*.cpp
 	src/librocket/*.hpp
+	src/librocket/*.h
 )
 LIST(APPEND core_SRC ${SRC_LIBROCKET})
 SOURCE_GROUP("src\\librocket"
@@ -69,6 +73,7 @@ SOURCE_GROUP("src\\librocket"
 FILE(GLOB SRC_MATH
 	src/math/*.cpp
 	src/math/*.hpp
+	src/math/*.h
 )
 LIST(APPEND core_SRC ${SRC_MATH})
 SOURCE_GROUP("src\\math"
@@ -79,6 +84,7 @@ SOURCE_GROUP("src\\math"
 FILE(GLOB SRC_PLATFORM
 	src/platform/*.cpp
 	src/platform/*.hpp
+	src/platform/*.h
 )
 LIST(APPEND core_SRC ${SRC_PLATFORM})
 SOURCE_GROUP("src\\platform"

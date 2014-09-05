@@ -7,6 +7,8 @@
 
 #include "constants.cpp"
 
+
+
 SDL_Window* Game::SDLWindow = NULL;
 SDL_GLContext Game::OpenGLContext = NULL;
 //Rocket::Core::Context* Game::LibRocketContext = NULL;
@@ -41,6 +43,8 @@ Game::Game(void)
 	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 100.0f, 100000.0f);
 	Game::SkyboxCamera->InitAsPerspective(90,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
 	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
+
+	this->cameraControl = new CameraControl(Game::PerspectiveCamera);
 } 
 
 void Game::Init() 
@@ -51,103 +55,14 @@ void Game::Init()
 
 void Game::Update( float dt )
 {
-	glm::vec3 camera_forward_vector = glm::vec3(PerspectiveCamera->ViewFrame()[2]);
-	glm::vec3 camera_side_vector = glm::vec3(PerspectiveCamera->ViewFrame()[0]);
-
-	//move camera
-	if (is_camera_moving_forward) {
-		Game::PerspectiveCamera->world_x += CAMERA_VELOCITY * (dt / 1000) * camera_forward_vector.x * camera_forward_direction;
-		Game::PerspectiveCamera->world_y += CAMERA_VELOCITY * (dt / 1000) * camera_forward_vector.y * camera_forward_direction;
-		Game::PerspectiveCamera->world_z += CAMERA_VELOCITY * (dt / 1000) * camera_forward_vector.z * camera_forward_direction;
-	}
-
-	if (is_camera_moving_sideways){
-		Game::PerspectiveCamera->world_x += CAMERA_VELOCITY * (dt / 1000) * camera_side_vector.x * camera_sideways_direction;
-		Game::PerspectiveCamera->world_y += CAMERA_VELOCITY * (dt / 1000) * camera_side_vector.y * camera_sideways_direction;
-		Game::PerspectiveCamera->world_z += CAMERA_VELOCITY * (dt / 1000) * camera_side_vector.z * camera_sideways_direction;
-	}
-
+	this->cameraControl->Update(dt);
 	current_scene->Update(dt);
 	addFrameTime(dt);
 }
 
 void Game::OnEvent( SDL_Event* Event )
 {
-	switch(Event->type){
-		case SDL_KEYDOWN:  {
-			switch(Event->key.keysym.sym) {
-				case SDLK_w: 
-				{
-					is_camera_moving_forward = true;
-					camera_forward_direction = -1;
-					break;
-				}
-				case SDLK_s: 
-				{
-					is_camera_moving_forward = true;
-					camera_forward_direction = 1;
-					break;
-				}
-				case SDLK_a: 
-				{
-					is_camera_moving_sideways = true;
-					camera_sideways_direction = -1;
-					break;
-				}
-				case SDLK_d: 
-				{
-					is_camera_moving_sideways = true;
-					camera_sideways_direction = 1;
-
-					break;
-				}
-				case SDLK_0: 
-				{
-					Game::PerspectiveCamera->world_x = 0;
-					Game::PerspectiveCamera->world_y = 0;
-					Game::PerspectiveCamera->world_z = 0;
-					Game::PerspectiveCamera->Orient(0, 0, 0);
-
-					break;
-				}
-				break;
-			}
-
-			break;
-		}
-
-		case SDL_KEYUP:  {
-			switch(Event->key.keysym.sym) {
-			case SDLK_w: 
-			case SDLK_s: 
-				{
-					is_camera_moving_forward = false;
-					break;
-				}
-			case SDLK_a: 
-			case SDLK_d: 
-				{
-					is_camera_moving_sideways = false;
-					break;
-				}
-			}
-			break;
-		}
-
-		case SDL_MOUSEMOTION : {
-			//-rotations correspond to up and left
-			int dy = -Event->motion.yrel * CAMERA_SMOOTH;
-			int dx = -Event->motion.xrel * CAMERA_SMOOTH;
-
-			PerspectiveCamera->Rotate(dy, x_axis);
-			SkyboxCamera->Rotate(dy, x_axis);
-
-			PerspectiveCamera->Rotate(dx, y_axis);
-			SkyboxCamera->Rotate(dx, y_axis);
-			
-			break;
-		}
-	}
+	this->cameraControl->OnEvent(Event);
 }
 
 void Game::addFrameTime( float f )
