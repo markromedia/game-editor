@@ -27,7 +27,7 @@
 
 const int SKYBOX_SIZE = 100;
 
-Skybox::Skybox() 
+Skybox::Skybox()
 {
 	//setup the basic stuff for the skybox
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);

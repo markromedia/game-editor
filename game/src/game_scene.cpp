@@ -23,6 +23,8 @@
 #include "graphics/vertex_data.hpp"
 #include "data/model_loader.hpp"
 #include "terrain.hpp"
+#include "skybox.hpp"
+
 
 Graphics::RenderOperation* render_model1;
 Graphics::RenderOperation* render_model2;
@@ -72,7 +74,7 @@ void GameScene::Init()
 	initModels();
 
 	//init skybox
-	Skybox.Setup();
+	skybox.Setup();
 
 	//load textures
 	Graphics::TextureManager::LoadTextures();
@@ -98,7 +100,7 @@ void GameScene::Update(float dt)
 	Game::SkyboxCamera->update(dt);
 
 	//draw skybox
-	Skybox.Update();
+    skybox.Update();
 
 	//draw terraom
 	//terrain.Render();

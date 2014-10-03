@@ -12,7 +12,7 @@ namespace Math {
 	{
 		return deg * (Math::PI / 180);
 	}
-};
+}
 
 namespace Math {
 	class Vector4;

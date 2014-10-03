@@ -29,7 +29,7 @@ private:
 	void setupNatural16();
 public:
 	/// Default constructor.
-	Skybox(void);
+	Skybox();
 
 	/// Setups this object.
 	void Setup();

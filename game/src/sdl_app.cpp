@@ -88,7 +88,7 @@ bool SdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
-    Screen::Init(1680, 1000);
+    Screen::Init(300, 200);
     
     if((SDLWindow = SDL_CreateWindow("Flight",
                                      0,

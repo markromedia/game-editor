@@ -13,6 +13,7 @@
 #include "../math/matrix4.hpp"
 
 namespace Graphics {
+
 	//forward declarations
 	class Quad;
 	class VertexBuffer;
@@ -28,13 +29,13 @@ namespace Graphics {
 		RenderOperation(void);
 
 		/// @summary	The camera to use to render
-		Camera* Camera;
+		Graphics::Camera* Camera;
 
 		/// @summary	The model matrix.
 		glm::mat4 ModelMatrix;
 
 		/// @summary	The vertex buffer associated with this render operation
-		VertexBuffer* VertexBuffer;
+        Graphics::VertexBuffer* VertexBuffer;
 
 		/// @summary	Type of the operation this operation expects
 		OperationType Operation_Type;
@@ -55,7 +56,7 @@ namespace Graphics {
 		float translation_x, translation_y, translation_z;
 
 		/// @summary	Possible associated quad
-		Quad* Quad;
+        Graphics::Quad* Quad;
 
 		/// @summary	Any associated color
 		Color4f Color;
