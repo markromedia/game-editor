@@ -1,10 +1,10 @@
 #include "sdl_app.hpp"
+#include "screen.h"
 
 SdlApp::SdlApp()
 {
 	SDLWindow = NULL;
 	Running = true;
-	game = new Game();
 }
 
 SdlApp::SdlApp( const SdlApp& from )
@@ -87,14 +87,22 @@ bool SdlApp::OnInit()
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	if((SDLWindow = SDL_CreateWindow("Flight",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT,
+    
+    Screen::Init(1680, 1000);
+    
+    if((SDLWindow = SDL_CreateWindow("Flight",
+                                     0,
+                                     0,
+                                     Screen::Width(),
+                                     Screen::Height(),
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN)) == NULL) {
 		return false;
 	}
+    
+//    int w, h;
+//    SDL_GetWindowSize(SDLWindow, &w, &h);
+//    Screen::Init(w, h);
+
 
 	/* Create our opengl context and attach it to our window */ 
 	ctx = SDL_GL_CreateContext(SDLWindow);
@@ -116,7 +124,7 @@ bool SdlApp::OnInit()
 	CHECK_GL_ERROR();
 
 	/* set viewport */
-	glViewport(0, 0, Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
+	glViewport(0, 0, Screen::Width(), Screen::Height());
 	
 	/* This makes our buffer swap synchronized with the monitor's vertical refresh */ 
 	SDL_GL_SetSwapInterval(1);
@@ -134,6 +142,7 @@ bool SdlApp::OnInit()
 	Game::OpenGLContext = ctx;
 
 	// initialize the game
+    game = new Game();
 	game->Init();
 
 	return true;

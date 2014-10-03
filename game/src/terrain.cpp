@@ -11,7 +11,7 @@
 #include "logger.hpp"
 #include "game.hpp"
 #include "graphics/color4f.hpp"
-#include "graphics/quad.hpp"
+#include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
 #include "graphics/frame.hpp"

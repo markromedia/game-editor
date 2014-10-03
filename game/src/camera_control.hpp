@@ -21,7 +21,7 @@ class CameraControl
 {
 private:
 	/// Values that represent CAMERA_DIRECTION.
-	enum CAMERA_DIRECTION { LEFT = 1, RIGHT = 2, FORWARD = 4, BACKWARDS = 8, NONE = 0 };
+	enum CAMERA_DIRECTION { LEFT = 1, RIGHT = 2, FORWARD = 4, BACKWARDS = 8, UP = 16, DOWN = 32, NONE = 0 };
 
 	/// @summary	The camera target.
 	glm::vec3 camera_target;
@@ -34,6 +34,8 @@ private:
 
 	/// @summary	true if this object is looking at origin.
 	bool is_looking_at_origin;
+    
+    bool at_target;
 public:
 	/// Constructor.
 	/// @param [in,out]	camera_node	If non-null, the camera node.

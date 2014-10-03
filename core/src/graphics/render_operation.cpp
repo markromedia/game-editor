@@ -2,7 +2,7 @@
 
 #include "vertex_buffer.hpp"
 #include "texture.hpp"
-#include "quad.hpp"
+#include "primitives/quad.hpp"
 
 
 using namespace Graphics;

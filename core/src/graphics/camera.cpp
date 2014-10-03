@@ -2,7 +2,7 @@
 
 #include <math.h>
 #include "../math/vector4.hpp"
-#include "../constants.cpp"
+#include "screen.h"
 
 Graphics::Camera::Camera()
 {
@@ -18,8 +18,8 @@ void Graphics::Camera::InitAsOrtho( int width, int height )
 
 void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_ratio, float near, float far )
 {
-	projection_matrix = glm::perspective(fov_angle_in_deg, aspect_ratio, near, far);
-	fullscreen_z = 1 / (tan(Math::DegreeToRadian(fov_angle_in_deg / 2))) * (Constants::SCREEN_HEIGHT / 4);
+	projection_matrix = glm::perspective(Math::DegreeToRadian(fov_angle_in_deg), aspect_ratio, near, far);
+	fullscreen_z = 1 / (tan(Math::DegreeToRadian(fov_angle_in_deg / 2))) * (Screen::Height() / 4);
 }
 
 void Graphics::Camera::update(float dt)

@@ -5,7 +5,7 @@
 #include "texture_manager.hpp"
 #include "vertex_buffer.hpp"
 #include "vertex_buffer_manager.hpp"
-#include "quad.hpp"
+#include "primitives/quad.hpp"
 #include "../data/model_loader.hpp"
 
 using namespace Graphics;
@@ -37,7 +37,7 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	
 	//create vbo and quad
 	r.VertexBuffer = VertexBufferManager::GetBuffer(USE_TEXTURE);
-	r.Quad = new Graphics::Quad(r.VertexBuffer, width, height);
+//	r.Quad = new Graphics::Quad();
 
 	//create crop for texture coords
 	float crop_x =  (float) width / texture_width;

@@ -12,7 +12,7 @@
 #include "constants.cpp"
 #include "logger.hpp"
 #include "graphics/color4f.hpp"
-#include "graphics/quad.hpp"
+#include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
 #include "graphics/frame.hpp"
@@ -30,9 +30,9 @@ Graphics::RenderOperation* render_wire_frame;
 
 float rot;
 bool render1Enabled = true;
-bool render2Enabled = false;
+bool render2Enabled = true;
 
-int render_1_model = ModelLoader::TEAPOT;
+int render_1_model = ModelLoader::FALCON;
 int render_2_model = ModelLoader::TORUS;
 
 Terrain terrain;
@@ -43,7 +43,7 @@ void initModels()
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
 
 	if (render1Enabled) {
-		float x_pos = 0, y_pos = 100, z_pos = -400;
+		float x_pos = 0, y_pos = 100, z_pos = -200;
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
 		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);

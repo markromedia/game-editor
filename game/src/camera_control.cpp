@@ -1,13 +1,13 @@
 #include "camera_control.hpp"
 
-const float CAMERA_VELOCITY = 100;
+const float CAMERA_VELOCITY = 2;
 
 CameraControl::CameraControl(Graphics::Camera* camera_node) {
 	this->camera_node = camera_node;
 	camera_move_direction = NONE;
     
-	camera_target.x = 0; camera_target.y = 0; camera_target.z = 100;
-	camera_node->Translate(camera_target.x, camera_target.y, camera_target.z);
+	camera_target.x = 0; camera_target.y = 0; camera_target.z = 0;
+	camera_node->SetTranslation(0, 0, 0);
 }
 
 void CameraControl::Update(float delta)
@@ -22,25 +22,30 @@ void CameraControl::Update(float delta)
 			camera_target += camera_node->getForwardVector() * CAMERA_VELOCITY;
 		if (camera_move_direction & BACKWARDS)
 			camera_target += camera_node->getForwardVector() * -CAMERA_VELOCITY;
-        
+        if (camera_move_direction & UP)
+			camera_target += camera_node->getUpVector() * CAMERA_VELOCITY;
+        if (camera_move_direction & DOWN)
+			camera_target += camera_node->getUpVector() * -CAMERA_VELOCITY;
+
 		//round target
 		camera_target.x = (int) camera_target.x;
 		camera_target.y = (int) camera_target.y;
 		camera_target.z = (int) camera_target.z;
+        
+        at_target = false;
 	}
-    
-	if (camera_node->translation_vec != camera_target) {
-		glm::vec3 res = (camera_node->translation_vec - camera_target) * (delta / (delta + 100));
-		if (std::abs(res.x - camera_target.x) <= 1 &&
-			std::abs(res.y - camera_target.y) <= 1 &&
-			std::abs(res.z - camera_target.z) <= 1)
-		{
-			res = camera_target;		
-			camera_node->SetTranslation(res.x, res.y, res.z);
-		} else {
-			camera_node->Translate(res.x, res.y, res.z);
-		}
-	}
+    camera_node->SetTranslation(camera_target.x, camera_target.y, camera_target.z);
+//	if (camera_target != camera_node->translation_vec) {
+//		glm::vec3 res = (camera_target - camera_node->translation_vec) * (delta / (delta + 100.0f));
+//		if (std::abs(res.x) <= 1 &&
+//			std::abs(res.y) <= 1 &&
+//			std::abs(res.z) <= 1)
+//		{
+//			camera_node->SetTranslation(camera_target.x, camera_target.y, camera_target.z);
+//		} else {
+//			camera_node->Translate(res.x, res.y, res.z);
+//		}
+//	}
 
 }
 
@@ -57,14 +62,26 @@ void CameraControl::OnEvent(SDL_Event* Event)
 			camera_move_direction |= BACKWARDS;
 			break;
 		}
+        case SDLK_LEFT:
 		case SDLK_a: {
 			camera_move_direction |= LEFT;
 			break;
 		}
+        case SDLK_RIGHT:
 		case SDLK_d: {
 			camera_move_direction |= RIGHT;
 			break;
 		}
+        case SDLK_UP: {
+            camera_move_direction |= UP;
+            break;
+        }
+        case SDLK_DOWN: {
+            camera_move_direction |= DOWN;
+            break;
+        }
+
+
 		}
 		break;
 	}
@@ -78,14 +95,25 @@ void CameraControl::OnEvent(SDL_Event* Event)
 				camera_move_direction &= ~BACKWARDS;
 				break;
 			}
+            case SDLK_LEFT:
 			case SDLK_a: {
 				camera_move_direction &= ~LEFT;
 				break;
 			}
+            case SDLK_RIGHT:
 			case SDLK_d: {
 				camera_move_direction &= ~RIGHT;
 				break;
 			}
+            case SDLK_UP: {
+				camera_move_direction &= ~UP;
+				break;
+			}
+			case SDLK_DOWN: {
+				camera_move_direction &= ~DOWN;
+				break;
+			}
+
 		}
 		break;
 	}

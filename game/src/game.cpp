@@ -5,7 +5,7 @@
 
 #include "game_scene.hpp"
 
-#include "constants.cpp"
+#include "screen.h"
 
 
 
@@ -40,9 +40,9 @@ Game::Game(void)
 	Game::OrthoCamera = new Graphics::Camera();
 	Game::SkyboxCamera = new Graphics::Camera();
 
-	Game::PerspectiveCamera->InitAsPerspective(60,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 100.0f, 100000.0f);
-	Game::SkyboxCamera->InitAsPerspective(90,  ( (float) Constants::SCREEN_WIDTH / Constants::SCREEN_HEIGHT), 1.0f, 10000.0f);
-	Game::OrthoCamera->InitAsOrtho(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT);
+	Game::PerspectiveCamera->InitAsPerspective(60,  Screen::Width() / Screen::Width(), 1.0f, 10000.0f);
+	Game::SkyboxCamera->InitAsPerspective(90,  Screen::Width() / Screen::Height(), 1.0f, 10000.0f);
+	Game::OrthoCamera->InitAsOrtho((int) Screen::Width(), (int) Screen::Height());
 
 	this->cameraControl = new CameraControl(Game::PerspectiveCamera);
 } 

@@ -59,6 +59,28 @@ SOURCE_GROUP("src\\graphics"
     ${SRC_GRAPHICS}
 )
 
+FILE (GLOB SRC_GRAPHICS_SHADER
+	src/graphics/shader_executor/*.cpp
+	src/graphics/shader_executor/*.hpp
+	src/graphics/shader_executor/*.h
+)
+LIST(APPEND core_SRC ${SRC_GRAPHICS_SHADER})
+SOURCE_GROUP("src\\graphics\\shader_executor"
+  FILES
+    ${SRC_GRAPHICS_SHADER}
+)
+
+FILE (GLOB SRC_GRAPHICS_PRIMITIVES
+	src/graphics/primitives/*.cpp
+	src/graphics/primitives/*.hpp
+	src/graphics/primitives/*.h
+)
+LIST(APPEND core_SRC ${SRC_GRAPHICS_PRIMITIVES})
+SOURCE_GROUP("src\\graphics\\primitives"
+  FILES
+    ${SRC_GRAPHICS_PRIMITIVES}
+)
+
 FILE(GLOB SRC_LIBROCKET
 	src/librocket/*.cpp
 	src/librocket/*.hpp
