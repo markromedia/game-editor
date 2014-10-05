@@ -25,11 +25,11 @@
 Terrain::Terrain()
 {
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_TERRAIN;
+	renderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_TERRAIN;
 	renderOperation->Color = Graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1);
     
 	wireframeRenderOperation = Graphics::RenderOperationManager::GetDrawWireframeOp(ModelLoader::SKYBOX);
-	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::DRAW_WIREFRAME;
+	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_WIREFRAME;
 }
 
 void Terrain::Update( float dt )

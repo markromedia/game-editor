@@ -31,7 +31,7 @@ Skybox::Skybox()
 {
 	//setup the basic stuff for the skybox
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_SKYBOX;
+	renderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_SKYBOX;
 	renderOperation->Skybox_Textures.reserve(6);
 
 	//use identity

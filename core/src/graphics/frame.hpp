@@ -2,6 +2,8 @@
 #define __FRAME_hpp
 
 #include <queue>
+#include <map>
+#include <string>
 
 namespace Graphics {
 	//forward declarations 
@@ -13,7 +15,8 @@ namespace Graphics {
 	{
 	private:
 		/// @summary	The list of render executors.
-		std::vector<RenderExecutor*> executors;
+		std::map<std::string, RenderExecutor*> executors;
+
 	public:
 		/// Default constructor.
 		Frame(void);
@@ -31,6 +34,11 @@ namespace Graphics {
 
 		/// Renders the frame and empties the render queue.
 		void Render();
+
+		/// Adds a render executor to 'executor'.
+		/// @param	name				The name.
+		/// @param [in,out]	executor	If non-null, the executor.
+		void AddRenderExecutor(std::string name, RenderExecutor* executor);
 	};
 }
 #endif  // __FRAME_hpp

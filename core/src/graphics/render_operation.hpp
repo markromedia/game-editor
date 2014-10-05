@@ -23,7 +23,11 @@ namespace Graphics {
 	class RenderOperation
 	{
 	public:
-		enum OperationType { DRAW_TEXTURE, DRAW_MODEL, DRAW_WIREFRAME, DRAW_SKYBOX, DRAW_TERRAIN };
+		static const std::string OperationType_DRAW_TEXTURE;
+		static const std::string OperationType_DRAW_MODEL;
+		static const std::string OperationType_DRAW_WIREFRAME;
+		static const std::string OperationType_DRAW_SKYBOX;
+		static const std::string OperationType_DRAW_TERRAIN;
 
 		/// Default constructor.
 		RenderOperation(void);
@@ -38,7 +42,7 @@ namespace Graphics {
         Graphics::VertexBuffer* VertexBuffer;
 
 		/// @summary	Type of the operation this operation expects
-		OperationType Operation_Type;
+		std::string Operation_Type;
 
 		/// @summary	Possible diffuse texture
 		Texture* Diffuse_Texture;

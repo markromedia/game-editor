@@ -19,19 +19,19 @@ using namespace Graphics;
 Frame::Frame(void)
 {
 	//push executors in order of the OperationType
-	executors.push_back(new DrawTextureExecutor);
-	executors.push_back(new DrawModelExecutor);
-	executors.push_back(new DrawWireframeExecutor);
-	executors.push_back(new DrawSkyboxExecutor);
-	executors.push_back(new DrawTerrainExecutor);
+	this->AddRenderExecutor(RenderOperation::OperationType_DRAW_TEXTURE, new DrawTextureExecutor);
+	this->AddRenderExecutor(RenderOperation::OperationType_DRAW_MODEL, new DrawModelExecutor);
+	this->AddRenderExecutor(RenderOperation::OperationType_DRAW_WIREFRAME, new DrawWireframeExecutor);
+	this->AddRenderExecutor(RenderOperation::OperationType_DRAW_SKYBOX, new DrawSkyboxExecutor);
+	this->AddRenderExecutor(RenderOperation::OperationType_DRAW_TERRAIN, new DrawTerrainExecutor);
 }
 
 void Frame::Init()
 {
 	//init all executors
-	for(std::vector<RenderExecutor*>::iterator it = executors.begin(); it != executors.end(); ++it) {
-		(*it)->Init();
-	}
+	for (std::pair<const std::string,RenderExecutor*>& x: executors) {
+        x.second->Init();
+	} 
 }
 
 void Frame::Render()
@@ -43,6 +43,11 @@ void Frame::Render()
 		//execute using operation type 
 		executors[renderOp->Operation_Type]->Execute(renderOp);
 	}
+}
+
+void Frame::AddRenderExecutor(std::string name, RenderExecutor* executor)
+{
+	executors[name] = executor;
 }
 
 void Frame::QueueRenderOperation( RenderOperation* renderOperation, Camera* camera )
