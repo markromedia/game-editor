@@ -30,7 +30,7 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	_checkCreateInstance();
 
 	RenderOperation r = RenderOperation();
-	r.Operation_Type = RenderOperation::DRAW_TEXTURE;
+	r.Operation_Type = RenderOperation::OperationType_DRAW_TEXTURE;
 	
 	//load texture
 	r.Diffuse_Texture = TextureManager::GetTexture(texture);
@@ -59,7 +59,7 @@ RenderOperation* RenderOperationManager::GetDrawModelOp(int model)
 	RenderOperation r = RenderOperation();
 
 	//set values
-	r.Operation_Type = RenderOperation::DRAW_MODEL;
+	r.Operation_Type = RenderOperation::OperationType_DRAW_MODEL;
 	r.VertexBuffer = ModelLoader::LoadModel(model);//VertexBufferManager::GetBuffer(USE_COLOR);
 
 	RenderOperationManager::instance->render_operations.push_back(r);
@@ -73,7 +73,7 @@ RenderOperation* RenderOperationManager::GetDrawWireframeOp(int model)
 	RenderOperation r = RenderOperation();
 
 	//set values
-	r.Operation_Type = RenderOperation::DRAW_WIREFRAME;
+	r.Operation_Type = RenderOperation::OperationType_DRAW_WIREFRAME;
 	r.VertexBuffer = ModelLoader::LoadModel(model);
 
 	RenderOperationManager::instance->render_operations.push_back(r);

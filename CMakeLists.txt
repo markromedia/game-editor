@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+MESSAGE(STATUS "AWESOMIUM =>" $ENV{AWE_DIR})
+
 if (WIN32)
 	Message(STATUS "***************************************************************************")
 	Message(STATUS "*                           WINDOWS USERS!!! READ THIS                    *")
@@ -10,6 +12,10 @@ ENDIF()
 
 
 project(Flight)
+
+MESSAGE(STATUS "***************************************************")
+MESSAGE(STATUS "*                  Main Config                    *")
+MESSAGE(STATUS "***************************************************")
 
 # Use our modified FindSDL2* modules
 set(CMAKE_MODULE_PATH "${Flight_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
@@ -67,8 +73,6 @@ MESSAGE(STATUS "Boost_LIBRARY_DIRS = " ${Boost_LIBRARY_DIRS})
 MESSAGE(STATUS "OPENGL_INCLUDE_DIR = " ${OPENGL_INCLUDE_DIR})
 MESSAGE(STATUS "GLM_INCLUDE_DIRS = " ${GLM_INCLUDE_DIRS})
 MESSAGE(STATUS "GLEW_INCLUDE_DIR = " ${GLEW_INCLUDE_DIR})
-MESSAGE(STATUS "GLEW_LIBRARIES = " ${GLEW_LIBRARIES})
-MESSAGE(STATUS "OPENGL_LIBRARIES = " ${OPENGL_LIBRARIES})
 MESSAGE(STATUS "")
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIRS} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLEW_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
