@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0.1)
 
 MESSAGE(STATUS "AWESOMIUM =>" $ENV{AWE_DIR})
 
@@ -61,6 +61,12 @@ ELSE()
 	find_package(SDL2_image REQUIRED)
 ENDIF(WIN32)
 
+#for linux, need to fix the path for awesomium. fix this
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    MESSAGE(STATUS "Awesomium path is going to be hardcoded")
+    SET(AWESOMIUM_ROOT "/home/mudit/applications/awesomium_v1.7.4_sdk_linux32")
+ENDIF()
+
 #MESSAGE(STATUS "")
 MESSAGE(STATUS "SDL2_INCLUDE_DIR = " ${SDL2_INCLUDE_DIR})
 MESSAGE(STATUS "SDL2_LIBRARY = " ${SDL2_LIBRARY})
@@ -88,8 +94,8 @@ IF(APPLE)
 ENDIF(APPLE)
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    add_subdirectory(platform/osx)
-ENDIF
+    add_subdirectory(platform/linux)
+ENDIF()
 
 add_subdirectory(core)
 add_subdirectory(game)

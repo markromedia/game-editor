@@ -126,7 +126,7 @@ IF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 		HINTS
 		$ENV{CPP_REPOSITORY}/sdl2
 		PATH_SUFFIXES lib64 lib
-		lib/x64
+		lib/x64cd /p[
 		x86_64-w64-mingw32/lib
 		PATHS
 		/sw
