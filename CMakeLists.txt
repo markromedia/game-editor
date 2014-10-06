@@ -83,6 +83,10 @@ IF(APPLE)
 	add_subdirectory(platform/osx)
 ENDIF(APPLE)
 
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    add_subdirectory(platform/osx)
+ENDIF
+
 add_subdirectory(core)
 add_subdirectory(game)
 add_subdirectory(editor)
