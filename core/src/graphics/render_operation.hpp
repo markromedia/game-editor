@@ -3,6 +3,7 @@
 #define __RENDER_OPERATION__hpp
 
 #include <vector>
+#include <string>
 
 #define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>

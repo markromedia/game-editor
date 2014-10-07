@@ -4,6 +4,7 @@ find_path(AWESOMIUM_INCLUDE_DIR Awesomium/WebCore.h
 	PATH_SUFFIXES include
 	PATHS
 	${AWESOMIUM_ROOT}
+	${AWESOMIUM_ROOT}/include
 	$ENV{AWE_DIR}include
 	$ENV{AWESOMIUM_ROOT}
 	~/Library/Frameworks
@@ -16,10 +17,11 @@ find_path(AWESOMIUM_INCLUDE_DIR Awesomium/WebCore.h
 	/opt/)
 	
 find_library(AWESOMIUM_LIBRARY 
-	NAMES awesomium.lib 
+	NAMES awesomium.lib libawesomium-1-7.so.4.0
 	PATH_SUFFIXES lib64 lib build/lib 
 	PATHS
 	${AWESOMIUM_ROOT}
+	${AWESOMIUM_ROOT}/bin
 	$ENV{AWE_DIR}build/lib
 	$ENV{AWESOMIUM_ROOT}
 	~/Library/Frameworks
