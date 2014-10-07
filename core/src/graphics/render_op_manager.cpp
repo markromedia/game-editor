@@ -37,7 +37,7 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	
 	//create vbo and quad
 	r.VertexBuffer = VertexBufferManager::GetBuffer(USE_TEXTURE);
-//	r.Quad = new Graphics::Quad();
+	r.Quad = new Graphics::Quad(r.VertexBuffer);
 
 	//create crop for texture coords
 	float crop_x =  (float) width / texture_width;

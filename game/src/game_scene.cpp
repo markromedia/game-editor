@@ -31,8 +31,8 @@ Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
-bool render1Enabled = true;
-bool render2Enabled = true;
+bool render1Enabled = false;
+bool render2Enabled = false;
 
 int render_1_model = ModelLoader::FALCON;
 int render_2_model = ModelLoader::TORUS;
@@ -80,15 +80,6 @@ void GameScene::Init()
 	Graphics::TextureManager::LoadTextures();
 	//create vbos
 	Graphics::VertexBufferManager::CreateBuffers();
-	
-	//load librocket font/document
-	//Rocket::Core::FontDatabase::LoadFontFace("resources\\rocket\\Oloron.TTF");
-	//document = Game::LibRocketContext->LoadDocument("resources\\rocket\\frame_rate.rml");
-
-	//if (document != NULL)
-	//{
-	//	document->Show();	
-	//}
 }
 
 void GameScene::Update(float dt)

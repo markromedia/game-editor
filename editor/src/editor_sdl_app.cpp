@@ -38,17 +38,7 @@ int EditorSdlApp::OnExecute()
 		}
 		
 		float dt = time - previous_time;
-		game->Update(dt);
-
-		/*
-		unsigned int end_time = SDL_GetTicks();
-
-		unsigned int d = end_time - time;
-		if (d < 32)
-		{
-			SDL_Delay(32 - d);		
-		}
-		*/
+		editor->Update(dt);
 
 		previous_time = time;
 	}
@@ -76,19 +66,14 @@ bool EditorSdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE,          16);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE,            32);
-//
-//	SDL_GL_SetAttribute(SDL_GL_ACCUM_RED_SIZE,        8);
-//	SDL_GL_SetAttribute(SDL_GL_ACCUM_GREEN_SIZE,    8);
-//	SDL_GL_SetAttribute(SDL_GL_ACCUM_BLUE_SIZE,        8);
-//	SDL_GL_SetAttribute(SDL_GL_ACCUM_ALPHA_SIZE,    8);
-//
+	
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS,  1);
 
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES,  2);
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
-    if((SDLWindow = SDL_CreateWindow("Flight",
+    if((SDLWindow = SDL_CreateWindow("Flight Editor",
                                      SDL_WINDOWPOS_UNDEFINED,
                                      SDL_WINDOWPOS_UNDEFINED,
                                      0,
@@ -127,17 +112,13 @@ bool EditorSdlApp::OnInit()
 	/* This makes our buffer swap synchronized with the monitor's vertical refresh */ 
 	SDL_GL_SetSwapInterval(1);
 
-	// initialize awesomium
-	this->web_core = Awesomium::WebCore::Initialize(Awesomium::WebConfig());
-	Awesomium::WebView* view = web_core->CreateWebView(300, 300);
+	//init the editor
+	this->editor = new Editor();
+	this->editor->Init();
 
-	// set game variables
+	//make sure the game has opengl
 	Game::SDLWindow = SDLWindow;
 	Game::OpenGLContext = ctx;
-
-	// initialize the game
-    game = new Game();
-	game->Init();
 
 	return true;
 }
@@ -147,7 +128,7 @@ void EditorSdlApp::OnEvent( SDL_Event* Event )
 	if(Event->type == SDL_QUIT) {
 		Running = false;
 	} 
-	game->OnEvent(Event);
+	editor->OnEvent(Event);
 }
 
 void EditorSdlApp::OnCleanup()

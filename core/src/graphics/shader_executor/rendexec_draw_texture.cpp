@@ -61,7 +61,7 @@ void DrawTextureExecutor::Execute(RenderOperation* renderOp)
 {
 	glViewport(0, 0, Screen::Width(), Screen::Height());
 	//set up matrices
-	//model_view_mat.SetTranslation(renderOp->translation_x, renderOp->translation_y, 0);
+	model_view_mat = renderOp->Camera->ViewMatrix() * renderOp->ModelMatrix;	
 	model_view_projection_mat = renderOp->Camera->ProjectionMatrix() * renderOp->Camera->ViewMatrix() * model_view_mat;
 
 	glUseProgram(this->programObject);

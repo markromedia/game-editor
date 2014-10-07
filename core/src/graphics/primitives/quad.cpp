@@ -3,7 +3,7 @@
 
 using namespace Graphics;
 
-Quad::Quad(int a, VertexBuffer* buffer, int width, int height)
+Quad::Quad(VertexBuffer* buffer, int width, int height)
 {
 	v1 = buffer->CreateVertex(0,0); //bottom left
 	v2 = buffer->CreateVertex((float) width,0); //bottom right

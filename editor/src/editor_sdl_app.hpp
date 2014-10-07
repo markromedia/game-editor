@@ -17,14 +17,11 @@
 #include "opengl.h"
 #include <SDL.h>
 //#include <Rocket/Core.h>
-#include "librocket/librocket_renderer.hpp"
-#include "librocket/librocket_system.hpp"
-#include "game.hpp"
+#include "editor.hpp"
 #include "constants.cpp"
 #include "graphics/glstate.hpp"
 #include "logger.hpp"
-#include "Awesomium/WebCore.h"
-
+#include "gllogger.hpp"
 
 class EditorSdlApp
 {
@@ -51,8 +48,6 @@ public:
 	///
 	/// @return	.
 	int OnExecute();
-
-	Awesomium::WebCore* web_core;
 protected:
 
 	/// Executes the initialise action.
@@ -80,10 +75,7 @@ private:
 	SDL_GLContext ctx;
 
 	/// @summary	The game.
-	Game* game;
+	Editor* editor;
 
-	// the lib rocket stuff
-	LibRocketSystemInterface* libRocketSystemInterface;
-	LibRocketRenderer* libRocketRenderer;
 };
 #endif  // _EDITOR_SDL_APP_hpp

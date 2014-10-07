@@ -61,6 +61,14 @@ SOURCE_GROUP("src"
 #			               RESOURCES    		                        #
 #										        #
 #########################################################################################
+FILE(GLOB RES_ROOT
+	resources/*.*
+)
+LIST(APPEND editor_SRC ${RES_ROOT})
+SOURCE_GROUP("resources"
+  FILES
+    ${RES_ROOT}
+)
 
 
 #########################################################################################
@@ -77,6 +85,11 @@ target_link_libraries(editor core game_lib ${AWESOMIUM_LIBRARY})
 add_custom_command(TARGET editor PRE_BUILD 
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
 					${core_SOURCE_DIR}/resources $<TARGET_FILE_DIR:editor>/resources)
+
+add_custom_command(TARGET editor PRE_BUILD 
+					COMMAND ${CMAKE_COMMAND} -E copy_directory
+					${editor_SOURCE_DIR}/resources $<TARGET_FILE_DIR:editor>/resources)
+	
 
 #copy dll's
 IF (WIN32)
