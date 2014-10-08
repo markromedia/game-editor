@@ -68,6 +68,12 @@ namespace Graphics {
 		/// @param	max_vertices	(optional) the maximum vertices.
 		VertexBuffer(unsigned int flags, int max_vertices, int max_indices);
 
+        /// binds this buffer and its data to the opengl context
+        void Bind();
+
+        /// unbinds this buffer and its data to the opengl context
+        void Unbind();
+
 		/// Creates the hardware buffers.
 		void CreateBuffers();
 

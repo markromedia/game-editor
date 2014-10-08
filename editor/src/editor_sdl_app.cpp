@@ -1,3 +1,4 @@
+#include <graphics/render_queue.hpp>
 #include "editor_sdl_app.hpp"
 #include "graphics/screen.h"
 
@@ -112,13 +113,13 @@ bool EditorSdlApp::OnInit()
 	/* This makes our buffer swap synchronized with the monitor's vertical refresh */ 
 	SDL_GL_SetSwapInterval(1);
 
-	//init the editor
+
+    //init render queue
+    Graphics::RenderQueue::Init(SDLWindow);
+
+    //init the editor
 	this->editor = new Editor();
 	this->editor->Init();
-
-	//make sure the game has opengl
-	Game::SDLWindow = SDLWindow;
-	Game::OpenGLContext = ctx;
 
 	return true;
 }

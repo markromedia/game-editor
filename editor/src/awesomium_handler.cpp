@@ -6,6 +6,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "graphics/render_op_manager.hpp"
+#include "graphics/render_queue.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
 
@@ -48,5 +49,5 @@ void AwesomiumHandler::OnEvent(SDL_Event* Event)
 
 void AwesomiumHandler::Update(float dt)
 {
-	Game::ScreenFrame->QueueRenderOperation(_render_operation, Game::OrthoCamera);
+    Graphics::RenderQueue::QueueRenderOperation(_render_operation, Game::OrthoCamera);
 }

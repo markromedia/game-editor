@@ -17,6 +17,7 @@
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
+#include "graphics/render_queue.hpp"
 #include "data/model_loader.hpp"
 #include "terrain.hpp"
 
@@ -93,13 +94,9 @@ void GameScene::Update(float dt)
     
 	//draw models
 	if (render1Enabled)
-		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
+        Graphics::RenderQueue::QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
-		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
-	//librocket up top of everything
-	Logger::GetInstance()->LogPreformance("GameScene::UpdateLibRocket");
-	UpdateLibRocket();
-	Logger::GetInstance()->StopPreformance("GameScene::UpdateLibRocket");
+        Graphics::RenderQueue::QueueRenderOperation(render_model2, Game::PerspectiveCamera);
 
 	Logger::GetInstance()->LogPreformance("GameScene::Render");
 	Render();
@@ -110,33 +107,7 @@ void GameScene::Update(float dt)
 
 void GameScene::Render()
 {
-	//clear the screen
-	glClearColor(1, 1, 1, 1);
-	//glClearColor(0, 0, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	Logger::GetInstance()->LogPreformance("VertexBufferManager::UpdateBuffers");
-	//update all the vbos
-	Graphics::VertexBufferManager::UpdateBuffers();
-	Logger::GetInstance()->StopPreformance("VertexBufferManager::UpdateBuffers");
-
-	Logger::GetInstance()->LogPreformance("ScreenFrame::Render");
-	//tell frame to render
-
-	Game::ScreenFrame->Render();
-	Logger::GetInstance()->StopPreformance("ScreenFrame::Render");
-
-	//tell rocket to render
-	Logger::GetInstance()->LogPreformance("LibRocket::Render");
-	//Game::LibRocketContext->Render();
-	Logger::GetInstance()->StopPreformance("LibRocket::Render");
-	
-	//Swap our back buffer to the front
-	Logger::GetInstance()->LogPreformance("SDL::SwapWindow");
-	SDL_GL_SwapWindow(Game::SDLWindow);
-	//glFinish();
-	Logger::GetInstance()->StopPreformance("SDL::SwapWindow");
-	CHECK_GL_ERROR();
+    Graphics::RenderQueue::Execute();
 }
 
 void GameScene::UpdateLibRocket()

@@ -153,3 +153,10 @@ void VertexBuffer::CreateTriangle( Vertex* v1, Vertex* v2, Vertex* v3 )
 	indices_buffer.push_back(v2->index);
 	indices_buffer.push_back(v3->index);
 }
+
+void VertexBuffer::Bind() {
+}
+
+void VertexBuffer::Unbind() {
+
+}

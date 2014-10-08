@@ -15,6 +15,7 @@
 #include "graphics/texture_manager.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
+#include "graphics/render_queue.hpp"
 #include "data/model_loader.hpp"
 
 const int SKYBOX_SIZE = 100;
@@ -23,7 +24,7 @@ Skybox::Skybox()
 {
 	//setup the basic stuff for the skybox
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_SKYBOX;
+	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_SKYBOX;
 	renderOperation->Skybox_Textures.reserve(6);
 
 	//use identity
@@ -38,7 +39,7 @@ void Skybox::Setup()
 
 void Skybox::Update()
 {
-	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::SkyboxCamera);
+    Graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::SkyboxCamera);
 }
 
 void Skybox::setupIceField()

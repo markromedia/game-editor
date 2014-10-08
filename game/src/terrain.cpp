@@ -4,31 +4,25 @@
 #include <fstream>
 #include<iterator>
 
-#include "opengl.h"
-#include <SDL.h>
-
-#include "logger.hpp"
 #include "game.hpp"
 #include "graphics/color4f.hpp"
 #include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
-#include "graphics/frame.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
-#include "graphics/vertex_buffer.hpp"
-#include "graphics/vertex_data.hpp"
+#include "graphics/render_queue.hpp"
 #include "data/model_loader.hpp"
 
 Terrain::Terrain()
 {
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_TERRAIN;
+	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_TERRAIN;
 	renderOperation->Color = Graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1);
     
 	wireframeRenderOperation = Graphics::RenderOperationManager::GetDrawWireframeOp(ModelLoader::SKYBOX);
-	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::OperationType_DRAW_WIREFRAME;
+	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::DRAW_WIREFRAME;
 }
 
 void Terrain::Update( float dt )
@@ -40,10 +34,9 @@ void Terrain::Render()
 	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0, 0, 0));
 	wireframeRenderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0, 0, 0));
 	
-	Game::ScreenFrame->QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
-	Game::ScreenFrame->QueueRenderOperation(wireframeRenderOperation, Game::PerspectiveCamera);
+    Graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+    Graphics::RenderQueue::QueueRenderOperation(wireframeRenderOperation, Game::PerspectiveCamera);
 }
-
 
 void Terrain::CreateGrid(int rows, int cols, int grid_size)
 {

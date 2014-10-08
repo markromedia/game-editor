@@ -9,10 +9,7 @@
 
 
 
-SDL_Window* Game::SDLWindow = NULL;
-SDL_GLContext Game::OpenGLContext = NULL;
 //Rocket::Core::Context* Game::LibRocketContext = NULL;
-Graphics::Frame* Game::ScreenFrame = NULL;
 Graphics::Camera* Game::PerspectiveCamera = NULL;
 Graphics::Camera* Game::OrthoCamera = NULL;
 Graphics::Camera* Game::SkyboxCamera = NULL;
@@ -33,7 +30,6 @@ const glm::vec3 y_axis = glm::vec3(0, 1, 0);
 
 Game::Game(void) 
 {
-	Game::ScreenFrame = new Graphics::Frame();
 	current_scene = new GameScene();
 
 	Game::PerspectiveCamera = new Graphics::Camera();
@@ -49,7 +45,6 @@ Game::Game(void)
 
 void Game::Init() 
 {
-	Game::ScreenFrame->Init();
 	current_scene->Init();
 }
 

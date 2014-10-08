@@ -1,5 +1,6 @@
 #include "sdl_app.hpp"
 #include "graphics/screen.h"
+#include "graphics/render_queue.hpp"
 
 SdlApp::SdlApp()
 {
@@ -137,11 +138,11 @@ bool SdlApp::OnInit()
 	//Rocket::Core::Initialise();
 	//Game::LibRocketContext = Rocket::Core::CreateContext("default", Rocket::Core::Vector2i(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT));
 
-	// set game variables
-	Game::SDLWindow = SDLWindow;
-	Game::OpenGLContext = ctx;
 
-	// initialize the game
+    //init render queue
+    Graphics::RenderQueue::Init(SDLWindow);
+
+    // initialize the game
     game = new Game();
 	game->Init();
 

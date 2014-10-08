@@ -9,7 +9,6 @@
 // INCLUDES
 #include <SDL.h>
 //#include <Rocket/Core.h>
-#include "graphics/frame.hpp"
 #include "graphics/camera.hpp"
 
 #include "camera_control.hpp"
@@ -46,15 +45,8 @@ public:
 	/// @summary	The current scene.
 	Scene*								current_scene;
 
-	/// These are injected by sdl
-	static SDL_Window*					SDLWindow;
-	static SDL_GLContext				OpenGLContext;
-
 	// The librocket context
 	//static Rocket::Core::Context*		LibRocketContext;
-
-	/// @summary	The main drawable frame
-	static Graphics::Frame*				ScreenFrame;
 
 	// the curent framerate/previous frame times
 	static float						FrameRate, update_time, render_time;

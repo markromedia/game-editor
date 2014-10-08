@@ -7,15 +7,9 @@
 
 using namespace Graphics;
 
-const std::string RenderOperation::OperationType_DRAW_TEXTURE = "DRAW_TEXTURE";
-const std::string RenderOperation::OperationType_DRAW_MODEL = "DRAW_MODEL";
-const std::string RenderOperation::OperationType_DRAW_WIREFRAME = "DRAW_WIREFRAME";
-const std::string RenderOperation::OperationType_DRAW_SKYBOX = "DRAW_SKYBOX";
-const std::string RenderOperation::OperationType_DRAW_TERRAIN = "DRAW_TERRAIN";
-
-RenderOperation::RenderOperation()
+RenderOperation::RenderOperation(void)
 {
-	Operation_Type = OperationType_DRAW_TEXTURE;
+	Operation_Type = DRAW_TEXTURE;
 	translation_x = translation_y = translation_z = 0;
 	//null out pointers
 	Camera = NULL;
@@ -25,8 +19,4 @@ RenderOperation::RenderOperation()
 	Illumination_Texture = NULL;
 	Quad = NULL;
 }
-
-
-
-
 
