@@ -2,7 +2,7 @@
 #ifndef __GL_STATE__hpp
 #define __GL_STATE__hpp
 
-#include "../opengl.h"
+#include "opengl.h"
 #include <vector>
 #include <set>
 

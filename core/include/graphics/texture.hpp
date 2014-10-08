@@ -2,7 +2,7 @@
 #ifndef _TEXTURE_hpp
 #define _TEXTURE_hpp
 
-#include "../opengl.h"
+#include "opengl.h"
 #include <string>
 
 namespace Graphics {

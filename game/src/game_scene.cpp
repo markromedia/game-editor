@@ -9,22 +9,16 @@
 //#include <Rocket/Core.h>
 #include <boost/lexical_cast.hpp>
 
-#include "constants.cpp"
 #include "logger.hpp"
 #include "graphics/color4f.hpp"
 #include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
-#include "graphics/frame.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
-#include "graphics/vertex_buffer.hpp"
-#include "graphics/vertex_data.hpp"
 #include "data/model_loader.hpp"
 #include "terrain.hpp"
-#include "skybox.hpp"
-
 
 Graphics::RenderOperation* render_model1;
 Graphics::RenderOperation* render_model2;

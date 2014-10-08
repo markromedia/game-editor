@@ -11,14 +11,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "color4f.hpp"
-#include "../math/matrix4.hpp"
+#include "math/matrix4.hpp"
+#include "texture.hpp"
 
 namespace Graphics {
 
 	//forward declarations
 	class Quad;
 	class VertexBuffer;
-	class Texture;
 	class Camera;
 
 	class RenderOperation

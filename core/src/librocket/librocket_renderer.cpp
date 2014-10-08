@@ -25,7 +25,7 @@
  *
  */
 
-#include "librocket_renderer.hpp"
+#include "librocket/librocket_renderer.hpp"
 //#include <Rocket/Core.h>
 
 #define GL_CLAMP_TO_EDGE 0x812F

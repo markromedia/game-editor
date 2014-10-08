@@ -1,4 +1,4 @@
-#include "gllogger.hpp"
+#include "graphics/gllogger.hpp"
 
 int GLLogger::CheckGLError(std::string file, int line)
 {

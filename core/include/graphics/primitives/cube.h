@@ -10,8 +10,8 @@
 #define __Flight__cube__
 
 #include <iostream>
-#include "../gllogger.hpp"
-#include "../vertex_buffer.hpp"
+#include "graphics/gllogger.hpp"
+#include "graphics/vertex_buffer.hpp"
 using namespace Graphics;
 
 

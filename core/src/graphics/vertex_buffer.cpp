@@ -1,7 +1,7 @@
-#include "vertex_buffer.hpp"
+#include "graphics/vertex_buffer.hpp"
 
-#include "vertex_data.hpp"
-#include "gllogger.hpp"
+#include "graphics/vertex_data.hpp"
+#include "graphics/gllogger.hpp"
 
 using namespace Graphics;
 

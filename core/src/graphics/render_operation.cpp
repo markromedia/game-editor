@@ -1,8 +1,8 @@
-#include "render_operation.hpp"
+#include "graphics/render_operation.hpp"
 
-#include "vertex_buffer.hpp"
-#include "texture.hpp"
-#include "primitives/quad.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/texture.hpp"
+#include "graphics/primitives/quad.hpp"
 
 
 using namespace Graphics;

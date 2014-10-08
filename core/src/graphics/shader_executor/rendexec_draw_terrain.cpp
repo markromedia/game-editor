@@ -1,15 +1,11 @@
-#include "rendexec_draw_terrain.hpp"
+#include "graphics/shader_executor/rendexec_draw_terrain.hpp"
 
-#include "../gllogger.hpp"
-#include "../glstate.hpp"
-#include "../shader_manager.hpp"
-#include "../shader_object.hpp"
-#include "../vertex_buffer.hpp"
-#include "../texture.hpp"
-#include "../render_operation.hpp"
-#include "../../math/matrix4.hpp"
-#include "../../constants.cpp"
-#include "../camera.hpp"
+#include "graphics/gllogger.hpp"
+#include "graphics/glstate.hpp"
+#include "graphics/shader_manager.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/render_operation.hpp"
+#include "graphics/camera.hpp"
 
 using namespace Graphics;
 

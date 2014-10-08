@@ -7,7 +7,6 @@
 #include "opengl.h"
 #include <SDL.h>
 
-#include "constants.cpp"
 #include "logger.hpp"
 #include "game.hpp"
 #include "graphics/color4f.hpp"

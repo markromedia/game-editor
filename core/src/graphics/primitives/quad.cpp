@@ -1,5 +1,4 @@
-#include "../opengl.h"
-#include "quad.hpp"
+#include "graphics/primitives/quad.hpp"
 
 using namespace Graphics;
 

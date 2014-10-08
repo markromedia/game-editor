@@ -1,6 +1,6 @@
-#include "entity.hpp"
+#include "es/entity.hpp"
 
-#include "entity_manager.hpp"
+#include "es/entity_manager.hpp"
 
 Entity::Entity()
 {

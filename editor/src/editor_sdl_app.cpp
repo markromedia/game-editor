@@ -1,5 +1,5 @@
 #include "editor_sdl_app.hpp"
-#include "screen.h"
+#include "graphics/screen.h"
 
 EditorSdlApp::EditorSdlApp()
 {

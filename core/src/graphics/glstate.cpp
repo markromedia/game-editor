@@ -1,5 +1,5 @@
 #include "opengl.h"
-#include "glstate.hpp"
+#include "graphics/glstate.hpp"
 
 std::set<GLuint> GLState::global_states;
 std::set<GLuint> GLState::client_states;

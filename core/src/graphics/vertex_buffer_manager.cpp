@@ -1,6 +1,6 @@
-#include "vertex_buffer_manager.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
 
-#include "vertex_buffer.hpp"
+#include "graphics/vertex_buffer.hpp"
 
 using namespace Graphics;
 

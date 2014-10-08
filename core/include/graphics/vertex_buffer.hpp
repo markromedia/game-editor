@@ -17,14 +17,15 @@
 #define NORMAL_DATA_SIZE				3 * sizeof(float)
 #define ONE_FLOAT_COLOR_DATA_SIZE		1 * sizeof(float)
 
-#include "../opengl.h"
 #include <vector>
 #include <iostream>
-#define GLM_FORCE_RADIANS 
+
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "vertex_data.hpp"
+#include "opengl.h"
 
 namespace Graphics {
 	const int DEFAULT_MAX_VERTICES = 128;

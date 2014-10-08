@@ -1,12 +1,12 @@
-#include "render_op_manager.hpp"
+#include "graphics/render_op_manager.hpp"
 
-#include "render_operation.hpp"
-#include "texture.hpp"
-#include "texture_manager.hpp"
-#include "vertex_buffer.hpp"
-#include "vertex_buffer_manager.hpp"
-#include "primitives/quad.hpp"
-#include "../data/model_loader.hpp"
+#include "graphics/render_operation.hpp"
+#include "graphics/texture.hpp"
+#include "graphics/texture_manager.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
+#include "graphics/primitives/quad.hpp"
+#include "data/model_loader.hpp"
 
 using namespace Graphics;
 

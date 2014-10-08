@@ -6,9 +6,9 @@
 //
 //
 
-#include "cube.h"
+#include "graphics/primitives/cube.h"
 
-#include "../vertex_buffer_manager.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
 
 Cube::Cube(int flags, int width, int height, int depth) : _width(width), _height(height), _depth(depth)
 {

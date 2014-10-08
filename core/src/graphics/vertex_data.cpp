@@ -1,7 +1,7 @@
-#include "vertex_data.hpp"
+#include "graphics/vertex_data.hpp"
 
-#include "vertex_buffer.hpp"
-#include "../logger.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "logger.hpp"
 
 using namespace Graphics;
 

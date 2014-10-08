@@ -1,7 +1,7 @@
-#include "texture_manager.hpp"
+#include "graphics/texture_manager.hpp"
 
-#include "texture.hpp"
-#include "../logger.hpp"
+#include "graphics/texture.hpp"
+#include "logger.hpp"
 
 using namespace Graphics;
 

@@ -4,7 +4,7 @@
 #ifndef __SHADER__MANAGER_hpp
 #define __SHADER__MANAGER_hpp
 
-#include "../opengl.h"
+#include "opengl.h"
 #include <vector>
 #include <set>
 #include <fstream>

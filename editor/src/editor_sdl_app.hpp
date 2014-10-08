@@ -18,10 +18,9 @@
 #include <SDL.h>
 //#include <Rocket/Core.h>
 #include "editor.hpp"
-#include "constants.cpp"
 #include "graphics/glstate.hpp"
 #include "logger.hpp"
-#include "gllogger.hpp"
+#include "graphics/gllogger.hpp"
 
 class EditorSdlApp
 {

@@ -1,7 +1,7 @@
 #ifndef __RENDEREX_hpp
 #define __RENDEREX_hpp
 
-#include "../opengl.h"
+#include "opengl.h"
 
 namespace Graphics {
 	//forward declarations

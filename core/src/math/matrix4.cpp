@@ -1,8 +1,8 @@
-#include "matrix4.hpp"
+#include "math/matrix4.hpp"
 
 #include <math.h>
 #include <iostream>
-#include "vector4.hpp"
+#include "math/vector4.hpp"
 
 using namespace Math;
 

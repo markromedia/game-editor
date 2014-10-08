@@ -1,8 +1,8 @@
 #ifndef __RENDER_EX_DRAW_WIREFRAME_hpp
 #define __RENDER_EX_DRAW_WIREFRAME_hpp
 
-#include "../opengl.h"
-#include "../shader_executor.hpp"
+#include "opengl.h"
+#include "graphics/shader_executor.hpp"
 
 #define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>

@@ -7,8 +7,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-#include "../math/matrix3.hpp"
-#include "../math/matrix4.hpp"
+#include "math/matrix3.hpp"
+#include "math/matrix4.hpp"
 
 //forward declaration
 namespace Math {

@@ -1,14 +1,123 @@
 project(core)
 
+INCLUDE_DIRECTORIES(
+	${core_SOURCE_DIR}/include/
+)
+
 #########################################################################################
-#											#
-#				      SOURCE FILES		        		#
-#										        #
+#											                                            #
+#				                    INCLUDE FILES		        	                    #
+#										                                                #
+#########################################################################################
+
+FILE (GLOB INCLUDE_ROOT
+	include/*.hpp
+	include/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_ROOT})
+SOURCE_GROUP("include"
+  FILES
+    ${INCLUDE_ROOT}
+)
+
+FILE(GLOB INCLUDE_DATA
+	include/data/*.hpp
+	include/data/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_DATA})
+SOURCE_GROUP("include\\data"
+  FILES
+    ${INCLUDE_DATA}
+)
+
+FILE(GLOB INCLUDE_MODEL
+	include/data/model/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_MODEL})
+SOURCE_GROUP("include\\data\\model"
+  FILES
+    ${INCLUDE_MODEL}
+)
+
+FILE(GLOB INCLUDE_ES
+	include/es/*.h
+	include/es/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES})
+SOURCE_GROUP("include\\es"
+  FILES
+    ${INCLUDE_ES}
+)
+
+FILE (GLOB INCLUDE_GRAPHICS
+	include/graphics/*.cpp
+	include/graphics/*.hpp
+	include/graphics/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_GRAPHICS})
+SOURCE_GROUP("include\\graphics"
+  FILES
+    ${INCLUDE_GRAPHICS}
+)
+
+FILE (GLOB INCLUDE_GRAPHICS_SHADER
+	include/graphics/shader_executor/*.hpp
+	include/graphics/shader_executor/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_GRAPHICS_SHADER})
+SOURCE_GROUP("include\\graphics\\shader_executor"
+  FILES
+    ${INCLUDE_GRAPHICS_SHADER}
+)
+
+FILE (GLOB INCLUDE_GRAPHICS_PRIMITIVES
+	include/graphics/primitives/*.hpp
+	include/graphics/primitives/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_GRAPHICS_PRIMITIVES})
+SOURCE_GROUP("include\\graphics\\primitives"
+  FILES
+    ${INCLUDE_GRAPHICS_PRIMITIVES}
+)
+
+FILE(GLOB INCLUDE_LIBROCKET
+	include/librocket/*.hpp
+	include/librocket/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_LIBROCKET})
+SOURCE_GROUP("include\\librocket"
+  FILES
+    ${INCLUDE_LIBROCKET}
+)
+
+FILE(GLOB INCLUDE_MATH
+	include/math/*.hpp
+	include/math/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_MATH})
+SOURCE_GROUP("include\\math"
+  FILES
+    ${INCLUDE_MATH}
+)
+
+FILE(GLOB INCLUDE_PLATFORM
+	include/platform/*.hpp
+	include/platform/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_PLATFORM})
+SOURCE_GROUP("include\\platform"
+  FILES
+    ${INCLUDE_PLATFORM}
+)
+
+#########################################################################################
+#											                                            #
+#				                    SOURCE FILES		        	                    #
+#										                                                #
 #########################################################################################
 
 FILE (GLOB SRC_ROOT
 	src/*.cpp                
-	src/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_ROOT})
 SOURCE_GROUP("src"
@@ -18,8 +127,6 @@ SOURCE_GROUP("src"
 
 FILE(GLOB SRC_DATA
 	src/data/*.cpp
-	src/data/*.hpp
-	src/data/*.h
 )
 LIST(APPEND core_SRC ${SRC_DATA})
 SOURCE_GROUP("src\\data"
@@ -28,7 +135,6 @@ SOURCE_GROUP("src\\data"
 )
 
 FILE(GLOB SRC_MODEL
-	src/data/model/*.h
 	src/data/model/*.c
 )
 LIST(APPEND core_SRC ${SRC_MODEL})
@@ -38,8 +144,6 @@ SOURCE_GROUP("src\\data\\model"
 )
 
 FILE(GLOB SRC_ES 
-	src/es/*.h
-	src/es/*.hpp
 	src/es/*.cpp
 )  
 LIST(APPEND core_SRC ${SRC_ES})
@@ -50,8 +154,6 @@ SOURCE_GROUP("src\\es"
 
 FILE (GLOB SRC_GRAPHICS
 	src/graphics/*.cpp
-	src/graphics/*.hpp
-	src/graphics/*.h
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS})
 SOURCE_GROUP("src\\graphics"
@@ -61,8 +163,6 @@ SOURCE_GROUP("src\\graphics"
 
 FILE (GLOB SRC_GRAPHICS_SHADER
 	src/graphics/shader_executor/*.cpp
-	src/graphics/shader_executor/*.hpp
-	src/graphics/shader_executor/*.h
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS_SHADER})
 SOURCE_GROUP("src\\graphics\\shader_executor"
@@ -72,8 +172,6 @@ SOURCE_GROUP("src\\graphics\\shader_executor"
 
 FILE (GLOB SRC_GRAPHICS_PRIMITIVES
 	src/graphics/primitives/*.cpp
-	src/graphics/primitives/*.hpp
-	src/graphics/primitives/*.h
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS_PRIMITIVES})
 SOURCE_GROUP("src\\graphics\\primitives"
@@ -83,8 +181,6 @@ SOURCE_GROUP("src\\graphics\\primitives"
 
 FILE(GLOB SRC_LIBROCKET
 	src/librocket/*.cpp
-	src/librocket/*.hpp
-	src/librocket/*.h
 )
 LIST(APPEND core_SRC ${SRC_LIBROCKET})
 SOURCE_GROUP("src\\librocket"
@@ -94,8 +190,6 @@ SOURCE_GROUP("src\\librocket"
 
 FILE(GLOB SRC_MATH
 	src/math/*.cpp
-	src/math/*.hpp
-	src/math/*.h
 )
 LIST(APPEND core_SRC ${SRC_MATH})
 SOURCE_GROUP("src\\math"
@@ -103,22 +197,10 @@ SOURCE_GROUP("src\\math"
     ${SRC_MATH}
 )
 
-FILE(GLOB SRC_PLATFORM
-	src/platform/*.cpp
-	src/platform/*.hpp
-	src/platform/*.h
-)
-LIST(APPEND core_SRC ${SRC_PLATFORM})
-SOURCE_GROUP("src\\platform"
-  FILES
-    ${SRC_PLATFORM}
-)
-	
-
 #########################################################################################
-#										        #
-#			               RESOURCES    		                        #
-#										        #
+#										                                                #
+#			                         RESOURCES    		                                #
+#										                                                #
 #########################################################################################
 
 FILE(GLOB RES_ROOT

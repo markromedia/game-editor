@@ -29,15 +29,14 @@
 #define ROCKETSHELLRENDERINTERFACE_H
 
 //#include <Rocket/Core/RenderInterface.h>
-#include "../opengl.h"
-#include "../graphics/gllogger.hpp"
-#include "../graphics/glstate.hpp"
-#include "../graphics/shader_manager.hpp"
-#include "../graphics/shader_object.hpp"
-#include "../graphics/vertex_buffer.hpp"
-#include "../graphics/texture.hpp"
-#include "../constants.cpp"
-#include "../math/matrix4.hpp"
+#include "opengl.h"
+#include "graphics/gllogger.hpp"
+#include "graphics/glstate.hpp"
+#include "graphics/shader_manager.hpp"
+#include "graphics/shader_object.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/texture.hpp"
+#include "math/matrix4.hpp"
 
 /**
 	Low level OpenGL render interface for Rocket

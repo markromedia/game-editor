@@ -10,19 +10,11 @@
 #include <boost/lexical_cast.hpp>
 
 
-#include "constants.cpp"
-#include "logger.hpp"
 #include "game.hpp"
-#include "graphics/color4f.hpp"
-#include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
-#include "graphics/frame.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
-#include "graphics/vertex_buffer_manager.hpp"
-#include "graphics/vertex_buffer.hpp"
-#include "graphics/vertex_data.hpp"
 #include "data/model_loader.hpp"
 
 const int SKYBOX_SIZE = 100;

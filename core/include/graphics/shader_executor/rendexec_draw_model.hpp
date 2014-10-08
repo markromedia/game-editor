@@ -1,11 +1,11 @@
 #ifndef __RENDER_EX_DRAW_MODEL_hpp
 #define __RENDER_EX_DRAW_MODEL_hpp
 
-#include "../opengl.h"
-#include "../shader_executor.hpp"
-#include "../../math/matrix4.hpp"
-#include "../../math/vector4.hpp"
-#include "../color4f.hpp"
+#include "opengl.h"
+#include "graphics/shader_executor.hpp"
+#include "math/matrix4.hpp"
+#include "math/vector4.hpp"
+#include "graphics/color4f.hpp"
 
 #define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>

@@ -1,9 +1,9 @@
 #ifndef __RENDER_EX_DRAW_SKYBOX_hpp
 #define __RENDER_EX_DRAW_SKYBOX_hpp
 
-#include "../../opengl.h"
-#include "../shader_executor.hpp"
-#include "../../math/matrix4.hpp"
+#include "opengl.h"
+#include "graphics/shader_executor.hpp"
+#include "math/matrix4.hpp"
 
 #define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>

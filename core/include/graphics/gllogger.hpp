@@ -6,12 +6,14 @@
 #define CHECK_GL_SHADER_ERROR(shader) GLLogger::CheckShaderError(shader, __FILE__, __LINE__)
 #define CHECK_GL_PROGRAM_ERROR(program) GLLogger::CheckProgramError(program, __FILE__, __LINE__)
 
-#include "../opengl.h"
 #include <vector>
 #include <set>
 #include <string>
 #include <sstream>
-#include "../logger.hpp"
+
+#include "opengl.h"
+#include "logger.hpp"
+
 
 class GLLogger
 {

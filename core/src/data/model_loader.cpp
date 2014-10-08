@@ -1,19 +1,18 @@
-#include "model_loader.hpp"
+#include "data/model_loader.hpp"
 
-#include "../graphics/vertex_buffer.hpp"
-#include "../graphics/vertex_buffer_manager.hpp"
-#include "../constants.cpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
 
 extern "C"
 {
-	#include "model/enemy.h"
-	#include "model/torus.h"
-	#include "model/cube.h"
-	#include "model/teapot.h"
-	#include "model/falcon.h"
-	#include "model/station.h"
-	#include "model/cube2.h"
-	#include "model/skybox.h"
+	#include "data/model/enemy.h"
+	#include "data/model/torus.h"
+	#include "data/model/cube.h"
+	#include "data/model/teapot.h"
+	#include "data/model/falcon.h"
+	#include "data/model/station.h"
+	#include "data/model/cube2.h"
+	#include "data/model/skybox.h"
 };
 
 #define NUM_ELEMENTS 8

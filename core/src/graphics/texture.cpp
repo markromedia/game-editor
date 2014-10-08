@@ -1,13 +1,12 @@
-#include "texture.hpp"
+#include "graphics/texture.hpp"
 
 #include <string>
-#include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "gllogger.hpp"
-#include "../logger.hpp"
-#include "../platform//FileSystem.hpp"
+#include "graphics/gllogger.hpp"
+#include "logger.hpp"
+#include "platform/FileSystem.hpp"
 
 using namespace Graphics;
 

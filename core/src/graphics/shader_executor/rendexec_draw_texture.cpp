@@ -1,14 +1,12 @@
-#include "rendexec_draw_texture.hpp"
+#include "graphics/shader_executor/rendexec_draw_texture.hpp"
 
-#include "../gllogger.hpp"
-#include "../shader_manager.hpp"
-#include "../shader_object.hpp"
-#include "../vertex_buffer.hpp"
-#include "../texture.hpp"
-#include "../render_operation.hpp"
-#include "../camera.hpp"
-#include "../../math/matrix4.hpp"
-#include "../screen.h"
+#include "graphics/gllogger.hpp"
+#include "graphics/shader_manager.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/render_operation.hpp"
+#include "graphics/camera.hpp"
+#include "graphics/screen.h"
+
 
 using namespace Graphics;
 

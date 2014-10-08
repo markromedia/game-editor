@@ -7,14 +7,7 @@ project(game)
 #########################################################################################
 
 INCLUDE_DIRECTORIES(
-	${core_SOURCE_DIR}/src/
-	${core_SOURCE_DIR}/src/data
-	${core_SOURCE_DIR}/src/data/model
-	${core_SOURCE_DIR}/src/es
-	${core_SOURCE_DIR}/src/graphics
-	${core_SOURCE_DIR}/src/librocket
-	${core_SOURCE_DIR}/src/math
-	${core_SOURCE_DIR}/src/platform
+	${core_SOURCE_DIR}/include/
 )
 
 #########################################################################################

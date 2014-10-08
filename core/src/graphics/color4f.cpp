@@ -1,4 +1,4 @@
-#include "color4f.hpp"
+#include "graphics/color4f.hpp"
 
 using namespace Graphics;
 

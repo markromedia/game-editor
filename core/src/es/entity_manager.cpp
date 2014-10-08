@@ -1,6 +1,6 @@
-#include "entity_manager.hpp"
+#include "es/entity_manager.hpp"
 
-#include "entity.hpp"
+#include "es/entity.hpp"
 
 EntityManager* EntityManager::instance = NULL;
 

@@ -1,8 +1,8 @@
-#include "camera.hpp"
+#include "graphics/camera.hpp"
 
 #include <math.h>
-#include "../math/vector4.hpp"
-#include "screen.h"
+#include "math/vector4.hpp"
+#include "graphics/screen.h"
 
 Graphics::Camera::Camera()
 {

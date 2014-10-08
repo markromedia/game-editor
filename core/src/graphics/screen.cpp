@@ -6,7 +6,7 @@
 //
 //
 
-#include "screen.h"
+#include "graphics/screen.h"
 
 Screen* Screen::_instance = NULL;
 

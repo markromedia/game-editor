@@ -1,18 +1,14 @@
-#include "frame.hpp"
+#include "graphics/frame.hpp"
 
-#include "../opengl.h"
-#include <vector>
-#include <queue>
-
-#include "render_operation.hpp"
-#include "shader_executor.hpp"
-#include "shader_executor/rendexec_draw_texture.hpp"
-#include "shader_executor/rendexec_draw_model.hpp"
-#include "shader_executor/rendexec_draw_wireframe.hpp"
-#include "shader_executor/rendexec_draw_skybox.hpp"
-#include "shader_executor/rendexec_draw_terrain.hpp"
-#include "vertex_buffer.hpp"
-#include "camera.hpp"
+#include "graphics/render_operation.hpp"
+#include "graphics/shader_executor.hpp"
+#include "graphics/shader_executor/rendexec_draw_texture.hpp"
+#include "graphics/shader_executor/rendexec_draw_model.hpp"
+#include "graphics/shader_executor/rendexec_draw_wireframe.hpp"
+#include "graphics/shader_executor/rendexec_draw_skybox.hpp"
+#include "graphics/shader_executor/rendexec_draw_terrain.hpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/camera.hpp"
 
 using namespace Graphics;
 

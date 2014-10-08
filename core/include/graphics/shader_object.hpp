@@ -4,7 +4,7 @@
 #ifndef __SHADER__OBJECT_hpp
 #define __SHADER__OBJECT_hpp
 
-#include "../opengl.h"
+#include "opengl.h"
 #include <vector>
 #include <set>
 #include "gllogger.hpp"
@@ -16,7 +16,7 @@ protected:
 	/// Constructor.
 	///
 	/// @param	type	(optional) the type.
-	ShaderObject(GLenum type = NULL);
+	ShaderObject(GLenum type = (GLenum) NULL);
 public:
 	/// Destructor.
 	~ShaderObject();

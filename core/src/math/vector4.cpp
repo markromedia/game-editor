@@ -1,4 +1,4 @@
-#include "vector4.hpp"
+#include "math/vector4.hpp"
 
 #include <math.h>
 

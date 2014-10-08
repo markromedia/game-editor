@@ -1,4 +1,4 @@
-#include "librocket_system.hpp"
+#include "librocket/librocket_system.hpp"
 #include <SDL.h>
 
 float LibRocketSystemInterface::GetElapsedTime()
