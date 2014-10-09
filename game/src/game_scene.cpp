@@ -20,6 +20,9 @@
 #include "graphics/render_queue.hpp"
 #include "graphics/transform.hpp"
 #include "data/model_loader.hpp"
+#include "es/entity.hpp"
+#include "es/transform_component.h"
+
 #include "terrain.hpp"
 
 Graphics::RenderOperation* render_model1;
@@ -39,6 +42,11 @@ void initModels()
 {
 	rot = 0;
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
+
+    Entity es;
+    es.add_component(new TransformComponent());
+
+    TransformComponent* c = (TransformComponent *) es.get_component(TransformComponent::MASK);
 
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 10, z_pos = -100;
