@@ -18,6 +18,7 @@
 #include "graphics/render_op_manager.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
 #include "graphics/render_queue.hpp"
+#include "graphics/transform.hpp"
 #include "data/model_loader.hpp"
 #include "terrain.hpp"
 
@@ -40,13 +41,15 @@ void initModels()
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
 
 	if (render1Enabled) {
-		float x_pos = 0, y_pos = 100, z_pos = -200;
+		float x_pos = 0, y_pos = 10, z_pos = -100;
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
-		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
-		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
-		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
-		render_model1->ModelMatrix = model_matrix;
+
+        Graphics::Transform transform;
+        transform.translate(x_pos, y_pos, z_pos);
+		transform.rotate(90, 0, 180 );
+        transform.uniform_scale(0.1);
+		render_model1->ModelMatrix = transform.getMatrix();
 		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
 	}
 

@@ -5,6 +5,8 @@
 #define GLM_FORCE_RADIANS 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/quaternion.hpp>
+
 #include <string>
 
 namespace Graphics {
@@ -12,15 +14,27 @@ namespace Graphics {
 	class Transform
 	{
 	private:
-		/// @summary	The world x coordinate.
-		float _world_x;
+        static const int kTransformDirty    = 0x1000;
+        static const int kTranslationDirty  = 0x0001;
+        static const int kScaleDirty        = 0x0010;
+        static const int kRotationDirty     = 0x0100;
 
-		/// @summary	The world y coordinate.
-		float _world_y;
+        int _dirty_bits;
 
-		/// @summary	The transform.
-		glm::mat4 transform;
+        //tranformation data
+        glm::vec3 _translation;
+        glm::vec3 _scale;
+        float _x_rot, _y_rot, _z_rot;
+
+        //matrix for all the transformations
+		glm::mat4 _transform;
+
+        //individual transform
+        glm::mat4 _translation_matrix;
+        glm::mat4 _scale_matrix;
+        glm::quat _orientation;
 	public:
+        static glm::vec3 UNIT_X, UNIT_Y, UNIT_Z;
 
 		/// Default constructor.
 		Transform();
@@ -35,27 +49,14 @@ namespace Graphics {
 		/// @param	z	The float to process.
 		void translate(float x, float y, float z);
 
-		/// Sets a world x coordinate.
-		/// @param	x	The float to process.
-		void set_world_x(float x);
+        /// applies to rotate
+        void rotate(float x_rot, float y_rot, float z_rot);
 
-		/// Sets a world y coordinate.
-		/// @param	y	The float to process.
-		void set_world_y(float y);
+        /// non-uniform scale
+        void scale(float scale_x, float scale_y, float scale_z);
 
-		/// Sets a world xy.
-		/// @param	x	The float to process.
-		/// @param	y	The float to process.
-		void set_world_xy(float x, float y);
-
-		/// Gets the world x coordinate.
-		/// @return	The world x coordinate.
-		float get_world_x();
-
-		/// Gets the world y coordinate.
-		/// @return	The world y coordinate.
-		float get_world_y();
-
+        /// preformas a uniform scale
+        void uniform_scale(float scale);
 	};
 }
 

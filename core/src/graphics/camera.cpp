@@ -18,7 +18,7 @@ void Graphics::Camera::InitAsOrtho( int width, int height )
 
 void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_ratio, float near, float far )
 {
-	projection_matrix = glm::perspective(Math::DegreeToRadian(fov_angle_in_deg), aspect_ratio, near, far);
+	projection_matrix = glm::perspective(glm::radians(fov_angle_in_deg), aspect_ratio, near, far);
 	fullscreen_z = 1 / (tan(Math::DegreeToRadian(fov_angle_in_deg / 2))) * (Screen::Height() / 4);
 }
 
