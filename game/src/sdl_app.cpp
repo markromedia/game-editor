@@ -40,6 +40,7 @@ int SdlApp::OnExecute()
 		
 		float dt = time - previous_time;
 		game->Update(dt);
+		game->Render();
 
 		/*
 		unsigned int end_time = SDL_GetTicks();
@@ -89,21 +90,19 @@ bool SdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
-    Screen::Init(300, 200);
-    
     if((SDLWindow = SDL_CreateWindow("Flight",
+                                     SDL_WINDOWPOS_UNDEFINED,
+                                     SDL_WINDOWPOS_UNDEFINED,
                                      0,
                                      0,
-                                     Screen::Width(),
-                                     Screen::Height(),
-		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN)) == NULL) {
+		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED)) == NULL) {
 		return false;
 	}
     
-//    int w, h;
-//    SDL_GetWindowSize(SDLWindow, &w, &h);
-//    Screen::Init(w, h);
-
+	//grab screen size after maximized window created
+    int w, h;
+    SDL_GetWindowSize(SDLWindow, &w, &h);
+    Screen::Init(w, h);
 
 	/* Create our opengl context and attach it to our window */ 
 	ctx = SDL_GL_CreateContext(SDLWindow);

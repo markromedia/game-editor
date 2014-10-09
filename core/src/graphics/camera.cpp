@@ -13,7 +13,7 @@ Graphics::Camera::Camera()
 
 void Graphics::Camera::InitAsOrtho( int width, int height )
 {
-	projection_matrix = glm::ortho(0, width, 0, height);
+	projection_matrix = glm::ortho((float) 0, (float) width, (float) 0, (float) height);
 }
 
 void Graphics::Camera::InitAsPerspective( float fov_angle_in_deg, float aspect_ratio, float near, float far )

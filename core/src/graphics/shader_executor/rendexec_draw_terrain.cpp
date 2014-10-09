@@ -97,6 +97,7 @@ void DrawTerrainExecutor::Execute(RenderOperation* renderOp)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
 	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
 
+	GLState::Disable(GL_DEPTH_TEST);
 	CHECK_GL_ERROR();
 }
 

@@ -1,13 +1,11 @@
 #ifndef __RENDER_QUEUE__screen__
 #define __RENDER_QUEUE__screen__
 
+#include <SDL.h>
 #include <iostream>
-
 #include <queue>
 #include <map>
 #include <string>
-
-class SDL_Window;
 
 namespace Graphics {
     //forward declarations

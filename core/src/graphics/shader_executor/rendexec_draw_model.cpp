@@ -102,23 +102,8 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	//set uniforms
 	SetUniforms(renderOp);
 
-    //bind VAO
-    glBindVertexArray(renderOp->VertexBuffer->vao_ptr);
-    
-	//bind VBO
-	glBindBuffer(GL_ARRAY_BUFFER, renderOp->VertexBuffer->iva_ptr);
-
-	//point to the vertices
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size, (const GLvoid*) renderOp->VertexBuffer->position_offset);
-
-	//point to normals
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->normal_offset);
-
-	//point to texture coords
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, renderOp->VertexBuffer->vertex_size , (const GLvoid*) renderOp->VertexBuffer->texture_offset);
+    //bind vertex buffer
+    renderOp->VertexBuffer->Bind(0, -1, 1, 2);
 
 	//depth testing
 	GLState::Enable(GL_DEPTH_TEST);
@@ -141,13 +126,13 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 		glBindTexture(GL_TEXTURE_2D, renderOp->Illumination_Texture->texture_id);
 	}
 
-	//bind ibo/draw
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderOp->VertexBuffer->indices_ptr);
+	//draw
 	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
 	
 	GLState::Disable(GL_DEPTH_TEST);
 
-	CHECK_GL_ERROR();
+	//unbind vertex array
+	renderOp->VertexBuffer->Unbind();
 }
 
 void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)

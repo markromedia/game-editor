@@ -1,11 +1,10 @@
 #include "graphics/render_queue.hpp"
 
-#include <SDL.h>
-
 #include "graphics/render_operation.hpp"
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
 #include "graphics/camera.hpp"
+#include "graphics/gllogger.hpp"
 
 #include "graphics/shader_executor/rendexec_draw_texture.hpp"
 #include "graphics/shader_executor/rendexec_draw_model.hpp"
@@ -47,6 +46,7 @@ void Graphics::RenderQueue::Execute()
         _instance->_queue.pop();
         //execute using operation type
         _instance->_executors[renderOp->Operation_Type]->Execute(renderOp);
+		CHECK_GL_ERROR();
     }
 
     SDL_GL_SwapWindow(_instance->_window);

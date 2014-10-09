@@ -70,6 +70,7 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	model_view_projection_mat = camera->ProjectionMatrix() * model_view_mat;
 
 	glUseProgram(this->programObject);
+	GLState::Enable(GL_DEPTH_TEST);
 
 	//send the matrices
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
@@ -111,7 +112,7 @@ void DrawWireframeExecutor::Execute( RenderOperation* renderOp )
 	CHECK_GL_ERROR();
 
 	//reset state
-	//GLState::Disable(GL_DEPTH_TEST);
+	GLState::Disable(GL_DEPTH_TEST);
 	GLState::Disable(GL_CULL_FACE);
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 	glCullFace(GL_BACK);

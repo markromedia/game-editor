@@ -37,6 +37,9 @@ public:
 	/// @param	Event any possibly sdl event (such as input). can be null
 	void Update(float dt);
 
+	/// Renders this object.
+	void Render();
+
 	/// Executes the event action.
 	///
 	/// @param [in,out]	Event	If non-null, the event.

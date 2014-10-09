@@ -68,8 +68,14 @@ namespace Graphics {
 		/// @param	max_vertices	(optional) the maximum vertices.
 		VertexBuffer(unsigned int flags, int max_vertices, int max_indices);
 
-        /// binds this buffer and its data to the opengl context
-        void Bind();
+        ///  binds this buffer and its data to the opengl context. Indices provided
+        ///  are the opengl attrib indices. If not enabled value wouldn't matter. -1
+        ///  is suggested for ignored ones
+        /// @param	position_idx	Zero-based index of the position.
+        /// @param	color_idx   	Zero-based index of the color.
+        /// @param	normal_idx  	Zero-based index of the normal.
+        /// @param	texture_idx 	Zero-based index of the texture.
+        void Bind(int position_idx, int color_idx, int normal_idx, int texture_idx);
 
         /// unbinds this buffer and its data to the opengl context
         void Unbind();

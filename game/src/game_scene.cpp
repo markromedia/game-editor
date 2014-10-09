@@ -26,10 +26,10 @@ Graphics::RenderOperation* render_model2;
 Graphics::RenderOperation* render_wire_frame;
 
 float rot;
-bool render1Enabled = false;
+bool render1Enabled = true;
 bool render2Enabled = false;
 
-int render_1_model = ModelLoader::FALCON;
+int render_1_model = ModelLoader::ENEMY;
 int render_2_model = ModelLoader::TORUS;
 
 Terrain terrain;
@@ -84,6 +84,8 @@ void GameScene::Update(float dt)
 	//update orientations of camera
 	Game::PerspectiveCamera->update(dt);
 	Game::SkyboxCamera->update(dt);
+	
+	Game::OrthoCamera->update(dt);
 
 	//draw skybox
     skybox.Update();
@@ -97,24 +99,5 @@ void GameScene::Update(float dt)
         Graphics::RenderQueue::QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
         Graphics::RenderQueue::QueueRenderOperation(render_model2, Game::PerspectiveCamera);
-
-	Logger::GetInstance()->LogPreformance("GameScene::Render");
-	Render();
-	Logger::GetInstance()->StopPreformance("GameScene::Render");
-
-	Logger::GetInstance()->StopLogPreformance();
 }
-
-void GameScene::Render()
-{
-    Graphics::RenderQueue::Execute();
-}
-
-void GameScene::UpdateLibRocket()
-{
-	//set FPS and draw librocket stuff
-	int fps = ((Game::FrameRate + 0.5f) * 100) / 100; const std::string fps_str = boost::lexical_cast<std::string>(fps);
-	//document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(fps_str.c_str()));
-
-	//Game::LibRocketContext->Update();
-}
+    

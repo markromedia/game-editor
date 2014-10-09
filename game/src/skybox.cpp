@@ -33,13 +33,13 @@ Skybox::Skybox()
 
 void Skybox::Setup()
 {
-	//setupIceField();
-	setupNatural16();
+	setupIceField();
+//	setupNatural16();
 }
 
 void Skybox::Update()
 {
-    Graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::SkyboxCamera);
+   //Graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::SkyboxCamera);
 }
 
 void Skybox::setupIceField()

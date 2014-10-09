@@ -6,7 +6,7 @@
 #include "game_scene.hpp"
 
 #include "graphics/screen.h"
-
+#include <graphics/render_queue.hpp>
 
 
 //Rocket::Core::Context* Game::LibRocketContext = NULL;
@@ -52,7 +52,11 @@ void Game::Update( float dt )
 {
 	this->cameraControl->Update(dt);
 	current_scene->Update(dt);
-	addFrameTime(dt);
+}
+
+void Game::Render()
+{
+	Graphics::RenderQueue::Execute();
 }
 
 void Game::OnEvent( SDL_Event* Event )

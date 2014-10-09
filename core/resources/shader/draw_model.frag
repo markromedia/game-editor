@@ -114,7 +114,8 @@ void main()
 	
 	if (u_has_diffuse_texture) 
 	{
-		color = 0.7f * texture(s_diffuse_texture, v_text_coord) + .3 * color;
+		vec2 flipped_texcoord = vec2(v_text_coord.x, 1.0 - v_text_coord.y);
+		color = 0.7f * texture(s_diffuse_texture, flipped_texcoord) + .3 * color;
 	}
 
 	if (u_has_illumination_texture)

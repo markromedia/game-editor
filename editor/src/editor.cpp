@@ -1,4 +1,5 @@
 #include "editor.hpp"
+#include "graphics/render_queue.hpp"
 
 void Editor::Init()
 {
@@ -20,4 +21,6 @@ void Editor::Update(float dt)
 {
 	this->_game->Update(dt);
 	this->_awesomium_handler->Update(dt);
+	//render everything
+	Graphics::RenderQueue::Execute();
 }
