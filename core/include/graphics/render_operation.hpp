@@ -27,8 +27,8 @@ namespace Graphics {
         enum OperationType {DRAW_TEXTURE = 1000, DRAW_MODEL = 1001, DRAW_WIREFRAME = 1002, DRAW_SKYBOX = 1003, DRAW_TERRAIN = 1004};
 
 		/// Default constructor.
-		RenderOperation(void);
-
+		RenderOperation();
+        
 		/// @summary	The camera to use to render
 		Graphics::Camera* Camera;
 
@@ -64,6 +64,12 @@ namespace Graphics {
 
 		/// @summary	Size of the points for point sprites
 		float PointSize;
+        
+        /// @summary	whether or not to use lighting
+        bool uses_lighting;
+       
+         /// @summary	whether or not to use colored vertices
+        bool uses_color;
 	};
 }
 

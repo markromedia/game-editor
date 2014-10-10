@@ -53,6 +53,9 @@ namespace Graphics {
 		GLuint fog_min_distance_uniform;
 
 		GLuint primary_color_uniform;
+        GLuint uses_colored_vertices;
+        
+        GLuint uses_lighting;
 
 		GLuint light_uniform_direction;
 		GLuint light_uniform_halfplane;

@@ -18,5 +18,8 @@ RenderOperation::RenderOperation(void)
 	Toon_Texture = NULL;
 	Illumination_Texture = NULL;
 	Quad = NULL;
+    uses_lighting = true;
+    uses_color = false;
 }
+
 

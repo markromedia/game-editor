@@ -41,12 +41,12 @@ namespace Graphics {
 	friend class VertexBufferManager;
 
 	private:
-		unsigned int flags;
 		void Init();
 	protected:
 		bool										buffers_created; 
 	public:
 		/// Members
+        unsigned int                                flags;
 		std::vector<float>							iva_data; // the actual data sent to OpenGL
 		std::vector<GLushort>						indices_buffer;
 		std::vector<Vertex*>						vertices; // ref of what's been allocated

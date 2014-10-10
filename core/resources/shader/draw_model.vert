@@ -7,6 +7,7 @@ uniform mat4 u_mvp_matrix;
 //attributes
 in vec4 a_position;
 in vec4 a_normal;
+in vec4 a_color;
 in vec2 a_text_coord;
 
 //varyings
@@ -28,7 +29,7 @@ void main ()
 	v_text_coord = a_text_coord;
 	
 	//set vertex color
-	v_color = vec4(1, 1, 1, 1);
+	v_color = a_color;
 
 	//calculate distance from vertex to eye in view space
 	vec3 eye_pos = vec3(0, 0, 0);

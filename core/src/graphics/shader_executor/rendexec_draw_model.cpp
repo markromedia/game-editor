@@ -48,8 +48,9 @@ void DrawModelExecutor::Init()
 	CHECK_GL_ERROR();
 
 	glBindAttribLocation(programObject, 0, "a_position");
-	glBindAttribLocation(programObject, 1, "a_normal");
-	glBindAttribLocation(programObject, 2, "a_text_coord");
+    glBindAttribLocation(programObject, 1, "a_color");
+	glBindAttribLocation(programObject, 2, "a_normal");
+	glBindAttribLocation(programObject, 3, "a_text_coord");
 
 	glLinkProgram(programObject);
 
@@ -68,7 +69,9 @@ void DrawModelExecutor::Init()
 	has_toon_texture_uniform = glGetUniformLocation(programObject, "u_has_toon_texture");
 	has_illumination_texture_uniform = glGetUniformLocation(programObject, "u_has_illumination_texture");
 	primary_color_uniform = glGetUniformLocation(programObject, "u_primary_color");
-
+    uses_colored_vertices = glGetUniformLocation(programObject, "u_uses_colored_vertices");
+    uses_lighting = glGetUniformLocation(programObject, "u_uses_lighting");
+    
 	//get fog uniforms
 	fog_max_distance_uniform = glGetUniformLocation(programObject, "u_fog_max_distance");
 	fog_min_distance_uniform = glGetUniformLocation(programObject, "u_fog_min_distance");
@@ -103,7 +106,7 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	SetUniforms(renderOp);
 
     //bind vertex buffer
-    renderOp->VertexBuffer->Bind(0, -1, 1, 2);
+    renderOp->VertexBuffer->Bind(0, 1, 2, 3);
 
 	//depth testing
 	GLState::Enable(GL_DEPTH_TEST);
@@ -145,10 +148,12 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	glUniform1f(has_diffuse_texture_uniform, render->Diffuse_Texture != NULL ? 1 : 0);
 	glUniform1f(has_toon_texture_uniform, render->Toon_Texture != NULL ? 1 : 0);
 	glUniform1f(has_illumination_texture_uniform, render->Illumination_Texture != NULL ? 1 : 0);
+    glUniform1f(uses_colored_vertices, render->uses_color);
+    glUniform1f(uses_lighting, render->uses_lighting);
 	
 	//the primary color
 	glUniform4f(primary_color_uniform, render->Color.r, render->Color.g, render->Color.b, render->Color.a);
-
+    
 	//set fog
 	glUniform1f(fog_min_distance_uniform,1000);
 	glUniform1f(fog_max_distance_uniform, 1500);

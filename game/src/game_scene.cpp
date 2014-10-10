@@ -22,6 +22,7 @@
 #include "data/model_loader.hpp"
 #include "es/entity.hpp"
 #include "es/transform_component.h"
+#include "graphics/primitives.hpp"
 
 #include "terrain.hpp"
 
@@ -31,7 +32,7 @@ Graphics::RenderOperation* render_wire_frame;
 
 float rot;
 bool render1Enabled = true;
-bool render2Enabled = false;
+bool render2Enabled = true;
 
 int render_1_model = ModelLoader::ENEMY;
 int render_2_model = ModelLoader::TORUS;
@@ -43,33 +44,40 @@ void initModels()
 	rot = 0;
 	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
 
-    Entity es;
-    es.add_component(new TransformComponent());
-
-    TransformComponent* c = (TransformComponent *) es.get_component(TransformComponent::MASK);
-
 	if (render1Enabled) {
-		float x_pos = 0, y_pos = 10, z_pos = -100;
+		float x_pos = 0, y_pos = 10, z_pos = -400;
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
 
         Graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);
-		transform.rotate(90, 0, 180 );
+		transform.rotate(-45, 0, -45);
         transform.uniform_scale(0.1);
+        
 		render_model1->ModelMatrix = transform.getMatrix();
 		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
 	}
 
 	if (render2Enabled) {
-		float x_pos = 0, y_pos = 0, z_pos = -200;
-		render_model2 = Graphics::RenderOperationManager::GetDrawModelOp(render_2_model);
-		render_model2->Color.rbga(1, 0, 0, 1);
-		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
-		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
-		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
-		render_model2->ModelMatrix = model_matrix;
-		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/falcon_toon.bmp");
+        float x_pos = 0, y_pos = 0, z_pos = 0;
+        render_model2 = new Graphics::RenderOperation();
+        render_model2->Operation_Type = Graphics::RenderOperation::DRAW_MODEL;
+        render_model2->uses_lighting = false;
+        render_model2->uses_color = true;
+        render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL);
+        Graphics::P::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 100, 100, 100);
+        cube.v1->rgba(1, 0, 0, 1);
+        cube.v2->rgba(1, 1, 0, 1);
+        cube.v3->rgba(1, 0, 0, 1);
+        cube.v4->rgba(1, 1, 0, 1);
+        cube.v5->rgba(1, 0, 0, 1);
+        cube.v6->rgba(1, 1, 0, 1);
+        cube.v7->rgba(1, 0, 0, 1);
+        cube.v8->rgba(1, 1, 0, 1);
+        
+        Graphics::Transform transform;
+        transform.translate(x_pos, y_pos, z_pos);
+		render_model2->ModelMatrix = transform.getMatrix();
 	}
 
 	//terrain.CreateGrid(128, 128, 500);
