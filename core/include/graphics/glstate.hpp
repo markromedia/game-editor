@@ -13,6 +13,10 @@ private:
 	static std::set<GLuint> client_states;
 
 	static bool setState(std::set<GLuint>& states, GLuint state, bool isEnable);
+
+	//for blend more
+	static GLenum _sfactor;
+	static GLenum _dfactor;
 public:
 
 	static void Enable(GLuint state);
@@ -22,6 +26,8 @@ public:
 	static void EnableClientState(GLuint state);
 
 	static void DisableClientState(GLuint state);
+
+	static void SetBlendModes(GLenum sfactor, GLenum dfactor);
 };
 
 #endif  // __GL_STATE__hpp

@@ -8,7 +8,11 @@
 
 #include "graphics/primitives.hpp"
 
-Graphics::P::Quad Graphics::Primitives::CreateQuad(VertexBuffer* buffer, int width, int height)
+Graphics::Quad::Quad()
+{
+}
+
+Graphics::Quad Graphics::Primitives::CreateQuad(VertexBuffer* buffer, int width, int height, Graphics::Color4f* vertex_color)
 {
     Graphics::Vertex *v1 = buffer->CreateVertex(0,0); //bottom left
 	Graphics::Vertex *v2 = buffer->CreateVertex((float) width,0); //bottom right
@@ -17,10 +21,18 @@ Graphics::P::Quad Graphics::Primitives::CreateQuad(VertexBuffer* buffer, int wid
 	buffer->CreateTriangle(v1, v2, v3);
 	buffer->CreateTriangle(v3, v2, v4);
     
-    return (Graphics::P::Quad){v1, v2, v3, v4};
+	if (vertex_color != NULL)
+	{
+		v1->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v2->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v3->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v4->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+	}
+
+    return Graphics::Quad(v1, v2, v3, v4);
 }
 
-Graphics::P::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int width, int height, int depth)
+Graphics::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int width, int height, int depth, Graphics::Color4f* vertex_color)
 {
     float hDepth = depth / 2.0f;
     Graphics::Vertex *v1 = buffer->CreateVertex(0,0, hDepth); //front bottom left
@@ -52,8 +64,27 @@ Graphics::P::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int wid
     buffer->CreateTriangle(v2, v6, v4);
 	buffer->CreateTriangle(v4, v6, v8);
 
+	if (vertex_color != NULL)
+	{
+		v1->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v2->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v3->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v4->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v5->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v6->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v7->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+		v8->rgba(vertex_color->r, vertex_color->g, vertex_color->b, vertex_color->a);
+	}
 
-    
-    return (Graphics::P::Cube){v1, v2, v3, v4, v5, v6, v7, v8};
+    return Graphics::Cube(v1, v2, v3, v4, v5, v6, v7, v8);
+}
+
+Graphics::Grid CreateGrid(Graphics::VertexBuffer* buffer, 
+	int num_rows, int num_cols, 
+	float row_spacing, float col_spacing, 
+	float line_thickness, 
+	Graphics::Color4f* vertex_color)
+{
+	return Graphics::Grid(std::vector<Graphics::Cube>());
 }
 

@@ -11,7 +11,6 @@
 
 #include "logger.hpp"
 #include "graphics/color4f.hpp"
-#include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
 #include "graphics/render_operation.hpp"
@@ -60,20 +59,13 @@ void initModels()
 
 	if (render2Enabled) {
         float x_pos = 0, y_pos = 0, z_pos = 0;
+		Graphics::Color4f color(1,.1, 0, 0.5f);
         render_model2 = new Graphics::RenderOperation();
         render_model2->Operation_Type = Graphics::RenderOperation::DRAW_MODEL;
         render_model2->uses_lighting = false;
         render_model2->uses_color = true;
         render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL);
-        Graphics::P::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 100, 100, 100);
-        cube.v1->rgba(1, 0, 0, 1);
-        cube.v2->rgba(1, 1, 0, 1);
-        cube.v3->rgba(1, 0, 0, 1);
-        cube.v4->rgba(1, 1, 0, 1);
-        cube.v5->rgba(1, 0, 0, 1);
-        cube.v6->rgba(1, 1, 0, 1);
-        cube.v7->rgba(1, 0, 0, 1);
-        cube.v8->rgba(1, 1, 0, 1);
+        Graphics::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 100, 100, 100, &color);
         
         Graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);

@@ -70,16 +70,6 @@ SOURCE_GROUP("include\\graphics\\shader_executor"
     ${INCLUDE_GRAPHICS_SHADER}
 )
 
-FILE (GLOB INCLUDE_GRAPHICS_PRIMITIVES
-	include/graphics/primitives/*.hpp
-	include/graphics/primitives/*.h
-)
-LIST(APPEND core_SRC ${INCLUDE_GRAPHICS_PRIMITIVES})
-SOURCE_GROUP("include\\graphics\\primitives"
-  FILES
-    ${INCLUDE_GRAPHICS_PRIMITIVES}
-)
-
 FILE(GLOB INCLUDE_LIBROCKET
 	include/librocket/*.hpp
 	include/librocket/*.h
@@ -168,15 +158,6 @@ LIST(APPEND core_SRC ${SRC_GRAPHICS_SHADER})
 SOURCE_GROUP("src\\graphics\\shader_executor"
   FILES
     ${SRC_GRAPHICS_SHADER}
-)
-
-FILE (GLOB SRC_GRAPHICS_PRIMITIVES
-	src/graphics/primitives/*.cpp
-)
-LIST(APPEND core_SRC ${SRC_GRAPHICS_PRIMITIVES})
-SOURCE_GROUP("src\\graphics\\primitives"
-  FILES
-    ${SRC_GRAPHICS_PRIMITIVES}
 )
 
 FILE(GLOB SRC_LIBROCKET

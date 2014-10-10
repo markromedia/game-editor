@@ -136,7 +136,11 @@ void main()
     {
         color = v_color;
     } 
-	color[3] = 1; //make sure alpha is on
+	else 
+	{
+		color[3] = 1; //make sure alpha is on
+	}
+	
 	//fragColor = apply_linear_fog_factor(color); //apply any fog
     fragColor = color;
 }												

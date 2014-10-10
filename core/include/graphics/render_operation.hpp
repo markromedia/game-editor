@@ -10,14 +10,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "color4f.hpp"
-#include "math/matrix4.hpp"
-#include "texture.hpp"
+#include "graphics/color4f.hpp"
+#include "graphics/texture.hpp"
+#include "graphics/primitives.hpp"
 
 namespace Graphics {
 
 	//forward declarations
-	class Quad;
 	class VertexBuffer;
 	class Camera;
 
@@ -57,7 +56,7 @@ namespace Graphics {
 		float translation_x, translation_y, translation_z;
 
 		/// @summary	Possible associated quad
-        Graphics::Quad* Quad;
+        Graphics::Quad Quad;
 
 		/// @summary	Any associated color
 		Color4f Color;

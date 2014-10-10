@@ -2,7 +2,6 @@
 
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/texture.hpp"
-#include "graphics/primitives/quad.hpp"
 
 
 using namespace Graphics;
@@ -17,7 +16,6 @@ RenderOperation::RenderOperation(void)
 	Diffuse_Texture = NULL;
 	Toon_Texture = NULL;
 	Illumination_Texture = NULL;
-	Quad = NULL;
     uses_lighting = true;
     uses_color = false;
 }

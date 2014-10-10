@@ -6,7 +6,6 @@
 
 #include "game.hpp"
 #include "graphics/color4f.hpp"
-#include "graphics/primitives/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
 #include "graphics/render_operation.hpp"

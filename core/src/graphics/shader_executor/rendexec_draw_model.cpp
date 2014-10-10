@@ -94,9 +94,15 @@ void DrawModelExecutor::Init()
 
 void DrawModelExecutor::Execute(RenderOperation* renderOp)
 {
-	Camera* camera = renderOp->Camera;
+	GLState::Enable(GL_BLEND);
+	GLState::SetBlendModes(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	//depth testing
+	GLState::Enable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 
 	//set up matrices
+	Camera* camera = renderOp->Camera;
 	model_view_mat = camera->ViewMatrix() * renderOp->ModelMatrix;
 	model_view_projection_mat = camera->ProjectionMatrix() * model_view_mat;
 
@@ -107,10 +113,6 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 
     //bind vertex buffer
     renderOp->VertexBuffer->Bind(0, 1, 2, 3);
-
-	//depth testing
-	GLState::Enable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 
 	//possibly bind textures
 	if (renderOp->Diffuse_Texture != NULL)
@@ -132,10 +134,9 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	//draw
 	glDrawElements(GL_TRIANGLES, renderOp->VertexBuffer->indices_buffer.size(), GL_UNSIGNED_SHORT, 0);
 	
-	GLState::Disable(GL_DEPTH_TEST);
-
-	//unbind vertex array
+	//reset
 	renderOp->VertexBuffer->Unbind();
+	GLState::Disable(GL_DEPTH_TEST);
 }
 
 void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
