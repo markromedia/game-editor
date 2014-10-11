@@ -92,7 +92,7 @@ add_custom_command(TARGET editor PRE_BUILD
 
 add_custom_command(TARGET editor PRE_BUILD  
 					COMMAND ${CMAKE_COMMAND} -E copy_directory
-					$ENV{AWE_DIR}/build/bin/packed $<TARGET_FILE_DIR:editor>)
+					$ENV{AWE_DIR}/build/bin $<TARGET_FILE_DIR:editor>)
 ENDIF(WIN32)
 
 install(TARGETS editor RUNTIME DESTINATION ${BIN_DIR})

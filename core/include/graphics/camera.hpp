@@ -123,6 +123,10 @@ namespace Graphics {
 		/// @param	y	The float to process.
 		/// @param	z	The float to process.
 		void SetTranslation(float x, float y, float z);
+
+		/// Look at position
+		/// @param	position	The position.
+		void LookAt(glm::vec3 position);
 	};
 }
 #endif  // __CAMERA_hpp

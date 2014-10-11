@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.0.1)
 
-MESSAGE(STATUS "AWESOMIUM =>" $ENV{AWE_DIR})
-
 if (WIN32)
 	Message(STATUS "***************************************************************************")
 	Message(STATUS "*                           WINDOWS USERS!!! READ THIS                    *")

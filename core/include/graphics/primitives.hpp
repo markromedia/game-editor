@@ -4,6 +4,10 @@
 
 #include <stdlib.h>
 #include <vector>
+
+#define GLM_FORCE_RADIANS 
+#include <glm/glm.hpp>
+
 #include "graphics/gllogger.hpp"
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/color4f.hpp"
@@ -35,6 +39,8 @@ namespace Graphics {
         static Quad CreateQuad(VertexBuffer* buffer, int width, int height, Graphics::Color4f* vertex_color = NULL);
         
         static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, Graphics::Color4f* vertex_color = NULL);
+
+		static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, glm::vec3 init_position, Graphics::Color4f* vertex_color = NULL);
 
 		static Grid CreateGrid(VertexBuffer* buffer, 
 			int num_rows, int num_cols, 

@@ -41,31 +41,33 @@ Terrain terrain;
 void initModels()
 {
 	rot = 0;
-	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
+	Game::PerspectiveCamera->Translate( 527, -176, -334);
 
 	if (render1Enabled) {
-		float x_pos = 0, y_pos = 10, z_pos = -400;
+		float x_pos = 0, y_pos = 0, z_pos = 0;
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
 
         Graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);
-		transform.rotate(-45, 0, -45);
-        transform.uniform_scale(0.1);
+		transform.rotate(0, 0, 0);
+        transform.uniform_scale(.1f);
         
 		render_model1->ModelMatrix = transform.getMatrix();
 		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
 	}
 
 	if (render2Enabled) {
-        float x_pos = 0, y_pos = 0, z_pos = 0;
-		Graphics::Color4f color(1,.1, 0, 0.5f);
+        float x_pos = 0, y_pos = 0, z_pos = 0, line_thickness = 1;
+		int rows = 20, cols = 20, spacing = 20;
+		Graphics::Color4f color(.5,.5, .5, 1);
         render_model2 = new Graphics::RenderOperation();
         render_model2->Operation_Type = Graphics::RenderOperation::DRAW_MODEL;
         render_model2->uses_lighting = false;
         render_model2->uses_color = true;
-        render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL);
-        Graphics::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 100, 100, 100, &color);
+        render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL, (rows + cols + 2) * 8, (rows + cols + 2) * 36);
+        //Graphics::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 1000, 1000, 100, &color);
+		Graphics::Grid grid = Graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
         
         Graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);

@@ -83,6 +83,13 @@ void Graphics::Camera::SetTranslation(float x, float y, float z)
 	translation_vec.z = z;
 }
 
+void Graphics::Camera::LookAt(glm::vec3 position)
+{
+	this->update(0);
+	inverse_view_frame = glm::lookAt(translation_vec, position, glm::vec3(0, 1, 0));
+
+}
+
 void Graphics::Camera::RotateX( float angle_in_radians )
 {
 

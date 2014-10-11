@@ -14,10 +14,12 @@ Graphics::Quad::Quad()
 
 Graphics::Quad Graphics::Primitives::CreateQuad(VertexBuffer* buffer, int width, int height, Graphics::Color4f* vertex_color)
 {
-    Graphics::Vertex *v1 = buffer->CreateVertex(0,0); //bottom left
-	Graphics::Vertex *v2 = buffer->CreateVertex((float) width,0); //bottom right
-	Graphics::Vertex *v3 = buffer->CreateVertex(0, (float) height); //top left
-    Graphics::Vertex *v4 = buffer->CreateVertex((float) width, (float) height); //top right
+	float hWidth = width / 2.0f;
+	float hHeight = height / 2.0f;
+    Graphics::Vertex *v1 = buffer->CreateVertex(-hWidth,-hHeight); //bottom left
+	Graphics::Vertex *v2 = buffer->CreateVertex(hWidth,-hHeight); //bottom right
+	Graphics::Vertex *v3 = buffer->CreateVertex(-hWidth, hHeight); //top left
+    Graphics::Vertex *v4 = buffer->CreateVertex(hWidth, hHeight); //top right
 	buffer->CreateTriangle(v1, v2, v3);
 	buffer->CreateTriangle(v3, v2, v4);
     
@@ -34,16 +36,23 @@ Graphics::Quad Graphics::Primitives::CreateQuad(VertexBuffer* buffer, int width,
 
 Graphics::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int width, int height, int depth, Graphics::Color4f* vertex_color)
 {
-    float hDepth = depth / 2.0f;
-    Graphics::Vertex *v1 = buffer->CreateVertex(0,0, hDepth); //front bottom left
-	Graphics::Vertex *v2 = buffer->CreateVertex((float) width,0, hDepth); //front bottom right
-	Graphics::Vertex *v3 = buffer->CreateVertex(0, (float) height, hDepth); //front top left
-    Graphics::Vertex *v4 = buffer->CreateVertex((float) width, (float) height, hDepth); //front top right
+	return CreateCube(buffer, width, height, depth, glm::vec3(0,0,0), vertex_color);
+}
+
+Graphics::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int width, int height, int depth, glm::vec3 offset, Graphics::Color4f* vertex_color)
+{
+	float hDepth = depth / 2.0f;
+	float hWidth = width / 2.0f;
+	float hHeight = height / 2.0f;
+    Graphics::Vertex *v1 = buffer->CreateVertex(-hWidth + offset.x, -hHeight + offset.y, hDepth + offset.z); //front bottom left
+	Graphics::Vertex *v2 = buffer->CreateVertex(hWidth + offset.x, -hHeight + offset.y, hDepth + offset.z); //front bottom right
+	Graphics::Vertex *v3 = buffer->CreateVertex(-hWidth + offset.x,  hHeight + offset.y, hDepth + offset.z); //front top left 
+    Graphics::Vertex *v4 = buffer->CreateVertex(hWidth + offset.x,  hHeight + offset.y, hDepth + offset.z); //front top right
     
-    Graphics::Vertex *v5 = buffer->CreateVertex(0,0, -hDepth); //back bottom left
-	Graphics::Vertex *v6 = buffer->CreateVertex((float) width,0, -hDepth); //back bottom right
-	Graphics::Vertex *v7 = buffer->CreateVertex(0, (float) height, -hDepth); //back top left
-    Graphics::Vertex *v8 = buffer->CreateVertex((float) width, (float) height, -hDepth); //back top right
+    Graphics::Vertex *v5 = buffer->CreateVertex(-hWidth + offset.x, -hHeight + offset.y, -hDepth + offset.z); //back bottom left
+	Graphics::Vertex *v6 = buffer->CreateVertex(hWidth + offset.x, -hHeight + offset.y, -hDepth + offset.z); //back bottom right
+	Graphics::Vertex *v7 = buffer->CreateVertex(-hWidth + offset.x,  hHeight + offset.y, -hDepth + offset.z); //back top left
+    Graphics::Vertex *v8 = buffer->CreateVertex(hWidth + offset.x,  hHeight + offset.y, -hDepth + offset.z); //back top right
     
     //front
     buffer->CreateTriangle(v1, v2, v3);
@@ -79,12 +88,26 @@ Graphics::Cube Graphics::Primitives::CreateCube(VertexBuffer* buffer, int width,
     return Graphics::Cube(v1, v2, v3, v4, v5, v6, v7, v8);
 }
 
-Graphics::Grid CreateGrid(Graphics::VertexBuffer* buffer, 
-	int num_rows, int num_cols, 
-	float row_spacing, float col_spacing, 
-	float line_thickness, 
-	Graphics::Color4f* vertex_color)
+Graphics::Grid Graphics::Primitives::CreateGrid(VertexBuffer* buffer, 
+												int num_rows, int num_cols, 
+												float row_spacing, float col_spacing, 
+												float line_thickness, 
+												Graphics::Color4f* vertex_color)
 {
+	float x_lines_start = ((num_rows + 1) / 2) * row_spacing;
+	float x_lines_length = num_cols * col_spacing;
+	float z_lines_start = ((num_cols + 1) / 2) * col_spacing;
+	float z_lines_length = num_rows * row_spacing;
+
+	for (int i = 0; i < num_rows + 1; i++)
+	{
+		CreateCube(buffer, x_lines_length, line_thickness, line_thickness, glm::vec3(0, 0, x_lines_start + (i * -row_spacing)), vertex_color);
+	}
+
+	for (int i = 0; i < num_cols + 1; i++)
+	{
+		CreateCube(buffer, line_thickness, line_thickness, z_lines_length, glm::vec3(z_lines_start + (i * -col_spacing), 0, 0), vertex_color);
+	}
 	return Graphics::Grid(std::vector<Graphics::Cube>());
 }
 

@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "opengl.h"
+
 namespace Graphics {
 	//forward declarations
 	class Texture;
@@ -21,9 +23,11 @@ namespace Graphics {
 		TextureManager(void);
 
 		/// @summary	The list of managed textures.
-		std::vector<Texture> textures;
+		std::vector<Texture*> textures;
 	public:
 		static Texture* GetTexture(std::string file);
+
+		static Texture* TextureManager::CreateTexture(GLenum texture_format, int width, int height);
 
 		static void LoadTextures();
 	};

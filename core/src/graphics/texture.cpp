@@ -15,6 +15,7 @@ Texture::Texture(GLenum texture_format, int width, int height)
 	this->texture_format = texture_format;
 	this->texture_width = width;
 	this->texture_height = height;
+	this->loaded = true; //incase someone tried to call LoadTexture()
 	glGenTextures( 1, &texture_id );
 }
 
@@ -31,6 +32,11 @@ Texture::Texture(const Texture &source)
 
 void Texture::LoadTexture()
 {
+	if (this->loaded)
+	{
+		return;
+	}
+
 	SDL_Surface *surface;	// This surface will tell us the details of the image
 	GLint  nOfColors;
 
@@ -122,8 +128,9 @@ void Texture::SetTextureData(void* data, GLenum data_type, GLint internal_format
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	// Edit the texture object's image data using the information SDL_Surface gives us
-	glTexImage2D( GL_TEXTURE_2D, 0, internal_format, texture_width, texture_height, 0,
+	glTexImage2D( GL_TEXTURE_2D, 0, internal_format, this->texture_width, this->texture_height, 0,
 		texture_format, data_type, data );
+	CHECK_GL_ERROR();
 }
 
 void Texture::SetTextureSubData(void* data, int offset_x, int offset_y, int width, int height, GLenum data_type, GLint internal_format)

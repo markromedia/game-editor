@@ -9,7 +9,7 @@ TextureManager* TextureManager::instance = NULL;
 
 TextureManager::TextureManager()
 {
-	textures = std::vector<Texture>();
+	textures = std::vector<Texture*>();
 	textures.reserve(1024);
 }
 
@@ -32,17 +32,33 @@ Texture* TextureManager::GetTexture(std::string file)
 	}
 
 	//create texture and add it to managed list
-	Texture t = Texture(file);
+	Texture* t = new Texture(file);
 	instance->textures.push_back(t);
-	return &(instance->textures.back());
+	return instance->textures.back();
+}
+
+Texture* TextureManager::CreateTexture(GLenum texture_format, int width, int height)
+{
+	checkCreateInstance();
+
+	if (instance->textures.size() >= 1024)
+	{
+		LOG_ERROR("Cannot create anymore textures. At the 1024 max");
+		return NULL;
+	}
+
+	//create texture and add it to managed list
+	Texture* t = new Texture(texture_format, width, height);
+	instance->textures.push_back(t);
+	return instance->textures.back();
 }
 
 void TextureManager::LoadTextures()
 {
 	checkCreateInstance();
 	//load all the textures
-	for(std::vector<Texture>::iterator it = instance->textures.begin(); it != instance->textures.end(); ++it) {
-		it->LoadTexture();
+	for(std::vector<Texture*>::iterator it = instance->textures.begin(); it != instance->textures.end(); ++it) {
+		(*it)->LoadTexture();
 	}
 }
 

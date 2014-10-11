@@ -1,6 +1,6 @@
 include (FindPackageHandleStandardArgs)
 
-find_path(AWESOMIUM_INCLUDE_DIR Awesomium/WebCore.h
+find_path(AWESOMIUM_INCLUDE_DIR Awesomium
 	PATH_SUFFIXES include
 	PATHS
 	${AWESOMIUM_ROOT}
