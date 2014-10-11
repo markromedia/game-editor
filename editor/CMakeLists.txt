@@ -63,6 +63,34 @@ SOURCE_GROUP("resources"
     ${RES_ROOT}
 )
 
+FILE(GLOB RES_EDITOR
+	resources/editor/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR})
+SOURCE_GROUP("resources\\editor"
+  FILES
+    ${RES_EDITOR}
+)
+
+FILE(GLOB RES_EDITOR_UI
+	resources/editor/ui/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_UI})
+SOURCE_GROUP("resources\\editor\\ui"
+  FILES
+    ${RES_EDITOR_UI}
+)
+
+FILE(GLOB RES_EDITOR_HTML
+	resources/editor/ui/html/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_HTML})
+SOURCE_GROUP("resources\\editor\\ui\\html"
+  FILES
+    ${RES_EDITOR_HTML}
+)
+
+
 
 #########################################################################################
 #											#

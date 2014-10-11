@@ -4,6 +4,7 @@
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
+#include <Awesomium/STLHelpers.h>
 
 #include "game.hpp"
 #include "graphics/render_operation.hpp"
@@ -15,8 +16,10 @@ class AwesomiumSurfaceFactory;
 class AwesomiumHandler
 {
 private:
-	/// @summary	The webcore.
+	/// awesomium stuffs
 	Awesomium::WebCore* _webcore;
+	Awesomium::WebSession* _websession;
+	Awesomium::WebView* _webview;
 
 	/// @summary	The awesomium factory
 	AwesomiumSurfaceFactory* _awesomium_surface_factory;
@@ -36,7 +39,13 @@ public:
 class AwesomiumSurface : public Awesomium::Surface {
 private:
 	int _width, _height;
+
+	unsigned char* _buffer;
+
+	
 public:
+	bool dirty;
+
 	AwesomiumSurface(int width, int height);
 
 	/// @summary	The texture.
@@ -51,6 +60,8 @@ public:
 				const Awesomium::Rect& dest_rect);
 
 	void Scroll(int dx, int dy, const Awesomium::Rect& clip_rect);
+
+	void UpdateTexture();
 };
 
 class AwesomiumSurfaceFactory : public Awesomium::SurfaceFactory {
@@ -62,6 +73,12 @@ public:
 											int height);
 
 	void DestroySurface(Awesomium::Surface* surface);
+};
+
+class AwesomiumResourceInterceptor : public Awesomium::ResourceInterceptor
+{
+public:
+	Awesomium::ResourceResponse* OnRequest(Awesomium::ResourceRequest* request);
 };
 
 #endif  // __AWESOMIUM__hpp

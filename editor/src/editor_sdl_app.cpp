@@ -113,6 +113,9 @@ bool EditorSdlApp::OnInit()
 	/* This makes our buffer swap synchronized with the monitor's vertical refresh */ 
 	SDL_GL_SetSwapInterval(1);
 
+	//show the cursor
+	SDL_ShowCursor(SDL_ENABLE);
+
 
     //init render queue
     Graphics::RenderQueue::Init(SDLWindow);
