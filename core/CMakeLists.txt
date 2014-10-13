@@ -238,6 +238,17 @@ SOURCE_GROUP("resources\\skybox"
 #########################################################################################
 
 add_library (core ${core_SRC})
-target_link_libraries(core platform ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+
+target_link_libraries(core platform 
+	${SDL2_LIBRARY} 
+	${SDL2_IMAGE_LIBRARIES} 
+	${LUA_LIBRARIES} 
+	${GLEW_LIBRARIES} 
+	${OPENGL_LIBRARIES} 
+	${Boost_CHRONO_LIBRARY} 
+	${Boost_DATE_TIME_LIBRARY} 
+	${Boost_SYSTEM_LIBRARY} 
+	${Boost_THREAD_LIBRARY} 
+)
 
 install(TARGETS core ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

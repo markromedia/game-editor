@@ -7,6 +7,10 @@
 #include <set>
 #include <fstream>
 #include <algorithm>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/thread/thread.hpp> 
+
+std::vector<void (*)(std::string modified_file)> FileSystem::_change_listeners = std::vector<void (*)(std::string modified_file)>();
 
 std::string getFullFilePath(std::string resource_file) {
 	char ownPth[MAX_PATH]; 
@@ -38,6 +42,61 @@ unsigned long getFileLength(std::ifstream& file)
 
 std::string FileSystem::GetResourceFilePath(std::string resource_file) {
 	return getFullFilePath(resource_file);			
+}
+
+void FileSystem::NotifyOfDirectoryChanges(std::string directory, void(*call_back)(std::string modified_file))
+{
+	_change_listeners.push_back(call_back);
+}
+
+void FileSystem::ListenForDirectoryChanges(std::string directory)
+{
+	HANDLE h_Directory = ::CreateFile(
+		directory.c_str(),					// pointer to the file name
+		FILE_LIST_DIRECTORY,                // access (read/write) mode
+		FILE_SHARE_READ						// share mode
+		 | FILE_SHARE_WRITE
+		 | FILE_SHARE_DELETE,
+		NULL,                               // security descriptor
+		OPEN_EXISTING,                      // how to create
+		FILE_FLAG_BACKUP_SEMANTICS			// file attributes
+		 | FILE_FLAG_OVERLAPPED,
+		NULL);                              // file with attributes to copy
+
+	if (h_Directory == INVALID_HANDLE_VALUE)
+	{
+		std::cout << "ERROR: Error opening directory to watch: " << directory << std::endl;
+	}
+
+	int nCounter = 0;
+    FILE_NOTIFY_INFORMATION strFileNotifyInfo[1024];
+    DWORD dwBytesReturned = 0;   
+
+    while(TRUE)
+    {
+        int count = 0;
+
+		if( ReadDirectoryChangesW ( h_Directory, (LPVOID)&strFileNotifyInfo, sizeof(strFileNotifyInfo), TRUE, FILE_NOTIFY_CHANGE_LAST_WRITE, &dwBytesReturned, NULL, NULL) == 0)
+        {
+        }
+        else
+        {
+			wchar_t filename[MAX_PATH];
+			if (strFileNotifyInfo[0].FileNameLength)
+            {
+                wcsncpy_s(filename, MAX_PATH, strFileNotifyInfo[0].FileName, strFileNotifyInfo[0].FileNameLength / 2);
+                filename[strFileNotifyInfo[0].FileNameLength / 2] = 0;
+                wprintf(L"filechange: %s\n", filename);
+				for(std::vector<void (*)(std::string modified_file)>::iterator it = _change_listeners.begin(); it != _change_listeners.end(); ++it) 
+				{
+					(*it)("");
+				}
+				
+            }
+            //std::cout << "File Modified: " << strFileNotifyInfo[0].FileName << std::endl;
+        }
+		boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+    }
 }
 
 unsigned char* FileSystem::LoadFileContents(std::string filename) {

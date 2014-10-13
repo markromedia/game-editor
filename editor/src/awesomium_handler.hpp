@@ -23,7 +23,14 @@ private:
 
 	/// @summary	The awesomium factory
 	AwesomiumSurfaceFactory* _awesomium_surface_factory;
+
+	/// Reload user interface.
+	void doReloadUi();
+
+	/// @summary	true to do reload.
+	bool _reload_ui;
 public:
+
 	/// Initialises this object.
 	void Init();
 
@@ -34,6 +41,9 @@ public:
 	/// Updates the given dt.
 	/// @param	dt	The dt.
 	void Update(float dt);
+
+	/// Reload user interface.
+	void ReloadUi();
 };
 
 class AwesomiumSurface : public Awesomium::Surface {

@@ -13,8 +13,11 @@ private:
 	/// @summary	The game.
 	Game* _game;
 
+	/// @summary	The awesomium handler.
 	AwesomiumHandler* _awesomium_handler;
 public:
+	static bool _reload_awesomium;
+
 	/// Initialises this object.
 	void Init();
 

@@ -32,7 +32,12 @@ void AwesomiumHandler::Init()
 	_webview = _webcore->CreateWebView(width, height, _websession);
 	_webview->SetTransparent(true);
 
-    Awesomium::WebURL url(Awesomium::WSLit("asset://editor/html/index.html"));;
+	doReloadUi();
+}
+	
+void AwesomiumHandler::doReloadUi()
+{
+	Awesomium::WebURL url(Awesomium::WSLit("asset://editor/html/index.html"));;
     _webview->LoadURL(url);
 
 	while (_webview ->IsLoading()) {
@@ -41,7 +46,9 @@ void AwesomiumHandler::Init()
 
 	Sleep(300);
 	_webcore->Update();
+	_reload_ui = false;
 }
+
 
 void AwesomiumHandler::OnEvent(SDL_Event* Event)
 {
@@ -74,9 +81,13 @@ void AwesomiumHandler::OnEvent(SDL_Event* Event)
 
 }
 
-
 void AwesomiumHandler::Update(float dt)
 {
+	if (_reload_ui)
+	{
+		doReloadUi();
+	}
+
 	_webcore->Update();
 	for(std::vector<AwesomiumSurface*>::iterator it = _awesomium_surface_factory->_awesomium_surfaces.begin(); it != _awesomium_surface_factory->_awesomium_surfaces.end(); ++it) {
 		if ((*it)->dirty) {
@@ -84,6 +95,11 @@ void AwesomiumHandler::Update(float dt)
 		}
 		Graphics::RenderQueue::QueueRenderOperation((*it)->_render_operation, Game::OrthoCamera);
 	}
+}
+
+void AwesomiumHandler::ReloadUi()
+{
+	_reload_ui = true;
 }
 
 AwesomiumSurface::AwesomiumSurface(int width, int height) : _width(width), _height (height)

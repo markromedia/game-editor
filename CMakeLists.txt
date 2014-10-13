@@ -40,12 +40,15 @@ MESSAGE(STATUS "FLAGS:" ${CMAKE_CXX_FLAGS})
 
 # Look up SDL2 and add the include directory to our include path
 find_package(SDL2 REQUIRED)
-
 find_package(Lua51 REQUIRED)
-find_package(Boost REQUIRED)
 find_package(GLM REQUIRED)
 find_package(OpenGL REQUIRED)
 
+# boost configuration
+set(Boost_USE_STATIC_LIBS ON) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+set(Boost_DEBUG TRUE) 
 
 #if windows, manually fix some dependencies
 IF(WIN32)
@@ -54,7 +57,12 @@ IF(WIN32)
 
 	SET(SDL2_IMAGE_INCLUDE_DIRS $ENV{CPP_REPOSITORY}/sdl2_image/include)
 	SET(SDL2_IMAGE_LIBRARIES $ENV{CPP_REPOSITORY}/sdl2_image/lib/x86/SDL2_image.lib)
+	
+	set(BOOST_ROOT $ENV{CPP_REPOSITORY}/boost_1_56_0)
+	set(Boost_COMPILER -vc110)
+	find_package(Boost REQUIRED COMPONENTS chrono date_time system thread)
 ELSE()
+	find_package(Boost REQUIRED COMPONENTS chrono date_time system thread)
 	find_package(GLEW REQUIRED)
 	find_package(SDL2_image REQUIRED)
 ENDIF(WIN32)
@@ -73,7 +81,11 @@ MESSAGE(STATUS "SDL2_IMAGE_LIBRARIES = " ${SDL2_IMAGE_LIBRARIES})
 MESSAGE(STATUS "LUA_INCLUDE_DIR = " ${LUA_INCLUDE_DIR})
 MESSAGE(STATUS "LUA_LIBRARIES = " ${LUA_LIBRARIES})
 MESSAGE(STATUS "Boost_INCLUDE_DIRS = " ${Boost_INCLUDE_DIRS})
-MESSAGE(STATUS "Boost_LIBRARY_DIRS = " ${Boost_LIBRARY_DIRS})
+MESSAGE(STATUS "Boost Libaries")
+MESSAGE(STATUS "    Boost_CHRONO_LIBRARY = " ${Boost_CHRONO_LIBRARY})
+MESSAGE(STATUS "    Boost_DATE_TIME_LIBRARY = " ${Boost_DATE_TIME_LIBRARY})
+MESSAGE(STATUS "    Boost_SYSTEM_LIBRARY = " ${Boost_SYSTEM_LIBRARY})
+MESSAGE(STATUS "    Boost_THREAD_LIBRARY = " ${Boost_THREAD_LIBRARY})
 MESSAGE(STATUS "OPENGL_INCLUDE_DIR = " ${OPENGL_INCLUDE_DIR})
 MESSAGE(STATUS "GLM_INCLUDE_DIRS = " ${GLM_INCLUDE_DIRS})
 MESSAGE(STATUS "GLEW_INCLUDE_DIR = " ${GLEW_INCLUDE_DIR})
