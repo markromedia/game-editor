@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class FileSystem {
 private:
@@ -26,6 +27,19 @@ public:
 
 	/// Listen for directory changes.
 	static void ListenForDirectoryChanges(std::string directory);
+
+	/// Gets a file length.
+	/// @param [in,out]	file	The file.
+	/// @return	The file length.
+	static inline unsigned long getFileLength(std::ifstream& file) {
+		if(!file.good()) return 0;
+
+		file.seekg(0,std::ios::end);
+		unsigned long len = file.tellg();
+		file.seekg(std::ios::beg);
+
+		return len;
+	}
 };
 
 

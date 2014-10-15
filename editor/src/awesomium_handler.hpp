@@ -13,6 +13,7 @@
 #include <queue>
 
 class AwesomiumSurfaceFactory;
+class JavascriptDelegate;
 class AwesomiumHandler
 {
 private:
@@ -20,6 +21,9 @@ private:
 	Awesomium::WebCore* _webcore;
 	Awesomium::WebSession* _websession;
 	Awesomium::WebView* _webview;
+
+	//the javascript delegate
+	JavascriptDelegate* _javascript_delegate;
 
 	/// @summary	The awesomium factory
 	AwesomiumSurfaceFactory* _awesomium_surface_factory;

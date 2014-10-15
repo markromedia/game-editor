@@ -15,6 +15,7 @@
 #include "graphics/screen.h"
 #include "platform/FileSystem.hpp"
 #include <graphics/texture_manager.hpp>
+#include "javascript_delegate.hpp"
 
 void AwesomiumHandler::Init()
 {
@@ -33,6 +34,10 @@ void AwesomiumHandler::Init()
 	_webview->SetTransparent(true);
 
 	doReloadUi();
+	
+	//register the javascript delegate
+	_javascript_delegate = new JavascriptDelegate(this, _webview);
+	_webview->set_js_method_handler(_javascript_delegate);
 }
 	
 void AwesomiumHandler::doReloadUi()
@@ -44,8 +49,7 @@ void AwesomiumHandler::doReloadUi()
 	  _webcore->Update();
 	}
 
-	Sleep(300);
-	_webcore->Update();
+	Sleep(1000);
 	_reload_ui = false;
 }
 

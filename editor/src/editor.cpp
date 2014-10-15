@@ -4,6 +4,7 @@
 #include <boost/date_time.hpp> 
 #include "graphics/render_queue.hpp"
 #include "platform/FileSystem.hpp"
+#include "logger.hpp"
 
 bool Editor::_reload_awesomium = false;
 void listenForDirectoryChanges() {
@@ -12,6 +13,7 @@ void listenForDirectoryChanges() {
 
 void reloadAwesomium(std::string modified_file)
 {
+	LOG_DEBUG(modified_file + " changed. Will reload UI...");
 	Editor::_reload_awesomium = true;
 }
 

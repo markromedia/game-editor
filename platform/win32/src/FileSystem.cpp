@@ -5,7 +5,7 @@
 #include "FileSystem.hpp"
 #include <vector>
 #include <set>
-#include <fstream>
+
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/thread.hpp> 
@@ -27,17 +27,6 @@ std::string getFullFilePath(std::string resource_file) {
 	std::string filepath = executable.append(resource_file);
 
 	return filepath;
-}
-
-unsigned long getFileLength(std::ifstream& file)
-{
-	if(!file.good()) return 0;
-
-	file.seekg(0,std::ios::end);
-	unsigned long len = file.tellg();
-	file.seekg(std::ios::beg);
-
-	return len;
 }
 
 std::string FileSystem::GetResourceFilePath(std::string resource_file) {
@@ -86,14 +75,15 @@ void FileSystem::ListenForDirectoryChanges(std::string directory)
             {
                 wcsncpy_s(filename, MAX_PATH, strFileNotifyInfo[0].FileName, strFileNotifyInfo[0].FileNameLength / 2);
                 filename[strFileNotifyInfo[0].FileNameLength / 2] = 0;
-                wprintf(L"filechange: %s\n", filename);
-				for(std::vector<void (*)(std::string modified_file)>::iterator it = _change_listeners.begin(); it != _change_listeners.end(); ++it) 
-				{
-					(*it)("");
+                
+				std::wstring ws( filename );
+				std::string convert_str( ws.begin(), ws.end());
+				std::replace(convert_str.begin(), convert_str.end(), '\\', '/' );
+				for(std::vector<void (*)(std::string modified_file)>::iterator it = _change_listeners.begin(); it != _change_listeners.end(); ++it) {
+					(*it)(directory + "/" + convert_str);
 				}
 				
             }
-            //std::cout << "File Modified: " << strFileNotifyInfo[0].FileName << std::endl;
         }
 		boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
     }
