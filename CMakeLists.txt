@@ -70,7 +70,7 @@ ENDIF(WIN32)
 #for linux, need to fix the path for awesomium. fix this
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     MESSAGE(STATUS "Awesomium path is going to be hardcoded")
-    SET(AWESOMIUM_ROOT "/home/mudit/applications/awesomium_v1.7.4_sdk_linux32")
+    SET(AWESOMIUM_ROOT "/home/mudit/applications/awesomium_v1.7.4_sdk_linux64")
 ENDIF()
 
 #MESSAGE(STATUS "")

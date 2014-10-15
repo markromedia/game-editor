@@ -2,7 +2,7 @@
 #define _TRANSFORM_COMPONENT_hpp
 
 #include <map>
-#include "component.hpp"
+#include "es/component.hpp"
 #include "graphics/transform.hpp"
 
 class TransformComponent : public Component

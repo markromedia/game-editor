@@ -27,7 +27,7 @@ namespace Graphics {
 	public:
 		static Texture* GetTexture(std::string file);
 
-		static Texture* TextureManager::CreateTexture(GLenum texture_format, int width, int height);
+		static Texture* CreateTexture(GLenum texture_format, int width, int height);
 
 		static void LoadTextures();
 	};

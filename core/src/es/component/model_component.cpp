@@ -1,4 +1,4 @@
-#include "es/model_component.h"
+#include "es/component/model_component.h"
 
 ModelComponent::ModelComponent()
 {

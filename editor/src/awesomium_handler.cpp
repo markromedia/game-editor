@@ -3,15 +3,12 @@
 #include <algorithm>
 
 #define GLM_FORCE_RADIANS 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+
+#include <boost/thread/pthread/thread_data.hpp>
 
 #include "graphics/render_op_manager.hpp"
 #include "graphics/render_queue.hpp"
-#include "graphics/render_operation.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
-#include "graphics/transform.hpp"
 #include "graphics/screen.h"
 #include "platform/FileSystem.hpp"
 #include <graphics/texture_manager.hpp>
@@ -49,7 +46,7 @@ void AwesomiumHandler::doReloadUi()
 	  _webcore->Update();
 	}
 
-	Sleep(1000);
+    boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
 	_reload_ui = false;
 }
 

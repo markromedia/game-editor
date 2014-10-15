@@ -1,4 +1,4 @@
-#include "es/transform_component.h"
+#include "es/component/transform_component.h"
 
 TransformComponent::TransformComponent() :
         _transform(new Graphics::Transform())

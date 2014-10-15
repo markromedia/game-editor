@@ -1,8 +1,6 @@
 #include "es/entity.hpp"
 
-#include "es/entity_manager.hpp"
-
-Entity::Entity() : _enabled_components(0)
+Entity::Entity(std::string id) : _id(id),  _enabled_components(0)
 {
 }
 

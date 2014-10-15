@@ -19,8 +19,9 @@
 #include "graphics/render_queue.hpp"
 #include "graphics/transform.hpp"
 #include "data/model_loader.hpp"
+#include "es/system/entity_system.hpp"
 #include "es/entity.hpp"
-#include "es/transform_component.h"
+#include "es/component/transform_component.h"
 #include "graphics/primitives.hpp"
 
 #include "terrain.hpp"
@@ -40,11 +41,15 @@ Terrain terrain;
 
 void initModels()
 {
+    EntitySystem::Init();
+
 	rot = 0;
 	Game::PerspectiveCamera->Translate( 527, -176, -334);
 
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 0, z_pos = 0;
+        Entity* e = EntitySystem::CreateEntity();
+
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
 

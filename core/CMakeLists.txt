@@ -49,6 +49,27 @@ SOURCE_GROUP("include\\es"
     ${INCLUDE_ES}
 )
 
+FILE(GLOB INCLUDE_ES_SYSTEM
+	include/es/system/*.h
+	include/es/system/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES_SYSTEM})
+SOURCE_GROUP("include\\es\\system"
+  FILES
+    ${INCLUDE_ES_SYSTEM}
+)
+
+FILE(GLOB INCLUDE_ES_COMPONENT
+	include/es/component/*.h
+	include/es/component/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES_COMPONENT})
+SOURCE_GROUP("include\\es\\component"
+  FILES
+    ${INCLUDE_ES_COMPONENT}
+)
+
+
 FILE (GLOB INCLUDE_GRAPHICS
 	include/graphics/*.cpp
 	include/graphics/*.hpp
@@ -136,6 +157,33 @@ SOURCE_GROUP("src\\data\\model"
 FILE(GLOB SRC_ES 
 	src/es/*.cpp
 )  
+LIST(APPEND core_SRC ${SRC_ES})
+SOURCE_GROUP("src\\es"
+  FILES
+    ${SRC_ES}
+)
+
+FILE(GLOB SRC_ES_COMPONENT
+	src/es/component/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_ES_COMPONENT})
+SOURCE_GROUP("src\\es\\component"
+  FILES
+    ${SRC_ES_COMPONENT}
+)
+
+FILE(GLOB SRC_ES_SYSTEM
+	src/es/system/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_ES_SYSTEM})
+SOURCE_GROUP("src\\es\\system"
+  FILES
+    ${SRC_ES_SYSTEM}
+)
+
+FILE(GLOB SRC_ES
+	src/es/*.cpp
+)
 LIST(APPEND core_SRC ${SRC_ES})
 SOURCE_GROUP("src\\es"
   FILES

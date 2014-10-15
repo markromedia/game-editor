@@ -2,7 +2,7 @@
 #define _MODEL_COMPONENT_hpp
 
 #include <map>
-#include "component.hpp"
+#include "es/component.hpp"
 #include "graphics/vertex_buffer.hpp"
 
 class ModelComponent : public Component
