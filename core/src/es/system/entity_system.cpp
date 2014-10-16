@@ -1,12 +1,16 @@
 #include "es/system/entity_system.hpp"
 #include "logger.hpp"
+#include "es/system/transform_system.hpp"
 
 EntitySystem* EntitySystem::_instance = NULL;
 
-void Init() {
+void EntitySystem::Init() {
     if (!_instance) {
         _instance = new EntitySystem();
     }
+
+	//init sub-systems
+	TransformSystem::Init();
 }
 
 Entity* EntitySystem::CreateEntity(std::string uuid) {

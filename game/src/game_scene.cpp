@@ -20,8 +20,7 @@
 #include "graphics/transform.hpp"
 #include "data/model_loader.hpp"
 #include "es/system/entity_system.hpp"
-#include "es/entity.hpp"
-#include "es/component/transform_component.h"
+#include "es/system/transform_system.hpp"
 #include "graphics/primitives.hpp"
 
 #include "terrain.hpp"
@@ -49,16 +48,16 @@ void initModels()
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 0, z_pos = 0;
         Entity* e = EntitySystem::CreateEntity();
+		TransformComponent* transform = TransformSystem::CreateComponent()
+			->translate(x_pos, y_pos, z_pos)
+			->rotate(0, 0, 0)
+			->uniform_scale(0.1f);
+		e->add_component(transform);
 
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 		render_model1->Color.rbga(1, 0, 0, 1);
 
-        Graphics::Transform transform;
-        transform.translate(x_pos, y_pos, z_pos);
-		transform.rotate(0, 0, 0);
-        transform.uniform_scale(.1f);
-        
-		render_model1->ModelMatrix = transform.getMatrix();
+		render_model1->ModelMatrix = transform->getMatrix();
 		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
 	}
 
@@ -97,6 +96,8 @@ void GameScene::Init()
 
 void GameScene::Update(float dt)
 {
+	render_model1->ModelMatrix = TransformSystem::Find("")->getMatrix();
+
 	Logger::GetInstance()->StartLogPreformance();
 
 	//update orientations of camera

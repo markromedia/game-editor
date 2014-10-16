@@ -4,8 +4,6 @@
 
 #define GLM_FORCE_RADIANS 
 
-#include <boost/thread/pthread/thread_data.hpp>
-
 #include "graphics/render_op_manager.hpp"
 #include "graphics/render_queue.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
@@ -46,7 +44,7 @@ void AwesomiumHandler::doReloadUi()
 	  _webcore->Update();
 	}
 
-    boost::this_thread::sleep(boost::posix_time::milliseconds(1000));
+	Sleep(1000);
 	_reload_ui = false;
 }
 

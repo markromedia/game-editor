@@ -8,7 +8,7 @@
 class EntitySystem : public System
 {
 private:
-    map<std::string, Entity*> _entities;
+    std::map<std::string, Entity*> _entities;
     static EntitySystem* _instance;
 public:
     ///init this system

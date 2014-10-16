@@ -7,6 +7,8 @@ class Component
 {
 private:
 public:
-    virtual long mask() = 0;
+	virtual ~Component() {}
+
+	virtual long mask() = 0;
 };
 #endif  // _COMPONENT_hpp
