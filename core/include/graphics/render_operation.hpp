@@ -12,7 +12,8 @@
 
 #include "graphics/color4f.hpp"
 #include "graphics/texture.hpp"
-#include "graphics/primitives.hpp"
+#include "graphics/transform.hpp"
+#include "graphics/material.hpp"
 
 namespace Graphics {
 
@@ -27,48 +28,22 @@ namespace Graphics {
 
 		/// Default constructor.
 		RenderOperation();
-        
 		/// @summary	The camera to use to render
 		Graphics::Camera* Camera;
-
 		/// @summary	The model matrix.
 		glm::mat4 ModelMatrix;
-
 		/// @summary	The vertex buffer associated with this render operation
         Graphics::VertexBuffer* VertexBuffer;
-
 		/// @summary	Type of the operation this operation expects
 		int Operation_Type;
-
-		/// @summary	Possible diffuse texture
-		Texture* Diffuse_Texture;
-
-		/// @summary	Possible toon texture
-		Texture* Toon_Texture;
-
-		/// @summary	Possible illumination texture
-		Texture* Illumination_Texture;
-
 		/// @summary	The skybox textures.
 		std::vector<Texture*> Skybox_Textures;
-
-		/// @summary	Global translation to apply to the VBO
-		float translation_x, translation_y, translation_z;
-
-		/// @summary	Possible associated quad
-        Graphics::Quad Quad;
-
 		/// @summary	Any associated color
 		Color4f Color;
-
+        /// @summary	The material
+        MaterialProperties * _material;
 		/// @summary	Size of the points for point sprites
 		float PointSize;
-        
-        /// @summary	whether or not to use lighting
-        bool uses_lighting;
-       
-         /// @summary	whether or not to use colored vertices
-        bool uses_color;
 	};
 }
 

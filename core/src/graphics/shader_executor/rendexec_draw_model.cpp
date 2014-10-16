@@ -7,6 +7,7 @@
 #include "graphics/texture.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/camera.hpp"
+#include "graphics/material.hpp"
 
 using namespace Graphics;
 
@@ -108,6 +109,18 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 
 	glUseProgram(this->programObject);
 
+    //bind the material
+    if (renderOp->_material) {
+        renderOp->_material->Bind((Graphics::MaterialGLBinding) {
+                material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
+                uses_colored_vertices,
+                uses_lighting,
+                { has_diffuse_texture_uniform, diffuse_texture_sampler_uniform},
+                { has_toon_texture_uniform, toon_texture_sampler_uniform },
+                { has_illumination_texture_uniform, illumination_texture_sampler_uniform }
+        });
+    }
+
 	//set uniforms
 	SetUniforms(renderOp);
 
@@ -115,20 +128,20 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
     renderOp->VertexBuffer->Bind(0, 1, 2, 3);
 
 	//possibly bind textures
-	if (renderOp->Diffuse_Texture != NULL)
+	if (renderOp->_material->_diffuse_texture() != NULL)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, renderOp->Diffuse_Texture->texture_id);
+		glBindTexture(GL_TEXTURE_2D, renderOp->_material->_diffuse_texture()->texture_id);
 	}
-	if (renderOp->Toon_Texture != NULL)
+	if (renderOp->_material->_toon_texture() != NULL)
 	{
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, renderOp->Toon_Texture->texture_id);
+		glBindTexture(GL_TEXTURE_2D, renderOp->_material->_toon_texture()->texture_id);
 	}
-	if (renderOp->Illumination_Texture != NULL)
+	if (renderOp->_material->_illumination_texture() != NULL)
 	{
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, renderOp->Illumination_Texture->texture_id);
+		glBindTexture(GL_TEXTURE_2D, renderOp->_material->_illumination_texture()->texture_id);
 	}
 
 	//draw
@@ -144,13 +157,6 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	//send the matrices
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
 	glUniformMatrix4fv(model_view_matrix_uniform, 1, 0, glm::value_ptr(model_view_mat));
-	
-	//bools
-	glUniform1f(has_diffuse_texture_uniform, render->Diffuse_Texture != NULL ? 1 : 0);
-	glUniform1f(has_toon_texture_uniform, render->Toon_Texture != NULL ? 1 : 0);
-	glUniform1f(has_illumination_texture_uniform, render->Illumination_Texture != NULL ? 1 : 0);
-    glUniform1f(uses_colored_vertices, render->uses_color);
-    glUniform1f(uses_lighting, render->uses_lighting);
 	
 	//the primary color
 	glUniform4f(primary_color_uniform, render->Color.r, render->Color.g, render->Color.b, render->Color.a);

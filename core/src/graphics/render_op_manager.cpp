@@ -33,20 +33,20 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	r.Operation_Type = RenderOperation::DRAW_TEXTURE;
 	
 	//load texture
-	r.Diffuse_Texture = TextureManager::GetTexture(texture);
+	r._material->_diffuse_texture(TextureManager::GetTexture(texture));
 	
 	//create vbo and quad
 	r.VertexBuffer = VertexBufferManager::GetBuffer(USE_TEXTURE);
-	r.Quad = Graphics::Primitives::CreateQuad(r.VertexBuffer, texture_width, texture_height);
+	Quad quad = Graphics::Primitives::CreateQuad(r.VertexBuffer, texture_width, texture_height);
 
 	//create crop for texture coords
 	float crop_x =  (float) width / texture_width;
 	float crop_y = (float) height / texture_height;
-	
-	r.Quad.v1->s = 0; r.Quad.v1->t = 0;
-	r.Quad.v2->s = crop_x; r.Quad.v2->t = 0;
-	r.Quad.v3->s = 0; r.Quad.v3->t = crop_y;
-	r.Quad.v4->s = crop_x; r.Quad.v4->t = crop_y;
+
+    quad.v1->s = 0; quad.v1->t = 0;
+	quad.v2->s = crop_x; quad.v2->t = 0;
+	quad.v3->s = 0; quad.v3->t = crop_y;
+	quad.v4->s = crop_x; quad.v4->t = crop_y;
 	
 	RenderOperationManager::instance->render_operations.push_back(r);
 	return &(RenderOperationManager::instance->render_operations.back());

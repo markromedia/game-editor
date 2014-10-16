@@ -76,7 +76,7 @@ void DrawTextureExecutor::Execute(RenderOperation* renderOp)
 	//bind texture
 	glUniform1i(texture_sampler_uniform, 0);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderOp->Diffuse_Texture->texture_id);
+	glBindTexture(GL_TEXTURE_2D, renderOp->_material->_diffuse_texture()->texture_id);
 	CHECK_GL_ERROR();
 
 	//draw
