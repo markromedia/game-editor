@@ -23,6 +23,22 @@ body {
     height: 100%;
 }
 
+.panel-header {
+    float : left;
+    height : 22px;
+    width: 100%;
+    border-bottom: 1px solid #323232;
+
+    background: #d4d4d4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d4d4d4 0%, #919191 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4d4d4), color-stop(100%,#919191)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #d4d4d4 0%,#919191 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4d4', endColorstr='#919191',GradientType=0 ); /* IE6-9 */
+}
+
 /**
  *
  * FILE MENU STUFF
@@ -143,7 +159,7 @@ body {
  *
  */
 #browser-container {
-    height : 100%;
+    height : 600px;
     width : 250px;
     margin : 0;
     float : left;
@@ -156,23 +172,28 @@ body {
     background: #525252; /* Old browsers */
 }
 
-#browser-header {
-    float : left;
-    background-color: blue;
-    height : 22px;
-    width: 100%;
-    border-bottom: 1px solid #323232;
 
-    background: #d4d4d4; /* Old browsers */
-    background: -moz-linear-gradient(top,  #d4d4d4 0%, #919191 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4d4d4), color-stop(100%,#919191)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #d4d4d4 0%,#919191 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #d4d4d4 0%,#919191 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4d4', endColorstr='#919191',GradientType=0 ); /* IE6-9 */
+/**
+ *
+ * CODE EDITOR CONTAINER STYLES
+ *
+ */
 
+#code-editor-container {
+    float : right;
+    height: 100%;
+    width : 400px;
+    background: #525252;
 }
+
+#codemirror-editor-textarea {
+}
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: 500px;
+}
+
 
 
 
