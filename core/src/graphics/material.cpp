@@ -1,5 +1,12 @@
 #include "graphics/material.hpp"
 
+Graphics::MaterialProperties::MaterialProperties() :
+	Diffuse_Texture(NULL),
+	Toon_Texture(NULL),
+	Illumination_Texture(NULL)
+{
+}
+
 void Graphics::MaterialProperties::Bind(Graphics::MaterialGLBinding binding) {
     if (binding.diffuse_texture.uniform_has_texture != 0) {
         glUniform1f(binding.diffuse_texture.uniform_has_texture, Diffuse_Texture != NULL ? 1 : 0);

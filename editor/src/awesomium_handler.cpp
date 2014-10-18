@@ -11,6 +11,7 @@
 #include "platform/FileSystem.hpp"
 #include <graphics/texture_manager.hpp>
 #include "javascript_delegate.hpp"
+#include <graphics/primitives.hpp>
 
 void AwesomiumHandler::Init()
 {
@@ -116,7 +117,7 @@ AwesomiumSurface::AwesomiumSurface(int width, int height) : _width(width), _heig
 	_render_operation->ModelMatrix = transform.getMatrix();
 	
 	//load texture
-	_render_operation->Diffuse_Texture = Graphics::TextureManager::CreateTexture(GL_BGRA_EXT, width, height);
+	_render_operation->_material->_diffuse_texture(Graphics::TextureManager::CreateTexture(GL_BGRA_EXT, width, height));
 	
 	//create vbo and quad
 	_render_operation->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_TEXTURE);
@@ -148,7 +149,7 @@ void AwesomiumSurface::Scroll(int dx, int dy, Awesomium::Rect const& clip_rect)
 
 void AwesomiumSurface::UpdateTexture()
 {
-	glBindTexture(GL_TEXTURE_2D, _render_operation->Diffuse_Texture->texture_id);
+	glBindTexture(GL_TEXTURE_2D, _render_operation->_material->_diffuse_texture()->texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

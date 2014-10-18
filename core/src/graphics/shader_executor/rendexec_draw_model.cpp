@@ -111,14 +111,15 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 
     //bind the material
     if (renderOp->_material) {
-        renderOp->_material->Bind((Graphics::MaterialGLBinding) {
+		Graphics::MaterialGLBinding binding =  {
                 material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
                 uses_colored_vertices,
                 uses_lighting,
                 { has_diffuse_texture_uniform, diffuse_texture_sampler_uniform},
                 { has_toon_texture_uniform, toon_texture_sampler_uniform },
                 { has_illumination_texture_uniform, illumination_texture_sampler_uniform }
-        });
+        };
+        renderOp->_material->Bind(binding);
     }
 
 	//set uniforms
@@ -133,7 +134,7 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, renderOp->_material->_diffuse_texture()->texture_id);
 	}
-	if (renderOp->_material->_toon_texture() != NULL)
+	if (renderOp->_material->_toon_texture())
 	{
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, renderOp->_material->_toon_texture()->texture_id);

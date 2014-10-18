@@ -46,6 +46,8 @@ namespace  Graphics {
         //floats
         float specular_exponent;
     public:
+		MaterialProperties();
+
         inline MaterialProperties* _diffuse_texture(Texture* _texture) { Diffuse_Texture = _texture; return this; }
         inline Texture* _diffuse_texture() { return Diffuse_Texture; }
 
