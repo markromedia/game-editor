@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title>Flight Editor</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/editor.css" media="screen" />
+    <link rel="stylesheet" href="css/tabs.css" media="screen" />
+
+    <!--jquery-->
+    <script src="lib/jquery-1.11.1.min.js"></script>
+
+    <!--mock library COMMENT OUT WHEN RUNNING EDITOR -->
+    <!--<script src="js/mock-editor.js"></script>-->
+
+    <!-- code mirror -->
+    <link rel="stylesheet" href="lib/codemirror-4.6/lib/codemirror.css">
+    <link rel="stylesheet" href="lib/codemirror-4.6/theme/ambiance.css">
+    <script src="lib/codemirror-4.6/lib/codemirror.js"></script>
+    <script src="lib/codemirror-4.6/mode/javascript/javascript.js"></script>
+
+    <script src="js/browser.js" ></script>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            //tell application to init
+            editor.init();
+
+            var codeMirror = CodeMirror.fromTextArea(document.getElementById("codemirror-editor-textarea"), {
+                lineNumbers: true,
+                mode: "javascript",
+                value : ";",
+                theme : "ambiance"
+              });
+            codeMirror.setSize("100%", "100%")
+            setTimeout( codeMirror.refresh, 0);
+
+            browser.showDirectory();
+        });
+    </script>
+</head>
+<body>
+
+<div id="wrapper">
+    <!--File menu-->
+    <div id="file-menu-container">
+        <ul>
+            <li>File
+                <ul>
+                    <li>Open..</li>
+                    <li>Close..</li>
+                    <li>Save..</li>
+                </ul>
+            </li>
+            <li>Edit
+                <ul>
+                    <li>Cut</li>
+                    <li>Copy</li>
+                    <li>Paste</li>
+                </ul>
+            </li>
+            <li>View</li>
+            <li>Window</li>
+            <li>Help</li>
+        </ul>
+    </div>
+
+    <!--Quick action bar -->
+    <div id="quick-action-bar-container" >
+        <img src="res/marquee_icon.png" height="50px" />
+        <img src="res/cube_icon.png" height="50px" />
+        <img src="res/plane_icon.png" height="50px" />
+        <img src="res/pyramid_icon.png" height="50px" />
+        <img src="res/sphere_icon.png" height="50px" />
+    </div>
+
+    <!-- Entity / Directory Tabs -->
+    <div id="browser-container">
+        <div class="panel-header">
+            <span id="browser-panel-header-text"></span>
+        </div>
+
+        <article class="tabs">
+        	<section id="tab1">
+        		<h2 id="files-tab-header"><a href="javascript:browser.showDirectory()">Files</a></h2>
+        		<ul id="directory-list">
+                    <li>a</li>
+                </ul>
+        	</section>
+
+        	<section id="tab2">
+        		<h2 id="entity-tab-header"><a href="javascript:browser.showEntity()">Entities</a></h2>
+        		<p>This content appears on tab 2.</p>
+        	</section>
+        </article>
+    </div>
+
+    <!-- Code editor -->
+    <div id="code-editor-container">
+        <div class="panel-header">
+            Editor
+        </div>
+        <div id="codemirror-textarea-container">
+            <textarea id="codemirror-editor-textarea"> </textarea>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

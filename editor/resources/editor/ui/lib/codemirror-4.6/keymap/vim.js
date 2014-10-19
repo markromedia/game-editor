@@ -2351,7 +2351,7 @@
           var whitespaceLength = function(str) {
             var tabs = (str.split("\t").length - 1);
             var spaces = (str.split(" ").length - 1);
-            return tabs * cm.options.tabSize + spaces * 1;
+            return browser * cm.options.tabSize + spaces * 1;
           };
           var currentLine = cm.getLine(cm.getCursor().line);
           var indent = whitespaceLength(currentLine.match(/^\s*/)[0]);

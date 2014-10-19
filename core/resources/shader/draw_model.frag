@@ -142,5 +142,5 @@ void main()
 	}
 	
 	//fragColor = apply_linear_fog_factor(color); //apply any fog
-    fragColor = color;
+    fragColor = vec4(1,0,0,1);//color;
 }												

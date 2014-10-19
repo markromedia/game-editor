@@ -38,7 +38,7 @@ void AwesomiumHandler::Init()
 	
 void AwesomiumHandler::doReloadUi()
 {
-	Awesomium::WebURL url(Awesomium::WSLit("asset://editor/html/index.html"));;
+	Awesomium::WebURL url(Awesomium::WSLit("asset://editor/index.html"));;
     _webview->LoadURL(url);
 
 	while (_webview ->IsLoading()) {

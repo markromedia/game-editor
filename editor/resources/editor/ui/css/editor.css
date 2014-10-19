@@ -23,6 +23,15 @@ body {
     height: 100%;
 }
 
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .panel-header {
     float : left;
     height : 22px;
@@ -173,12 +182,13 @@ body {
 }
 
 
+
+
 /**
  *
  * CODE EDITOR CONTAINER STYLES
  *
  */
-
 #code-editor-container {
     float : right;
     height: 100%;
@@ -189,10 +199,17 @@ body {
 #codemirror-editor-textarea {
 }
 
+#codemirror-textarea-container {
+    float:left;
+    width:100%
+}
+
 .CodeMirror {
   border: 1px solid #eee;
   height: 500px;
 }
+
+
 
 
 
