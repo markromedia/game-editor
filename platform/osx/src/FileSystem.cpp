@@ -44,4 +44,13 @@ unsigned char* FileSystem::LoadFileContents(std::string filename) {
     return shaderSrc;
 }
 
+void FileSystem::NotifyOfDirectoryChanges(std::string directory, void (*call_back)(std::string modified_file)) {
+    
+}
+
+void FileSystem::ListenForDirectoryChanges(std::string directory) {
+    
+}
+
+
 #endif  // __FileSystem_cpp

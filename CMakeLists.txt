@@ -48,7 +48,6 @@ find_package(OpenGL REQUIRED)
 set(Boost_USE_STATIC_LIBS ON) 
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME OFF) 
-set(Boost_DEBUG TRUE) 
 
 #if windows, manually fix some dependencies
 IF(WIN32)
@@ -66,6 +65,12 @@ ELSE()
 	find_package(GLEW REQUIRED)
 	find_package(SDL2_image REQUIRED)
 ENDIF(WIN32)
+
+#workaround for getting 32-bit flew lib
+IF(APPLE)
+	SET(GLEW_INCLUDE_DIR /opt/local/include)
+	SET(GLEW_LIBRARIES /opt/local/lib/libGLEW.dylib)
+ENDIF(APPLE)
 
 #for linux, need to fix the path for awesomium. fix this
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -89,6 +94,7 @@ MESSAGE(STATUS "    Boost_THREAD_LIBRARY = " ${Boost_THREAD_LIBRARY})
 MESSAGE(STATUS "OPENGL_INCLUDE_DIR = " ${OPENGL_INCLUDE_DIR})
 MESSAGE(STATUS "GLM_INCLUDE_DIRS = " ${GLM_INCLUDE_DIRS})
 MESSAGE(STATUS "GLEW_INCLUDE_DIR = " ${GLEW_INCLUDE_DIR})
+MESSAGE(STATUS "GLEW_LIBRARIES = " ${GLEW_LIBRARIES})
 MESSAGE(STATUS "")
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIRS} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${GLM_INCLUDE_DIRS} ${GLEW_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
