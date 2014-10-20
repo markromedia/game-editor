@@ -45,7 +45,7 @@ void AwesomiumHandler::doReloadUi()
 	  _webcore->Update();
 	}
 
-	Sleep(1000);
+//	Sleep(1000);
 	_reload_ui = false;
 }
 

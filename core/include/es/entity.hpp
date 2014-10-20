@@ -2,6 +2,7 @@
 #define _ENTITY_hpp
 
 #include <map>
+#include <string>
 #include "es/component.hpp"
 
 typedef int FamilyId;
