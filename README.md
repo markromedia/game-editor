@@ -4,10 +4,9 @@ Flight is a sandbox for graphics/systems testing. Cross platform with a custom S
 
 ## Roadmap
 
-+ cmake support
-+ OSX/*nix support
-+ Awesomium integration
-+ Famo.us integration
++ ~~cmake support~~
++ ~~OSX/*nix support~~
++ ~~Awesomium integration~~
 + Editor
 + Live updates
 + SSAO 
