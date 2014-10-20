@@ -1,22 +1,8 @@
-#ifndef __FileSystem_cpp
-#define __FileSystem_cpp
-
 #include "FileSystem.hpp"
 #include <vector>
 #include <set>
 #include <fstream>
 #include <algorithm>
-
-unsigned long getFileLength(std::ifstream& file)
-{
-	if(!file.good()) return 0;
-
-	file.seekg(0,std::ios::end);
-	unsigned long len = file.tellg();
-	file.seekg(std::ios::beg);
-
-	return len;
-}
 
 std::string FileSystem::GetResourceFilePath(std::string resource_file) {
 	return resource_file;
@@ -44,4 +30,14 @@ unsigned char* FileSystem::LoadFileContents(std::string filename) {
     return shaderSrc;
 }
 
-#endif  // __FileSystem_cpp
+void FileSystem::ListenForDirectoryChanges(std::string directory) {
+
+}
+
+void FileSystem::NotifyOfDirectoryChanges(std::string directory, void (*call_back)(std::string)) {
+
+}
+
+std::vector<File> FileSystem::ListDirectoryContents(std::string directory) {
+    return std::vector<File>();
+}

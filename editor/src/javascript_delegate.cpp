@@ -4,7 +4,7 @@
 #include "game.hpp"
 #include "logger.hpp"
 #include "es/system/transform_system.hpp"
-#include "platform/Filesystem.hpp"
+#include "platform/FileSystem.hpp"
 
 JavascriptDelegate::JavascriptDelegate(AwesomiumHandler* awesomium_handler, Awesomium::WebView* web_view) : _awesomium_handler(awesomium_handler), _web_view(web_view)
 {

@@ -4,7 +4,16 @@ MESSAGE(STATUS "***************************************************")
 MESSAGE(STATUS "*                  Editor Config                  *")
 MESSAGE(STATUS "***************************************************")
 
-find_package(Awesomium REQUIRED)
+
+#for linux, need to fix the path for awesomium. fix this
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    MESSAGE(STATUS "Awesomium path is going to be hardcoded")
+    SET(AWESOMIUM_INCLUDE_DIR /home/mudit/applications/awesomium/awesomium_v1.7.4_sdk_linux64/include)
+    SET(AWESOMIUM_LIBRARY /home/mudit/applications/awesomium/awesomium_v1.7.4_sdk_linux64/bin/libawesomium-1-7.so.4.0)
+ElSE()
+    find_package(Awesomium REQUIRED)
+ENDIF()
+
 
 MESSAGE(STATUS "AWESOMIUM_INCLUDE_DIR = " ${AWESOMIUM_INCLUDE_DIR})
 MESSAGE(STATUS "AWESOMIUM_LIBRARY = " ${AWESOMIUM_LIBRARY})

@@ -1,5 +1,7 @@
 include (FindPackageHandleStandardArgs)
 
+MESSAGE (STATUS $ENV{AWESOMIUM_ROOT})
+
 find_path(AWESOMIUM_INCLUDE_DIR Awesomium
 	PATH_SUFFIXES include
 	PATHS
