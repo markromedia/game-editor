@@ -297,6 +297,7 @@ target_link_libraries(core platform
 	${Boost_DATE_TIME_LIBRARY} 
 	${Boost_SYSTEM_LIBRARY} 
 	${Boost_THREAD_LIBRARY} 
+    ${Boost_FILESYSTEM_LIBRARIES}
 )
 
 install(TARGETS core ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

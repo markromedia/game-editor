@@ -6,6 +6,11 @@
 #include <vector>
 #include <fstream>
 
+struct File {
+    std::string _file_name;
+    bool _is_directory;
+};
+
 class FileSystem {
 private:
 	static std::vector<void (*)(std::string modified_file)> _change_listeners;
@@ -27,6 +32,10 @@ public:
 
 	/// Listen for directory changes.
 	static void ListenForDirectoryChanges(std::string directory);
+    
+    /// list the contents of the provided directory
+    /// as vector of
+    static std::vector<File> ListDirectoryContents(std::string directory);
 
 	/// Gets a file length.
 	/// @param [in,out]	file	The file.

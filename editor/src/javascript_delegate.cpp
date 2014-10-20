@@ -4,6 +4,7 @@
 #include "game.hpp"
 #include "logger.hpp"
 #include "es/system/transform_system.hpp"
+#include "platform/Filesystem.hpp"
 
 JavascriptDelegate::JavascriptDelegate(AwesomiumHandler* awesomium_handler, Awesomium::WebView* web_view) : _awesomium_handler(awesomium_handler), _web_view(web_view)
 {
@@ -29,5 +30,7 @@ void JavascriptDelegate::OnMethodCall(Awesomium::WebView* caller, unsigned int r
 
 Awesomium::JSValue JavascriptDelegate::OnMethodCallWithReturnValue(Awesomium::WebView* caller, unsigned remote_object_id, Awesomium::WebString const& method_name, Awesomium::JSArray const& args)
 {
+    
+    
   return Awesomium::JSValue::Undefined();
 }

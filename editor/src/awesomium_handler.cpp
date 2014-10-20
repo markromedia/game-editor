@@ -34,6 +34,8 @@ void AwesomiumHandler::Init()
 	//register the javascript delegate
 	_javascript_delegate = new JavascriptDelegate(this, _webview);
 	_webview->set_js_method_handler(_javascript_delegate);
+    
+    std::vector<File> files = FileSystem::ListDirectoryContents(FileSystem::GetResourceFilePath("/Users/MarkUdit/code/flight/build/editor/Debug/resources/editor/ui"));
 }
 	
 void AwesomiumHandler::doReloadUi()
