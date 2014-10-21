@@ -102,25 +102,7 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	GLState::Enable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	//set up matrices
-	Camera* camera = renderOp->Camera;
-	model_view_mat = camera->ViewMatrix() * renderOp->ModelMatrix;
-	model_view_projection_mat = camera->ProjectionMatrix() * model_view_mat;
-
 	glUseProgram(this->programObject);
-
-    //bind the material
-    if (renderOp->_material) {
-		Graphics::MaterialGLBinding binding =  {
-                material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
-                uses_colored_vertices,
-                uses_lighting,
-                { has_diffuse_texture_uniform, diffuse_texture_sampler_uniform},
-                { has_toon_texture_uniform, toon_texture_sampler_uniform },
-                { has_illumination_texture_uniform, illumination_texture_sampler_uniform }
-        };
-        renderOp->_material->Bind(binding);
-    }
 
 	//set uniforms
 	SetUniforms(renderOp);
@@ -155,11 +137,28 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 
 void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 {
-	//send the matrices
+	//send the transform data
+    Camera* camera = render->Camera;
+    glm::mat4 model_view_mat = camera->ViewMatrix() * render->ModelMatrix;
+    glm::mat4 model_view_projection_mat = camera->ProjectionMatrix() * model_view_mat;
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));
 	glUniformMatrix4fv(model_view_matrix_uniform, 1, 0, glm::value_ptr(model_view_mat));
-	
-	//the primary color
+
+    //bind the material
+    if (render->_material) {
+        Graphics::MaterialGLBinding binding =  {
+                material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
+                uses_colored_vertices,
+                uses_lighting,
+                { has_diffuse_texture_uniform, diffuse_texture_sampler_uniform},
+                { has_toon_texture_uniform, toon_texture_sampler_uniform },
+                { has_illumination_texture_uniform, illumination_texture_sampler_uniform }
+        };
+        render->_material->Bind(binding);
+    }
+
+
+        //the primary color
 	glUniform4f(primary_color_uniform, render->Color.r, render->Color.g, render->Color.b, render->Color.a);
     
 	//set fog

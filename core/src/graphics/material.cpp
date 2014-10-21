@@ -21,10 +21,10 @@ void Graphics::MaterialProperties::Bind(Graphics::MaterialGLBinding binding) {
     }
 
     if (binding.uniform_uses_lighting != 0) {
-        glUniform1f(binding.illumination_texture.uniform_has_texture, is_lit);
+        glUniform1f(binding.uniform_uses_lighting, is_lit);
     }
 
     if (binding.uniform_uses_colored_vertices != 0) {
-        glUniform1f(binding.illumination_texture.uniform_has_texture, is_colored);
+        glUniform1f(binding.uniform_uses_colored_vertices, is_colored);
     }
 }

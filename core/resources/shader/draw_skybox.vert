@@ -6,7 +6,7 @@ in vec4 a_position;
 in vec2 a_text_coord;
 
 out vec2 v_text_coord;
-out vec3 pos;
+out vec4 pos;
 
 void main ()					
 {								
