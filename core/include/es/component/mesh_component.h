@@ -5,7 +5,7 @@
 #include "es/component.hpp"
 #include "graphics/vertex_buffer.hpp"
 
-class ModelComponent : public Component
+class MeshComponent : public Component
 {
 private:
     Graphics::VertexBuffer* model_data;
@@ -13,7 +13,7 @@ public:
     static const long MASK = 0x00000000000000000000000000000010;
 
     /// default const
-    ModelComponent();
+    MeshComponent();
 
     //return the mask for this component
     long mask();

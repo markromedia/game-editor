@@ -41,7 +41,7 @@ namespace Graphics {
 		/// @summary	Any associated color
 		Color4f Color;
         /// @summary	The material
-        MaterialProperties * _material;
+        Material * _material;
 		/// @summary	Size of the points for point sprites
 		float PointSize;
 	};

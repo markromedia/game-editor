@@ -53,10 +53,10 @@ void initModels()
 		e->add_component(transform);
 
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
-		render_model1->Color.rbga(1, 0, 0, 1);
 
 		render_model1->ModelMatrix = transform->getMatrix();
 		render_model1->_material->
+                _primary_color(Graphics::Color4f(1, 0, 0, 1))->
                 _is_lit(false)->
                 _diffuse_texture(Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
 	}

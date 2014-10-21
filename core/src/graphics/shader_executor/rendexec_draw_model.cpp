@@ -19,12 +19,6 @@ DrawModelExecutor::DrawModelExecutor()
 	light.ambient_color.rbga(1, 1, 1, 1);
 	light.diffuse_color.rbga(1, 1, 1, 1);
 	light.specular_color.rbga(1, 1, 1, 1);
-
-	//set up material
-	material.ambient_color.rbga(0.5, 0.5, 0.5, 1);
-	material.diffuse_color.rbga(1, 1, 1, 1);
-	material.specular_color.rbga(0, 0, 0, 0);
-	material.specular_exponent = 0;
 }
 
 void DrawModelExecutor::Init()
@@ -148,6 +142,7 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
     if (render->_material) {
         Graphics::MaterialGLBinding binding =  {
                 material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
+                primary_color_uniform,
                 uses_colored_vertices,
                 uses_lighting,
                 { has_diffuse_texture_uniform, diffuse_texture_sampler_uniform},
@@ -157,10 +152,6 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
         render->_material->Bind(binding);
     }
 
-
-        //the primary color
-	glUniform4f(primary_color_uniform, render->Color.r, render->Color.g, render->Color.b, render->Color.a);
-    
 	//set fog
 	glUniform1f(fog_min_distance_uniform,1000);
 	glUniform1f(fog_max_distance_uniform, 1500);
@@ -177,10 +168,5 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 	glUniform4f(light_uniform_diffuse_color, light.diffuse_color.r, light.diffuse_color.g, light.diffuse_color.b, light.diffuse_color.a);
 	glUniform4f(light_uniform_specular_color, light.specular_color.r, light.specular_color.g, light.specular_color.b, light.specular_color.a);
 
-	//send the material data
-	glUniform4f(material_uniform_ambient_color, material.ambient_color.r, material.ambient_color.g, material.ambient_color.b, material.ambient_color.a);
-	glUniform4f(material_uniform_diffuse_color, material.diffuse_color.r, material.diffuse_color.g, material.diffuse_color.b, material.diffuse_color.a);
-	glUniform4f(material_uniform_specular_color, material.specular_color.r, material.specular_color.g, material.specular_color.b, material.specular_color.a);
-	glUniform1f(material_uniform_specular_exponent, material.specular_exponent);
 	CHECK_GL_ERROR();
 }
