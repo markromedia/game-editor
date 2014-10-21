@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="lib/codemirror-4.6/theme/ambiance.css">
     <script src="lib/codemirror-4.6/lib/codemirror.js"></script>
     <script src="lib/codemirror-4.6/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="lib/CollapsibleLists.js"></script>
+
 
     <script src="js/browser.js" ></script>
 
@@ -37,6 +39,8 @@
             setTimeout( codeMirror.refresh, 0);
 
             browser.showDirectory();
+
+            CollapsibleLists.applyTo(document.getElementById("entity-list"));
         });
     </script>
 </head>
@@ -91,7 +95,22 @@
 
         	<section id="tab2">
         		<h2 id="entity-tab-header"><a href="javascript:browser.showEntity()">Entities</a></h2>
-        		<p>This content appears on tab 2.</p>
+                <ul class="collapsibleList" id="entity-list">
+                  <li>
+                    Parent item
+                    <ul>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Parent item
+                    <ul>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                    </ul>
+                  </li>
+                </ul>
         	</section>
         </article>
     </div>
