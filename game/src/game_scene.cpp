@@ -43,8 +43,6 @@ void initModels()
     EntitySystem::Init();
 
 	rot = 0;
-	Game::PerspectiveCamera->Translate( 527, -176, -334);
-
 	if (render1Enabled) {
 		float x_pos = 0, y_pos = 0, z_pos = 0;
         Entity* e = EntitySystem::CreateEntity();
@@ -55,10 +53,12 @@ void initModels()
 		e->add_component(transform);
 
 		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
-		render_model1->Color.rbga(1, 0, 0, 1);
 
 		render_model1->ModelMatrix = transform->getMatrix();
-		render_model1->_material->_diffuse_texture(Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
+		render_model1->_material->
+                _primary_color(Graphics::Color4f(1, 0, 0, 1))->
+                _is_lit(false)->
+                _diffuse_texture(Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
 	}
 
 	if (render2Enabled) {
@@ -71,8 +71,7 @@ void initModels()
                 ->_is_lit(false)
                 ->_is_colored(true);
         render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL, (rows + cols + 2) * 8, (rows + cols + 2) * 36);
-        //Graphics::Cube cube = Graphics::Primitives::CreateCube(render_model2->VertexBuffer, 1000, 1000, 100, &color);
-		Graphics::Grid grid = Graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
+		Graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
         
         Graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);

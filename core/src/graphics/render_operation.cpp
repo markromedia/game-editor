@@ -12,5 +12,5 @@ RenderOperation::RenderOperation()
 	//null out pointers
 	Camera = NULL;
 	VertexBuffer = NULL;
-    _material = new MaterialProperties();
+    _material = new Material();
 }

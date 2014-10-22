@@ -25,13 +25,6 @@ namespace Graphics {
 		Graphics::Color4f specular_color;
 	};
 
-	struct Material {
-		Graphics::Color4f ambient_color;
-		Graphics::Color4f diffuse_color;
-		Graphics::Color4f specular_color;
-		float specular_exponent;
-	};
-
 	class DrawModelExecutor : public Graphics::RenderExecutor
 	{
 	private:
@@ -72,7 +65,6 @@ namespace Graphics {
 		glm::mat4 model_view_projection_mat;
 
 		Light light;
-		Material material;
 
 		void SetUniforms(RenderOperation* render);
 	public:

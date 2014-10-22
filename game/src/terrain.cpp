@@ -18,7 +18,7 @@ Terrain::Terrain()
 {
 	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
 	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_TERRAIN;
-	renderOperation->Color = Graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1);
+	renderOperation->_material->_primary_color(Graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1));
     
 	wireframeRenderOperation = Graphics::RenderOperationManager::GetDrawWireframeOp(ModelLoader::SKYBOX);
 	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::DRAW_WIREFRAME;
