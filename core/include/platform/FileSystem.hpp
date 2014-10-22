@@ -18,7 +18,7 @@ public:
 	/// Loads the file contents into a char array
 	/// @param	filename	Filename of the file.
 	/// @return	null if it fails, else the file.
-	static unsigned char* LoadFileContents(std::string filename);
+	static unsigned char* LoadFileContents(std::string filename, bool path_is_absolute);
 
 	/// Returns the path of the provided resource file 
 	/// @param	resource_file	Filename of the file.
@@ -36,6 +36,11 @@ public:
     /// list the contents of the provided directory
     /// as vector of
     static std::vector<File> ListDirectoryContents(std::string directory);
+
+	/// Gets the executable path.
+	///
+	/// @return	The executable path.
+	static std::string GetExecutablePath();
 
 	/// Gets a file length.
 	/// @param [in,out]	file	The file.

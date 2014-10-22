@@ -12,7 +12,8 @@ browser = {
      */
     showDirectory : function() {
         //grab the directories
-        var files = editor.listDirectory(browser.absoluteDirectoryPath);
+        var json = editor.listDirectory(browser.absoluteDirectoryPath);
+        var files = jQuery.parseJSON(json);
 
         $('#directory-list').empty();
         files.forEach(function(file) {
@@ -39,10 +40,19 @@ browser = {
         $('#directory-list').find('li').removeClass("file-highlighted");
         el.className  += 'file-highlighted';
 
-        if (isDirectory) {
+        if (isDirectory == 'true') {
             this.absoluteDirectoryPath += '/' + filename;
             this.relativeDirectoryPath += '/' + filename;
             this.showDirectory();
+        } else {
+            window.fileEditor.initializeEditor("codemirror-editor-textarea");
+            if (browser.endsWith(filename, ".html") ||
+                browser.endsWith(filename, ".lua") ||
+                browser.endsWith(filename, ".js") ||
+                browser.endsWith(filename, ".vert") ||
+                browser.endsWith(filename, ".frag")) {
+                window.fileEditor.activeEditor.setValue(editor.loadFileContents(this.absoluteDirectoryPath + '/' + filename));
+            }
         }
     },
 
@@ -54,5 +64,12 @@ browser = {
         $('#tab2').css('z-index', '1');
         $('#files-tab-header').css({"border-bottom-width": "1px", "color": "#999"});
         $('#entity-tab-header').css({"border-bottom-width": "0", "color": "white"});
+    },
+
+    /**
+     * Utility for str.endswith
+     */
+    endsWith : function (str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
     }
 };

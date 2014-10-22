@@ -12,7 +12,7 @@
     <script src="lib/jquery-1.11.1.min.js"></script>
 
     <!--mock library COMMENT OUT WHEN RUNNING EDITOR -->
-    <script src="js/mock-editor.js"></script>
+    <!--<script src="js/mock-editor.js"></script>-->
 
     <!-- code mirror -->
     <link rel="stylesheet" href="lib/codemirror-4.6/lib/codemirror.css">
@@ -21,24 +21,17 @@
     <script src="lib/codemirror-4.6/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="lib/CollapsibleLists.js"></script>
 
-
     <script src="js/browser.js" ></script>
+    <script src="js/file-editor.js" ></script>
 
     <script type="text/javascript">
         $( document ).ready(function() {
             //tell application to init
-            editor.init();
-
-            var codeMirror = CodeMirror.fromTextArea(document.getElementById("codemirror-editor-textarea"), {
-                lineNumbers: true,
-                mode: "javascript",
-                value : ";",
-                theme : "ambiance"
-              });
-            codeMirror.setSize("100%", "100%")
-            setTimeout( codeMirror.refresh, 0);
-
+            //editor.init();
+            browser.absoluteDirectoryPath = 'D:/code/flyingmonkey/flight/editor/resources';
             browser.showDirectory();
+
+            fileEditor.initializeEditor("codemirror-editor-textarea");
 
             CollapsibleLists.applyTo(document.getElementById("entity-list"));
         });

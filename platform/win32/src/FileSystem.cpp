@@ -10,9 +10,14 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/thread/thread.hpp> 
 
+#define BOOST_FILESYSTEM_VERSION 3
+#define BOOST_FILESYSTEM_NO_DEPRECATED
+#include <boost/filesystem.hpp>
+
 std::vector<void (*)(std::string modified_file)> FileSystem::_change_listeners = std::vector<void (*)(std::string modified_file)>();
 
-std::string getFullFilePath(std::string resource_file) {
+std::string FileSystem::GetExecutablePath()
+{
 	char ownPth[MAX_PATH]; 
 	HMODULE hModule = GetModuleHandle(NULL);
 	if (hModule != NULL)
@@ -24,8 +29,12 @@ std::string getFullFilePath(std::string resource_file) {
 	std::replace(executable.begin(), executable.end(), '\\', '/' );
 	unsigned found = executable.find_last_of("/\\");
 	executable = executable.substr(0, found).append("/");
-	std::string filepath = executable.append(resource_file);
 
+	return executable;
+}
+
+std::string getFullFilePath(std::string resource_file) {
+	std::string filepath = FileSystem::GetExecutablePath().append(resource_file);
 	return filepath;
 }
 
@@ -89,8 +98,45 @@ void FileSystem::ListenForDirectoryChanges(std::string directory)
     }
 }
 
-unsigned char* FileSystem::LoadFileContents(std::string filename) {
-	std::string filepath = getFullFilePath(filename);
+std::vector<File> FileSystem::ListDirectoryContents(std::string directory)
+{
+	  std::vector<File> files;
+    
+    if (!boost::filesystem::exists(directory)) return files;
+    
+    if (boost::filesystem::is_directory(directory))
+    {
+        boost::filesystem::directory_iterator it(directory);
+        boost::filesystem::directory_iterator endit;
+        while(it != endit)
+        {
+            if (boost::filesystem::is_regular_file(*it))
+            {
+                std::string filename = it->path().filename().string();
+                File f = {filename, false};
+                files.push_back(f);
+            }
+            if (boost::filesystem::is_directory(*it))
+            {
+                std::string filename = it->path().filename().string();
+                File f = {filename, true};
+                files.push_back(f);
+            }
+
+            ++it;
+        }
+    }
+    
+    return files;;
+}
+
+
+unsigned char* FileSystem::LoadFileContents(std::string filename, bool path_is_absolute) {
+	
+	std::string filepath = filename;
+	if (!path_is_absolute) {
+		filepath = getFullFilePath(filename);
+	}
 
 	std::ifstream file;
 	file.open(filepath, std::ios::in);

@@ -99,7 +99,41 @@ SOURCE_GROUP("resources\\editor\\ui\\html"
     ${RES_EDITOR_HTML}
 )
 
+FILE(GLOB RES_EDITOR_CSS
+	resources/editor/ui/css/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_CSS})
+SOURCE_GROUP("resources\\editor\\ui\\css"
+  FILES
+    ${RES_EDITOR_CSS}
+)
 
+FILE(GLOB RES_EDITOR_JS
+	resources/editor/ui/js/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_JS})
+SOURCE_GROUP("resources\\editor\\ui\\js"
+  FILES
+    ${RES_EDITOR_JS}
+)
+
+FILE(GLOB RES_EDITOR_LIB
+	resources/editor/ui/lib/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_LIB})
+SOURCE_GROUP("resources\\editor\\ui\\lib"
+  FILES
+    ${RES_EDITOR_LIB}
+)
+
+FILE(GLOB RES_EDITOR_RES
+	resources/editor/ui/res/*.*
+)
+LIST(APPEND editor_SRC ${RES_EDITOR_RES})
+SOURCE_GROUP("resources\\editor\\ui\\res"
+  FILES
+    ${RES_EDITOR_RES}
+)
 
 #########################################################################################
 #											#
