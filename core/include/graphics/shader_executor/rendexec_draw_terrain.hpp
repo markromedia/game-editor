@@ -13,11 +13,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class RenderOperation;
 
-	class DrawTerrainExecutor : public Graphics::RenderExecutor
+	class DrawTerrainExecutor : public graphics::ShaderExecutor
 	{
 	private:
 		GLuint programObject;
@@ -37,7 +37,7 @@ namespace Graphics {
 
 		void Init();
 
-		void Execute (Graphics::RenderOperation* render);
+		void Execute (graphics::RenderOperation* render);
 	};
 }
 

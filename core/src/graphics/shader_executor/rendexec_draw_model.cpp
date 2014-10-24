@@ -9,7 +9,7 @@
 #include "graphics/camera.hpp"
 #include "graphics/material.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 DrawModelExecutor::DrawModelExecutor()
 {
@@ -129,7 +129,7 @@ void DrawModelExecutor::Execute(RenderOperation* renderOp)
 	GLState::Disable(GL_DEPTH_TEST);
 }
 
-void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
+void graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 {
 	//send the transform data
     Camera* camera = render->Camera;
@@ -140,7 +140,7 @@ void Graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
 
     //bind the material
     if (render->_material) {
-        Graphics::MaterialGLBinding binding =  {
+        graphics::MaterialGLBinding binding =  {
                 material_uniform_ambient_color, material_uniform_diffuse_color, material_uniform_specular_color, material_uniform_specular_exponent,
                 primary_color_uniform,
                 uses_colored_vertices,

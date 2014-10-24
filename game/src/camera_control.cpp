@@ -2,7 +2,7 @@
 
 const float CAMERA_VELOCITY = 2;
 
-CameraControl::CameraControl(Graphics::Camera* camera_node) {
+CameraControl::CameraControl(graphics::Camera* camera_node) {
 	this->camera_node = camera_node;
 	camera_move_direction = NONE;
     

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class RenderOperation;
 	class Color4f;

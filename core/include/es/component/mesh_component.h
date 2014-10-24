@@ -8,7 +8,7 @@
 class MeshComponent : public Component
 {
 private:
-    Graphics::VertexBuffer* model_data;
+    graphics::VertexBuffer* model_data;
 public:
     static const long MASK = 0x00000000000000000000000000000010;
 

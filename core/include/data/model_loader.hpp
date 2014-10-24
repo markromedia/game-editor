@@ -3,7 +3,7 @@
 
 
 //forward declarations
-namespace Graphics {
+namespace graphics {
 	class VertexBuffer;
 }
 
@@ -21,7 +21,7 @@ public:
 	static const int CUBE2 = 6;
 	static const int SKYBOX = 7;
 
-	static Graphics::VertexBuffer* LoadModel(int model);
+	static graphics::VertexBuffer* LoadModel(int model);
 };
 
 #endif  // __MODEL_LOADER_hpp

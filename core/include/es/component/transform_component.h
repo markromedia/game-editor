@@ -8,7 +8,7 @@
 class TransformComponent : public Component
 {
 private:
-    Graphics::Transform* _transform;
+    graphics::Transform* _transform;
 
 	std::string _id;
 public:
@@ -22,7 +22,7 @@ public:
 
 	/// Gets the transform.
 	/// @return	null if it fails, else the transform.
-	Graphics::Transform* getTransform();
+	graphics::Transform* getTransform();
 
 	/*
 	 * Convience wrappers for internal transform

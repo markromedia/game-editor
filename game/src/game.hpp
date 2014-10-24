@@ -55,9 +55,9 @@ public:
 	static float						FrameRate, update_time, render_time;
 
 	/// the cameras
-	static Graphics::Camera				*PerspectiveCamera;
-	static Graphics::Camera				*OrthoCamera;
-	static Graphics::Camera				*SkyboxCamera;
+	static graphics::Camera				*PerspectiveCamera;
+	static graphics::Camera				*OrthoCamera;
+	static graphics::Camera				*SkyboxCamera;
 
 
 };

@@ -63,10 +63,10 @@ public:
 	AwesomiumSurface(int width, int height);
 
 	/// @summary	The texture.
-	Graphics::Texture* _texture;
+	graphics::Texture* _texture;
 
 	/// @summary	The render operation
-	Graphics::RenderOperation* _render_operation;
+	graphics::RenderOperation* _render_operation;
 
 	void Paint(unsigned char* src_buffer,
 				int src_row_span,

@@ -5,7 +5,7 @@
 #include "opengl.h"
 #include <string>
 
-namespace Graphics {
+namespace graphics {
 	class Texture
 	{
 	private:

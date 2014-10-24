@@ -95,7 +95,7 @@ void AwesomiumHandler::Update(float dt)
 		if ((*it)->dirty) {
 			(*it)->UpdateTexture();
 		}
-		Graphics::RenderQueue::QueueRenderOperation((*it)->_render_operation, Game::OrthoCamera);
+		graphics::RenderQueue::QueueRenderOperation((*it)->_render_operation, Game::OrthoCamera);
 	}
 }
 
@@ -110,20 +110,20 @@ AwesomiumSurface::AwesomiumSurface(int width, int height) : _width(width), _heig
 	_buffer = new unsigned char[width * height * 4];
 	memset(_buffer, 0, sizeof(char)* width * height * 4 ); //zero everything out
 	
-	_render_operation = new Graphics::RenderOperation();
-	_render_operation->Operation_Type = Graphics::RenderOperation::DRAW_TEXTURE;
+	_render_operation = new graphics::RenderOperation();
+	_render_operation->Operation_Type = graphics::RenderOperation::DRAW_TEXTURE;
 
 	//transform. 
-	Graphics::Transform transform;
+	graphics::Transform transform;
     transform.translate(width / 2.0f, height / 2.0f, 0);
 	_render_operation->ModelMatrix = transform.getMatrix();
 	
 	//load texture
-	_render_operation->_material->_diffuse_texture(Graphics::TextureManager::CreateTexture(GL_BGRA_EXT, width, height));
+	_render_operation->_material->_diffuse_texture(graphics::TextureManager::CreateTexture(GL_BGRA_EXT, width, height));
 	
 	//create vbo and quad
-	_render_operation->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_TEXTURE);
-	Graphics::Quad quad = Graphics::Primitives::CreateQuad(_render_operation->VertexBuffer, width, height);
+	_render_operation->VertexBuffer = graphics::VertexBufferManager::GetBuffer(USE_TEXTURE);
+	graphics::Quad quad = graphics::Primitives::CreateQuad(_render_operation->VertexBuffer, width, height);
 
 	//text coords
 	quad.v1->s = 0; quad.v1->t = 0;

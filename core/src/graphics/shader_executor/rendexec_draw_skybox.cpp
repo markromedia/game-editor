@@ -8,7 +8,7 @@
 #include "graphics/render_operation.hpp"
 #include "graphics/camera.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 DrawSkyboxExecutor::DrawSkyboxExecutor()
 {

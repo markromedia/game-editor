@@ -7,7 +7,7 @@
 #include "graphics/render_operation.hpp"
 #include "graphics/camera.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 DrawTerrainExecutor::DrawTerrainExecutor()
 {
@@ -101,7 +101,7 @@ void DrawTerrainExecutor::Execute(RenderOperation* renderOp)
 	CHECK_GL_ERROR();
 }
 
-void Graphics::DrawTerrainExecutor::SetUniforms(RenderOperation* render)
+void graphics::DrawTerrainExecutor::SetUniforms(RenderOperation* render)
 {
 	//send the matrices
 	glUniformMatrix4fv(mvp_matrix_uniform, 1, 0, glm::value_ptr(model_view_projection_mat));

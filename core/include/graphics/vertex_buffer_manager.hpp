@@ -5,7 +5,7 @@
 
 #include "vertex_buffer.hpp"
 
-namespace Graphics {
+namespace graphics {
 	class VertexBufferManager {
 	private:
 		/// @summary	The instance.

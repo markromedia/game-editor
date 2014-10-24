@@ -8,7 +8,7 @@
 #include "logger.hpp"
 #include "platform/FileSystem.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 Texture::Texture(GLenum texture_format, int width, int height)
 {

@@ -12,7 +12,7 @@
 #include "graphics/vertex_buffer.hpp"
 #include "graphics/color4f.hpp"
 
-namespace Graphics {
+namespace graphics {
     struct Quad {
         Vertex *v1, *v2, *v3, *v4;
 		Quad();
@@ -36,17 +36,17 @@ namespace Graphics {
 	class Primitives
 	{
 	public:
-        static Quad CreateQuad(VertexBuffer* buffer, int width, int height, Graphics::Color4f* vertex_color = NULL);
+        static Quad CreateQuad(VertexBuffer* buffer, int width, int height, graphics::Color4f* vertex_color = NULL);
         
-        static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, Graphics::Color4f* vertex_color = NULL);
+        static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, graphics::Color4f* vertex_color = NULL);
 
-		static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, glm::vec3 init_position, Graphics::Color4f* vertex_color = NULL);
+		static Cube CreateCube(VertexBuffer* buffer, int width, int height, int depth, glm::vec3 init_position, graphics::Color4f* vertex_color = NULL);
 
 		static Grid CreateGrid(VertexBuffer* buffer, 
 			int num_rows, int num_cols, 
 			float row_spacing, float col_spacing, 
 			float line_thickness, 
-			Graphics::Color4f* vertex_color = NULL);
+			graphics::Color4f* vertex_color = NULL);
 	};
 }
 #endif  // __PRIMITIVES__hpp

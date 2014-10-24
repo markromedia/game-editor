@@ -54,7 +54,7 @@ public:
 	GLuint mvp_matrix_uniform;
 	GLuint texture_sampler_uniform;
 	GLuint alpha_uniform;
-	Graphics::VertexBuffer* vertex_buff;
+	graphics::VertexBuffer* vertex_buff;
 
 	Math::Matrix4 model_view_mat;
 	Math::Matrix4 model_view_projection_mat;

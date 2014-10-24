@@ -16,12 +16,12 @@
 
 Terrain::Terrain()
 {
-	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_TERRAIN;
-	renderOperation->_material->_primary_color(Graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1));
+	renderOperation = graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
+	renderOperation->Operation_Type = graphics::RenderOperation::DRAW_TERRAIN;
+	renderOperation->_material->_primary_color(graphics::Color4f(200 / 255.0f, 110 / 255.0f, 0, 1));
     
-	wireframeRenderOperation = Graphics::RenderOperationManager::GetDrawWireframeOp(ModelLoader::SKYBOX);
-	wireframeRenderOperation->Operation_Type = Graphics::RenderOperation::DRAW_WIREFRAME;
+	wireframeRenderOperation = graphics::RenderOperationManager::GetDrawWireframeOp(ModelLoader::SKYBOX);
+	wireframeRenderOperation->Operation_Type = graphics::RenderOperation::DRAW_WIREFRAME;
 }
 
 void Terrain::Update( float dt )
@@ -33,16 +33,16 @@ void Terrain::Render()
 	renderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0, 0, 0));
 	wireframeRenderOperation->ModelMatrix = glm::translate(glm::mat4(), glm::vec3(0, 0, 0));
 	
-    Graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
-    Graphics::RenderQueue::QueueRenderOperation(wireframeRenderOperation, Game::PerspectiveCamera);
+    graphics::RenderQueue::QueueRenderOperation(renderOperation, Game::PerspectiveCamera);
+    graphics::RenderQueue::QueueRenderOperation(wireframeRenderOperation, Game::PerspectiveCamera);
 }
 
 void Terrain::CreateGrid(int rows, int cols, int grid_size)
 {
 	std::vector<unsigned char> height_data = ReadHeightMapData("resources/terrain.raw");
 	int total_vertices = (rows + 1) * (cols + 1);
-	renderOperation->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_NORMAL, total_vertices, (rows * cols) * 6);
-	wireframeRenderOperation->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(0, total_vertices, (rows * cols) * 6);
+	renderOperation->VertexBuffer = graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_NORMAL, total_vertices, (rows * cols) * 6);
+	wireframeRenderOperation->VertexBuffer = graphics::VertexBufferManager::GetBuffer(0, total_vertices, (rows * cols) * 6);
     
 	int vertices_row_cnt = rows + 1;
 	int vertices_col_cnt = cols + 1;
@@ -66,10 +66,10 @@ void Terrain::CreateGrid(int rows, int cols, int grid_size)
 			int v3i = x + ((y + 1) * (cols + 1));
 			int v4i = x + 1 + ((y + 1) * (cols + 1));
             
-			Graphics::Vertex* v1 = renderOperation->VertexBuffer->vertices[v1i];
-			Graphics::Vertex* v2 = renderOperation->VertexBuffer->vertices[v2i];
-			Graphics::Vertex* v3 = renderOperation->VertexBuffer->vertices[v3i];
-			Graphics::Vertex* v4 = renderOperation->VertexBuffer->vertices[v4i];
+			graphics::Vertex* v1 = renderOperation->VertexBuffer->vertices[v1i];
+			graphics::Vertex* v2 = renderOperation->VertexBuffer->vertices[v2i];
+			graphics::Vertex* v3 = renderOperation->VertexBuffer->vertices[v3i];
+			graphics::Vertex* v4 = renderOperation->VertexBuffer->vertices[v4i];
             
 			renderOperation->VertexBuffer->CreateTriangle(v1, v2, v3);
 			renderOperation->VertexBuffer->CreateTriangle(v3, v2, v4);
@@ -96,10 +96,10 @@ void Terrain::CreateGrid(int rows, int cols, int grid_size)
 			assignColor(v3, v3n);
 			assignColor(v4, v4n);
 			
-			Graphics::Vertex* wv1 = wireframeRenderOperation->VertexBuffer->vertices[v1i];
-			Graphics::Vertex* wv2 = wireframeRenderOperation->VertexBuffer->vertices[v2i];
-			Graphics::Vertex* wv3 = wireframeRenderOperation->VertexBuffer->vertices[v3i];
-			Graphics::Vertex* wv4 = wireframeRenderOperation->VertexBuffer->vertices[v4i];
+			graphics::Vertex* wv1 = wireframeRenderOperation->VertexBuffer->vertices[v1i];
+			graphics::Vertex* wv2 = wireframeRenderOperation->VertexBuffer->vertices[v2i];
+			graphics::Vertex* wv3 = wireframeRenderOperation->VertexBuffer->vertices[v3i];
+			graphics::Vertex* wv4 = wireframeRenderOperation->VertexBuffer->vertices[v4i];
 			
 			wireframeRenderOperation->VertexBuffer->CreateTriangle(wv1, wv2, wv3);
 			wireframeRenderOperation->VertexBuffer->CreateTriangle(wv3, wv2, wv4);
@@ -116,7 +116,7 @@ std::vector<unsigned char> Terrain::ReadHeightMapData(char* filename)
 	return file_data;
 }
 
-void Terrain::assignColor(Graphics::Vertex* v, glm::vec3 normalized_normal)
+void Terrain::assignColor(graphics::Vertex* v, glm::vec3 normalized_normal)
 {
 	float angle =  glm::angle(normalized_normal, glm::vec3(normalized_normal.x, normalized_normal.y, 0));
     

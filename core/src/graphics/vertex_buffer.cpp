@@ -3,7 +3,7 @@
 #include "graphics/vertex_data.hpp"
 #include "graphics/gllogger.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 VertexBuffer::VertexBuffer(unsigned int flags, int max_vertices, int max_indices) : flags(flags), max_vertices(max_vertices), max_indices(max_indices)
 {

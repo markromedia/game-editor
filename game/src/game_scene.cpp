@@ -25,9 +25,9 @@
 
 #include "terrain.hpp"
 
-Graphics::RenderOperation* render_model1;
-Graphics::RenderOperation* render_model2;
-Graphics::RenderOperation* render_wire_frame;
+graphics::RenderOperation* render_model1;
+graphics::RenderOperation* render_model2;
+graphics::RenderOperation* render_wire_frame;
 
 float rot;
 bool render1Enabled = true;
@@ -52,28 +52,28 @@ void initModels()
 			->uniform_scale(0.1f);
 		e->add_component(transform);
 
-		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
+		render_model1 = graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
 
 		render_model1->ModelMatrix = transform->getMatrix();
 		render_model1->_material->
-                _primary_color(Graphics::Color4f(1, 0, 0, 1))->
+                _primary_color(graphics::Color4f(1, 0, 0, 1))->
                 _is_lit(false)->
-                _diffuse_texture(Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
+                _diffuse_texture(graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
 	}
 
 	if (render2Enabled) {
         float x_pos = 0, y_pos = 0, z_pos = 0, line_thickness = 1;
 		int rows = 20, cols = 20, spacing = 20;
-		Graphics::Color4f color(.5,.5, .5, 1);
-        render_model2 = new Graphics::RenderOperation();
-        render_model2->Operation_Type = Graphics::RenderOperation::DRAW_MODEL;
+		graphics::Color4f color(.5,.5, .5, 1);
+        render_model2 = new graphics::RenderOperation();
+        render_model2->Operation_Type = graphics::RenderOperation::DRAW_MODEL;
         render_model2->_material
                 ->_is_lit(false)
                 ->_is_colored(true);
-        render_model2->VertexBuffer = Graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL, (rows + cols + 2) * 8, (rows + cols + 2) * 36);
-		Graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
+        render_model2->VertexBuffer = graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL, (rows + cols + 2) * 8, (rows + cols + 2) * 36);
+		graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
         
-        Graphics::Transform transform;
+        graphics::Transform transform;
         transform.translate(x_pos, y_pos, z_pos);
 		render_model2->ModelMatrix = transform.getMatrix();
 	}
@@ -89,9 +89,9 @@ void GameScene::Init()
 	skybox.Setup();
 
 	//load textures
-	Graphics::TextureManager::LoadTextures();
+	graphics::TextureManager::LoadTextures();
 	//create vbos
-	Graphics::VertexBufferManager::CreateBuffers();
+	graphics::VertexBufferManager::CreateBuffers();
 }
 
 void GameScene::Update(float dt)
@@ -115,8 +115,8 @@ void GameScene::Update(float dt)
     
 	//draw models
 	if (render1Enabled)
-        Graphics::RenderQueue::QueueRenderOperation(render_model1, Game::PerspectiveCamera);
+        graphics::RenderQueue::QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
-        Graphics::RenderQueue::QueueRenderOperation(render_model2, Game::PerspectiveCamera);
+        graphics::RenderQueue::QueueRenderOperation(render_model2, Game::PerspectiveCamera);
 }
     

@@ -2,7 +2,7 @@
 
 TransformComponent::TransformComponent(std::string uuid) : 
 		_id(uuid),
-        _transform(new Graphics::Transform())
+        _transform(new graphics::Transform())
 {
 }
 
@@ -10,7 +10,7 @@ long TransformComponent::mask() {
     return TransformComponent::MASK;
 }
 
-Graphics::Transform* TransformComponent::getTransform()
+graphics::Transform* TransformComponent::getTransform()
 {
 	return _transform;
 }

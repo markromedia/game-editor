@@ -90,19 +90,31 @@ bool SdlApp::OnInit()
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    if((SDLWindow = SDL_CreateWindow("Flight Editor",
-                                     SDL_WINDOWPOS_UNDEFINED,
-                                     SDL_WINDOWPOS_UNDEFINED,
-                                     0,
-                                     0,
-                                     SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED)) == NULL) {
-		return false;
-	}
-    
-	//grab screen size after maximized window created
-    int w, h;
-    SDL_GetWindowSize(SDLWindow, &w, &h);
-    Screen::Init(w, h);
+
+    Screen::Init(300, 200);
+
+    if((SDLWindow = SDL_CreateWindow("Flight",
+            0,
+            0,
+            Screen::Width(),
+            Screen::Height(),
+            SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN)) == NULL) {
+        return false;
+    }
+//
+//    if((SDLWindow = SDL_CreateWindow("Flight Editor",
+//                                     SDL_WINDOWPOS_UNDEFINED,
+//                                     SDL_WINDOWPOS_UNDEFINED,
+//                                     0,
+//                                     0,
+//                                     SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED)) == NULL) {
+//		return false;
+//	}
+//
+//	//grab screen size after maximized window created
+//    int w, h;
+//    SDL_GetWindowSize(SDLWindow, &w, &h);
+//    Screen::Init(w, h);
 
 	/* Create our opengl context and attach it to our window */ 
 	ctx = SDL_GL_CreateContext(SDLWindow);
@@ -139,7 +151,7 @@ bool SdlApp::OnInit()
 
 
     //init render queue
-    Graphics::RenderQueue::Init(SDLWindow);
+    graphics::RenderQueue::Init(SDLWindow);
 
     // initialize the game
     game = new Game();

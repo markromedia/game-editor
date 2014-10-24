@@ -118,7 +118,7 @@ bool EditorSdlApp::OnInit()
 
 
     //init render queue
-    Graphics::RenderQueue::Init(SDLWindow);
+    graphics::RenderQueue::Init(SDLWindow);
 
     //init the editor
 	this->editor = new Editor();

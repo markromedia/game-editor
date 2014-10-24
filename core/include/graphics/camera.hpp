@@ -11,11 +11,7 @@
 #include "math/matrix4.hpp"
 
 //forward declaration
-namespace Math {
-	class Vector4;
-}
-
-namespace Graphics {
+namespace graphics {
 	class Camera
 	{
 	private:

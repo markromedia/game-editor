@@ -4,7 +4,7 @@
 #ifndef _VERTEX_DATA_hpp
 #define _VERTEX_DATA_hpp
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class Vertex;
 	class VertexBuffer;

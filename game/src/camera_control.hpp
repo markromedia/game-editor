@@ -28,7 +28,7 @@ private:
 	int camera_move_direction;
 
 	/// @summary	The camera node.
-	Graphics::Camera* camera_node;
+	graphics::Camera* camera_node;
 
 	/// @summary	true if this object is looking at origin.
 	bool is_looking_at_origin;
@@ -37,7 +37,7 @@ private:
 public:
 	/// Constructor.
 	/// @param [in,out]	camera_node	If non-null, the camera node.
-	CameraControl(Graphics::Camera* camera_node);
+	CameraControl(graphics::Camera* camera_node);
 
 	/// Updates the given delta.
 	/// @param	delta	The delta.

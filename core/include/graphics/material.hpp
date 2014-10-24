@@ -6,7 +6,7 @@
 #include "graphics/texture.hpp"
 #include "graphics/color4f.hpp"
 
-namespace  Graphics {
+namespace  graphics {
 
     struct MaterialTextureBinding {
         unsigned int uniform_has_texture;
@@ -40,12 +40,12 @@ namespace  Graphics {
         bool is_colored;
 
         //colors
-        Graphics::Color4f ambient_color;
-        Graphics::Color4f diffuse_color;
-        Graphics::Color4f specular_color;
+        graphics::Color4f ambient_color;
+        graphics::Color4f diffuse_color;
+        graphics::Color4f specular_color;
 
         //placeholder color for some operations
-        Graphics::Color4f primary_color;
+        graphics::Color4f primary_color;
 
         //floats
         float specular_exponent;

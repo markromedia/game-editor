@@ -12,10 +12,10 @@
 #include "graphics/shader_executor/rendexec_draw_skybox.hpp"
 #include "graphics/shader_executor/rendexec_draw_terrain.hpp"
 
-Graphics::RenderQueue* Graphics::RenderQueue::_instance = NULL;
+graphics::RenderQueue* graphics::RenderQueue::_instance = NULL;
 
 
-void Graphics::RenderQueue::Init(SDL_Window* window) {
+void graphics::RenderQueue::Init(SDL_Window* window) {
     _instance = new RenderQueue();
     _instance->_window = window;
 
@@ -26,19 +26,19 @@ void Graphics::RenderQueue::Init(SDL_Window* window) {
     _instance->AddRenderExecutor(RenderOperation::DRAW_TERRAIN, new DrawTerrainExecutor);
 
     //init all executors
-    for (std::pair<const int,RenderExecutor*>& x: _instance->_executors) {
+    for (std::pair<const int, ShaderExecutor *>& x: _instance->_executors) {
         x.second->Init();
     }
 }
 
 /// Renders the frame and empties the render queue.
-void Graphics::RenderQueue::Execute()
+void graphics::RenderQueue::Execute()
 {
     glClearColor(1, 1, 1, 1);
     //glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    Graphics::VertexBufferManager::UpdateBuffers();
+    graphics::VertexBufferManager::UpdateBuffers();
 
     while (!_instance->_queue.empty())
     {
@@ -53,12 +53,12 @@ void Graphics::RenderQueue::Execute()
 }
 
 
-void Graphics::RenderQueue::AddRenderExecutor(int id, Graphics::RenderExecutor* executor)
+void graphics::RenderQueue::AddRenderExecutor(int id, graphics::ShaderExecutor * executor)
 {
     _instance->_executors[id] = executor;
 }
 
-void Graphics::RenderQueue::QueueRenderOperation( Graphics::RenderOperation* renderOperation, Graphics::Camera* camera )
+void graphics::RenderQueue::QueueRenderOperation( graphics::RenderOperation* renderOperation, graphics::Camera* camera )
 {
     //set camera
     renderOperation->Camera = camera;

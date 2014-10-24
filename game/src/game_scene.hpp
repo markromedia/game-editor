@@ -10,7 +10,7 @@
 #include "skybox.hpp"
 
 //forward declarations
-namespace Graphics
+namespace graphics
 {
 	class RenderOperation;
 	class VertexBuffer;
@@ -18,13 +18,10 @@ namespace Graphics
 	class Vertex;
 }
 
-namespace Rocket { namespace Core { class ElementDocument; } }
-
 
 class GameScene : public Scene
 {
 public:
-	Rocket::Core::ElementDocument* document;
 	Skybox skybox;
 
 	void Init();

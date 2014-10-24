@@ -1,6 +1,6 @@
 #include "graphics/material.hpp"
 
-Graphics::Material::Material() :
+graphics::Material::Material() :
 	Diffuse_Texture(NULL),
 	Toon_Texture(NULL),
 	Illumination_Texture(NULL)
@@ -12,7 +12,7 @@ Graphics::Material::Material() :
     specular_exponent = 0;
 }
 
-void Graphics::Material::Bind(Graphics::MaterialGLBinding binding) {
+void graphics::Material::Bind(graphics::MaterialGLBinding binding) {
     if (binding.diffuse_texture.uniform_has_texture != 0) {
         glUniform1f(binding.diffuse_texture.uniform_has_texture, Diffuse_Texture != NULL ? 1 : 0);
     }

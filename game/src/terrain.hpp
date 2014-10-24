@@ -10,7 +10,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 //forward declarations
-namespace Graphics
+namespace graphics
 {
 	class RenderOperation;
 	class VertexBuffer;
@@ -22,8 +22,8 @@ class Terrain
 {
 private:
 	/// @summary	The render operation.
-	Graphics::RenderOperation* renderOperation;
-	Graphics::RenderOperation* wireframeRenderOperation;
+	graphics::RenderOperation* renderOperation;
+	graphics::RenderOperation* wireframeRenderOperation;
     
 	std::vector<unsigned char> ReadHeightMapData(char* filename);
     
@@ -31,7 +31,7 @@ private:
 	///
 	/// @param [in,out]	v		 	If non-null, the Graphics::Vertex* to process.
 	/// @param	normalized_normal	The normalized normal.
-	void assignColor(Graphics::Vertex* v, glm::vec3 normalized_normal);
+	void assignColor(graphics::Vertex* v, glm::vec3 normalized_normal);
 public:
 	/// Default constructor.
 	Terrain(void);

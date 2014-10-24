@@ -4,7 +4,7 @@
 #include "graphics/texture.hpp"
 
 
-using namespace Graphics;
+using namespace graphics;
 
 RenderOperation::RenderOperation()
 {

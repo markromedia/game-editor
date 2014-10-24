@@ -7,9 +7,9 @@
 #include <map>
 #include <string>
 
-namespace Graphics {
+namespace graphics {
     //forward declarations
-    class RenderExecutor;
+    class ShaderExecutor;
     class RenderOperation;
     class Camera;
 
@@ -18,7 +18,7 @@ namespace Graphics {
         /// @summary	The instance.
         static RenderQueue *_instance;
         /// @summary	The list of render executors.
-        std::map<int, RenderExecutor *> _executors;
+        std::map<int, ShaderExecutor *> _executors;
         /// @summary	the drawing window.
         SDL_Window* _window;
     public:
@@ -35,7 +35,7 @@ namespace Graphics {
         /// Adds a render executor to 'executor'.
         /// @param	name				The name.
         /// @param [in,out]	executor	If non-null, the executor.
-        static void AddRenderExecutor(int id, RenderExecutor *executor);
+        static void AddRenderExecutor(int id, ShaderExecutor *executor);
     };
 }
 

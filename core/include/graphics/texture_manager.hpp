@@ -6,7 +6,7 @@
 
 #include "opengl.h"
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class Texture;
 

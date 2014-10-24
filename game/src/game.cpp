@@ -10,9 +10,9 @@
 
 
 //Rocket::Core::Context* Game::LibRocketContext = NULL;
-Graphics::Camera* Game::PerspectiveCamera = NULL;
-Graphics::Camera* Game::OrthoCamera = NULL;
-Graphics::Camera* Game::SkyboxCamera = NULL;
+graphics::Camera* Game::PerspectiveCamera = NULL;
+graphics::Camera* Game::OrthoCamera = NULL;
+graphics::Camera* Game::SkyboxCamera = NULL;
 
 const float CAMERA_VELOCITY = 1500.0f;
 const float CAMERA_SMOOTH = 0.7f;
@@ -32,9 +32,9 @@ Game::Game(void)
 {
 	current_scene = new GameScene();
 
-	Game::PerspectiveCamera = new Graphics::Camera();
-	Game::OrthoCamera = new Graphics::Camera();
-	Game::SkyboxCamera = new Graphics::Camera();
+	Game::PerspectiveCamera = new graphics::Camera();
+	Game::OrthoCamera = new graphics::Camera();
+	Game::SkyboxCamera = new graphics::Camera();
 
 	Game::PerspectiveCamera->InitAsPerspective(90,  Screen::Width() / Screen::Height(), 1.0f, 10000.0f);
 	Game::SkyboxCamera->InitAsPerspective(90,  Screen::Width() / Screen::Height(), 1.0f, 10000.0f);
@@ -56,7 +56,7 @@ void Game::Update( float dt )
 
 void Game::Render()
 {
-	Graphics::RenderQueue::Execute();
+	graphics::RenderQueue::Execute();
 }
 
 void Game::OnEvent( SDL_Event* Event )

@@ -3,11 +3,11 @@
 
 #include "opengl.h"
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class RenderOperation;
 
-	class RenderExecutor 
+	class ShaderExecutor
 	{
 	protected:
 		GLuint programObject;
@@ -17,7 +17,7 @@ namespace Graphics {
 
 		/// Executes this render executor
 		/// @param [in,out]	renderOp	If non-null, the render operation.
-		virtual void Execute(Graphics::RenderOperation* renderOp) = 0;
+		virtual void Execute(graphics::RenderOperation* renderOp) = 0;
 	};
 }
 

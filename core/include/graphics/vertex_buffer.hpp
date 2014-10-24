@@ -27,7 +27,7 @@
 #include "vertex_data.hpp"
 #include "opengl.h"
 
-namespace Graphics {
+namespace graphics {
 	const int DEFAULT_MAX_VERTICES = 128;
 	const int DEFAULT_MAX_INDICES = (DEFAULT_MAX_VERTICES / 4) * 6;
 

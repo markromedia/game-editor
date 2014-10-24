@@ -8,7 +8,7 @@
 #include "data/model_loader.hpp"
 #include "graphics/primitives.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 RenderOperationManager* RenderOperationManager::instance = NULL;
 
@@ -37,7 +37,7 @@ RenderOperation* RenderOperationManager::GetDrawTextureOp(std::string texture, i
 	
 	//create vbo and quad
 	r.VertexBuffer = VertexBufferManager::GetBuffer(USE_TEXTURE);
-	Quad quad = Graphics::Primitives::CreateQuad(r.VertexBuffer, texture_width, texture_height);
+	Quad quad = graphics::Primitives::CreateQuad(r.VertexBuffer, texture_width, texture_height);
 
 	//create crop for texture coords
 	float crop_x =  (float) width / texture_width;

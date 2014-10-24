@@ -13,19 +13,19 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class RenderOperation;
 
 	struct Light {
 		glm::vec4 light_direction;
 		glm::vec4 light_half_plane;
-		Graphics::Color4f ambient_color;
-		Graphics::Color4f diffuse_color;
-		Graphics::Color4f specular_color;
+		graphics::Color4f ambient_color;
+		graphics::Color4f diffuse_color;
+		graphics::Color4f specular_color;
 	};
 
-	class DrawModelExecutor : public Graphics::RenderExecutor
+	class DrawModelExecutor : public graphics::ShaderExecutor
 	{
 	private:
 		GLuint programObject;
@@ -72,7 +72,7 @@ namespace Graphics {
 
 		void Init();
 
-		void Execute (Graphics::RenderOperation* render);
+		void Execute (graphics::RenderOperation* render);
 	};
 }
 

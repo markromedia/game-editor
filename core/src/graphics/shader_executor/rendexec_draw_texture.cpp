@@ -9,7 +9,7 @@
 #include <graphics/glstate.hpp>
 
 
-using namespace Graphics;
+using namespace graphics;
 
 DrawTextureExecutor::DrawTextureExecutor()
 {

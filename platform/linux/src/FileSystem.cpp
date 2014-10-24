@@ -8,7 +8,7 @@ std::string FileSystem::GetResourceFilePath(std::string resource_file) {
 	return resource_file;
 }
 
-unsigned char* FileSystem::LoadFileContents(std::string filename) {
+unsigned char* FileSystem::LoadFileContents(std::string filename, bool path_is_absolute) {
     std::ifstream file;
     file.open(filename, std::ios::in);
     unsigned long len = getFileLength(file);

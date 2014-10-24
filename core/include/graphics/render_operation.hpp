@@ -15,7 +15,7 @@
 #include "graphics/transform.hpp"
 #include "graphics/material.hpp"
 
-namespace Graphics {
+namespace graphics {
 
 	//forward declarations
 	class VertexBuffer;
@@ -29,11 +29,11 @@ namespace Graphics {
 		/// Default constructor.
 		RenderOperation();
 		/// @summary	The camera to use to render
-		Graphics::Camera* Camera;
+		graphics::Camera* Camera;
 		/// @summary	The model matrix.
 		glm::mat4 ModelMatrix;
 		/// @summary	The vertex buffer associated with this render operation
-        Graphics::VertexBuffer* VertexBuffer;
+        graphics::VertexBuffer* VertexBuffer;
 		/// @summary	Type of the operation this operation expects
 		int Operation_Type;
 		/// @summary	The skybox textures.

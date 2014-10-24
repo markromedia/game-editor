@@ -9,7 +9,7 @@
 
 #include <string>
 
-namespace Graphics {
+namespace graphics {
 	/// Represents a transform applied to some entity
 	class Transform
 	{

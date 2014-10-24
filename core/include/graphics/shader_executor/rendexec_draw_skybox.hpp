@@ -11,11 +11,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace Graphics {
+namespace graphics {
 	//forward declarations
 	class RenderOperation;
 
-	class DrawSkyboxExecutor : public Graphics::RenderExecutor
+	class DrawSkyboxExecutor : public graphics::ShaderExecutor
 	{
 	private:
 		GLuint programObject;
@@ -29,7 +29,7 @@ namespace Graphics {
 
 		void Init();
 
-		void Execute (Graphics::RenderOperation* render);
+		void Execute (graphics::RenderOperation* render);
 	};
 }
 

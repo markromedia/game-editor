@@ -23,8 +23,8 @@ const int SKYBOX_SIZE = 100;
 Skybox::Skybox()
 {
 	//setup the basic stuff for the skybox
-	renderOperation = Graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
-	renderOperation->Operation_Type = Graphics::RenderOperation::DRAW_SKYBOX;
+	renderOperation = graphics::RenderOperationManager::GetDrawModelOp(ModelLoader::SKYBOX);
+	renderOperation->Operation_Type = graphics::RenderOperation::DRAW_SKYBOX;
 	renderOperation->Skybox_Textures.reserve(6);
 
 	//use identity
@@ -45,43 +45,43 @@ void Skybox::Update()
 void Skybox::setupIceField()
 {
 	//back
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_180.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_180.png"));
 
 	//front
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_0.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_0.png"));
 
 	//bottom
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_bottom.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_bottom.png"));
 
 	//right
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_90.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_90.png"));
 
 	//top
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_top.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_top.png"));
 
 	//left
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/ice_field_270.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/ice_field_270.png"));
 }
 
 void Skybox::setupNatural16()
 {
 	//back
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_back.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_back.png"));
 
 	//front
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_front.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_front.png"));
 
 	//bottom
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_bottom.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_bottom.png"));
 
 	//right
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_right.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_right.png"));
 
 	//top
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_top.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_top.png"));
 
 	//left
-	renderOperation->Skybox_Textures.push_back(Graphics::TextureManager::GetTexture("resources/skybox/natural16_left.png"));
+	renderOperation->Skybox_Textures.push_back(graphics::TextureManager::GetTexture("resources/skybox/natural16_left.png"));
 }
 
 

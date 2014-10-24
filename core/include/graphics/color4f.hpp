@@ -1,7 +1,7 @@
 #ifndef __COLOR4F_hpp
 #define __COLOR4F_hpp
 
-namespace Graphics {
+namespace graphics {
 	class Color4f
 	{
 	public:

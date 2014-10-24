@@ -3,7 +3,7 @@
 #include "graphics/texture.hpp"
 #include "logger.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 TextureManager* TextureManager::instance = NULL;
 

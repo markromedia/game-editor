@@ -17,7 +17,7 @@ extern "C"
 
 #define NUM_ELEMENTS 8
 
-Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
+graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 {
 	double* vertices;
 	short* indices;
@@ -98,7 +98,7 @@ Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 		}
 	}
 
-	Graphics::VertexBuffer* buf = Graphics::VertexBufferManager::GetBuffer(USE_TEXTURE | USE_NORMAL, num_vertices, num_indices);
+	graphics::VertexBuffer* buf = graphics::VertexBufferManager::GetBuffer(USE_TEXTURE | USE_NORMAL, num_vertices, num_indices);
 	
 	for (int i = 0; i < num_vertices; i++)
 	{
