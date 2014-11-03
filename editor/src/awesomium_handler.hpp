@@ -33,6 +33,10 @@ private:
 
 	/// @summary	true to do reload.
 	bool _reload_ui;
+
+	//keyboard events handling
+	void handleSDLKeyEvent(Awesomium::WebView* webView, const SDL_Event& event);
+	int getWebKeyFromSDLKey(SDL_Keycode key);
 public:
 
 	/// Initialises this object.
