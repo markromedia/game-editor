@@ -53,6 +53,7 @@ add_executable(game ${game_SRC})
 add_library (game_lib ${game_SRC})
 
 target_link_libraries(game core)
+target_link_libraries(game_lib core)
 
 #copy core projects resources
 add_custom_command(TARGET game PRE_BUILD 

@@ -2,7 +2,7 @@
  * The global for the information contained in either the entity brower
  * or file browser
  */
-browser = {
+var browser = {
     //the current directory
     absoluteDirectoryPath : '',
     relativeDirectoryPath : '/',
@@ -45,13 +45,13 @@ browser = {
             this.relativeDirectoryPath += '/' + filename;
             this.showDirectory();
         } else {
-            window.fileEditor.initializeEditor("codemirror-editor-textarea");
+            fileEditor.initializeEditor("codemirror-editor-textarea");
             if (browser.endsWith(filename, ".html") ||
                 browser.endsWith(filename, ".lua") ||
                 browser.endsWith(filename, ".js") ||
                 browser.endsWith(filename, ".vert") ||
                 browser.endsWith(filename, ".frag")) {
-                window.fileEditor.activeEditor.setValue(editor.loadFileContents(this.absoluteDirectoryPath + '/' + filename));
+                fileEditor.activeEditor.setValue(editor.loadFileContents(this.absoluteDirectoryPath + '/' + filename));
             }
         }
     },
