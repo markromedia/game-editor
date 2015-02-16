@@ -41,3 +41,7 @@ void FileSystem::NotifyOfDirectoryChanges(std::string directory, void (*call_bac
 std::vector<File> FileSystem::ListDirectoryContents(std::string directory) {
     return std::vector<File>();
 }
+
+std::string FileSystem::GetExecutablePath() {
+    return std::string("");
+}

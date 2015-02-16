@@ -1,0 +1,181 @@
+@import "compass";
+
+body {
+  font-family: 'Droid Sans', serif;
+  font-size: 14px;
+  background-color: transparent;
+  overflow:hidden;
+}
+
+#wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.noselect {
+  @include user-select(none);
+}
+
+.panel-header {
+  float : left;
+  height : 22px;
+  width: 100%;
+  border-bottom: 1px solid #323232;
+  @include background-image(linear-gradient(#d4d4d4,#919191));
+}
+
+/**
+ *
+ * FILE MENU STUFF
+ *
+ */
+#file-menu-container {
+  @include background-image(linear-gradient(#aeaeae,#555555));
+
+  display: block;
+  height:22px;
+  font-size: 12px;
+  padding: 0;
+  color: white;
+  width:100%;
+
+  border-bottom: 1px solid #464646;
+  border-top: 1px solid black;
+
+  * {
+    font-family: 'Droid Sans', serif;
+    cursor:default;
+  }
+
+  ul {
+    text-align: left;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    :after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+
+    li {
+      display: inline-block;
+      padding-left: 5px;
+      padding-right: 20px;
+      margin-right: 10px;
+      margin-top: 0;
+      height: 100%;
+      border: 1px solid transparent;
+
+      &:hover {
+        @include background-image(linear-gradient(#747474,#555555));
+        border : 100px solid #1b1b1b;
+
+        ul {
+          display: block;
+          visibility: visible;
+          opacity: 1;
+          z-index : 100;
+
+        }
+      }
+    }
+
+    ul {
+      padding:0;
+      display: none;
+      position: absolute;
+      float: left;
+      background-color: black;
+      min-width: 200px;
+      border: 1px solid #a0a0a0;
+
+      li {
+        display: block;
+        padding-top: 3px;
+        padding-bottom: 3px;
+
+        :hover {
+          background-color: #3875d6;
+          color:white;
+        }
+      }
+    }
+  }
+}
+
+/**
+ *
+ * QUICK BAR STYLES
+ *
+ */
+#quick-action-bar-container  {
+  border-bottom: 1px solid black;
+  margin : 0;
+  float : left;
+  height : 60px;
+  width : 100%;
+
+  background: #525252; /* Old browsers */
+}
+
+/**
+ *
+ * BROWSER STYLES
+ *
+ */
+#browser-container {
+  height : 600px;
+  width : 250px;
+  margin : 0;
+  float : left;
+
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid white;
+
+  background: #525252; /* Old browsers */
+}
+
+
+
+
+/**
+ *
+ * CODE EDITOR CONTAINER STYLES
+ *
+ */
+#code-editor-container {
+  float : right;
+  height: 100%;
+  width : 400px;
+  background: #525252;
+}
+
+#codemirror-editor-textarea {
+}
+
+#codemirror-textarea-container {
+  float:left;
+  width:100%
+}
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: 500px;
+}
+
+
+
+
+
+
+
+
+

@@ -5,14 +5,14 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="css/editor.css" media="screen" />
-    <link rel="stylesheet" href="css/tabs.css" media="screen" />
+    <link rel="stylesheet" href="stylesheets/editor.css" media="screen" />
+    <link rel="stylesheet" href="stylesheets/tabs.css" media="screen" />
 
     <!--jquery-->
     <script src="lib/jquery-1.11.1.min.js"></script>
 
     <!--mock library COMMENT OUT WHEN RUNNING EDITOR -->
-    <!--<script src="js/mock-editor.js"></script>-->
+    <script src="js/mock-editor.js"></script>
 
     <!-- code mirror -->
     <link rel="stylesheet" href="lib/codemirror-4.6/lib/codemirror.css">
@@ -28,6 +28,7 @@
         $( document ).ready(function() {
             //tell application to init
             editor.init();
+            browser.absoluteDirectoryPath = 'D:/code/flyingmonkey/flight/editor/resources';
             browser.showDirectory();
 
             fileEditor.initializeEditor("codemirror-editor-textarea");
@@ -87,22 +88,24 @@
 
         	<section id="tab2">
         		<h2 id="entity-tab-header"><a href="javascript:browser.showEntity()">Entities</a></h2>
-<!--                <ul class="collapsibleList" id="entity-list">-->
-<!--                  <li>-->
-<!--                    Parent item-->
-<!--                    <ul>-->
-<!--                      <li>Child item</li>-->
-<!--                      <li>Child item</li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-<!--                  <li>-->
-<!--                    Parent item-->
-<!--                    <ul>-->
-<!--                      <li>Child item</li>-->
-<!--                      <li>Child item</li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-<!--                </ul>-->
+                <ul class="collapsibleList" id="entity-list">
+                  <li>
+                    Parent item
+                    <ul>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Parent item
+                    <ul>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                      <li>Child item</li>
+                    </ul>
+                  </li>
+                </ul>
         	</section>
         </article>
     </div>
