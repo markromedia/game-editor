@@ -20,7 +20,6 @@ JavascriptDelegate::JavascriptDelegate(AwesomiumHandler* awesomium_handler, Awes
 	delegate_js_obj.SetCustomMethod(Awesomium::WSLit("loadFileContents"), true);
 }
 
-float f = .1f;
 void JavascriptDelegate::OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, Awesomium::WebString const& method_name, Awesomium::JSArray const& args)
 {
 	if(remote_object_id == _delegate_remote_id

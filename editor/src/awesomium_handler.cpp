@@ -79,7 +79,7 @@ void AwesomiumHandler::OnEvent(SDL_Event* Event)
 		}
 		case SDL_KEYDOWN :
 		case SDL_KEYUP : {
-			//handleSDLKeyEvent(_webview, *Event);
+			handleSDLKeyEvent(_webview, *Event);
 			break;				 
 		}
 	}

@@ -4,7 +4,7 @@
  */
 browser = {
     //the current directory
-    absoluteDirectoryPath : '',
+    absoluteDirectoryPath : 'c:/',
     relativeDirectoryPath : '/',
 
     /**
