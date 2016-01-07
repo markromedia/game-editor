@@ -1,24 +1,23 @@
-#include "model_loader.hpp"
+#include "data/model_loader.hpp"
 
-#include "../graphics/vertex_buffer.hpp"
-#include "../graphics/vertex_buffer_manager.hpp"
-#include "../constants.cpp"
+#include "graphics/vertex_buffer.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
 
 extern "C"
 {
-	#include "model/enemy.h"
-	#include "model/torus.h"
-	#include "model/cube.h"
-	#include "model/teapot.h"
-	#include "model/falcon.h"
-	#include "model/station.h"
-	#include "model/cube2.h"
-	#include "model/skybox.h"
+	#include "data/model/enemy.h"
+	#include "data/model/torus.h"
+	#include "data/model/cube.h"
+	#include "data/model/teapot.h"
+	#include "data/model/falcon.h"
+	#include "data/model/station.h"
+	#include "data/model/cube2.h"
+	#include "data/model/skybox.h"
 };
 
 #define NUM_ELEMENTS 8
 
-Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
+graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 {
 	double* vertices;
 	short* indices;
@@ -89,9 +88,17 @@ Graphics::VertexBuffer* ModelLoader::LoadModel(int model)
 			num_indices = skybox_num_indices;
 			break;
 		}
+	default : 
+		{
+			vertices = &skybox_vertices[0];
+			indices = &skybox_indices[0];
+			num_vertices = skybox_num_vertices;
+			num_indices = skybox_num_indices;
+			break;
+		}
 	}
 
-	Graphics::VertexBuffer* buf = Graphics::VertexBufferManager::GetBuffer(USE_TEXTURE | USE_NORMAL, num_vertices, num_indices);
+	graphics::VertexBuffer* buf = graphics::VertexBufferManager::GetBuffer(USE_TEXTURE | USE_NORMAL, num_vertices, num_indices);
 	
 	for (int i = 0; i < num_vertices; i++)
 	{

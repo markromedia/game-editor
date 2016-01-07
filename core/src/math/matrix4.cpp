@@ -1,8 +1,8 @@
-#include "matrix4.hpp"
+#include "math/matrix4.hpp"
 
 #include <math.h>
 #include <iostream>
-#include "vector4.hpp"
+#include "math/vector4.hpp"
 
 using namespace Math;
 
@@ -70,7 +70,7 @@ void Math::Matrix4::SetPerspectiveProjection( float fov_angle, float aspect_rati
 	
 	float t[16] = {f / aspect_ratio,		     0,						      0,  							   0,
 								  0,	         f,                           0,							   0,
-							      0,             0, (far + near) / (near - far), (2 * near * far) / (near - far),
+							      0,             0, (float) ((far + near) / (near - far)), (float) ((2 * near * far) / (near - far)),
 						          0,             0,					         -1,							   0};
 	memcpy(data, t, 16 * sizeof(float));
 }
@@ -86,22 +86,22 @@ void Math::Matrix4::ToString()
 Matrix4 Matrix4::XRotationMat( float angle )
 {
 	return Matrix4(1,           0,           0,
-		           0,  cos(angle),   sin(angle),
-				   0, -sin(angle),   cos(angle));
+		           0, (float) cos(angle), (float) sin(angle),
+				   0, (float) -sin(angle), (float) cos(angle));
 }
 
 Matrix4 Matrix4::YRotationMat( float angle )
 {
-	return Matrix4(cos(angle),    0,   -sin(angle),
+	return Matrix4((float) cos(angle),    0, (float) -sin(angle),
 				            0,    1,             0,
-				   sin(angle),    0,    cos(angle));
+            (float) sin(angle),    0, (float) cos(angle));
 
 }
 
 Matrix4 Matrix4::ZRotationMat( float angle )
 {
-	return Matrix4(cos(angle),  sin(angle),   0,
-				  -sin(angle),  cos(angle),   0,
+	return Matrix4((float) cos(angle), (float) sin(angle),   0,
+            (float) -sin(angle), (float) cos(angle),   0,
 			  		        0,           0,   1);
 
 }

@@ -8,7 +8,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 //forward declarations
-namespace Graphics
+namespace graphics
 {
 	class RenderOperation;
 	class VertexBuffer;
@@ -20,7 +20,7 @@ class Skybox
 {
 private:
 	/// @summary	The render operation.
-	Graphics::RenderOperation* renderOperation;
+	graphics::RenderOperation* renderOperation;
 
 	glm::mat4 model_matrix;
 
@@ -29,7 +29,7 @@ private:
 	void setupNatural16();
 public:
 	/// Default constructor.
-	Skybox(void);
+	Skybox();
 
 	/// Setups this object.
 	void Setup();

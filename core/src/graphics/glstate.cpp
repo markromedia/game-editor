@@ -1,8 +1,10 @@
 #include "opengl.h"
-#include "glstate.hpp"
+#include "graphics/glstate.hpp"
 
 std::set<GLuint> GLState::global_states;
 std::set<GLuint> GLState::client_states;
+GLenum GLState::_sfactor;
+GLenum GLState::_dfactor;
 
 bool GLState::setState(std::set<GLuint>& states, GLuint state, bool isEnable) 
 {
@@ -61,5 +63,15 @@ void GLState::DisableClientState(GLuint state)
 	if (GLState::setState(global_states, state, false)) 
 	{
 		glDisableClientState(state);
+	}
+}
+
+void GLState::SetBlendModes(GLenum sfactor, GLenum dfactor)
+{
+	if (sfactor != _sfactor || dfactor != _dfactor)
+	{
+		glBlendFunc(sfactor, dfactor);
+		_sfactor = sfactor;
+		_dfactor = dfactor;
 	}
 }

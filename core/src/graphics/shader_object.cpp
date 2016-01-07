@@ -1,4 +1,4 @@
-#include "shader_object.hpp"
+#include "graphics/shader_object.hpp"
 
 ShaderObject::ShaderObject(GLenum type)
 {

@@ -6,9 +6,11 @@ in vec4 a_position;
 in vec2 a_text_coord;
 
 out vec2 v_text_coord;
+out vec4 pos;
 
 void main ()					
 {								
 	gl_Position = u_mvp_matrix * a_position;	
 	v_text_coord = a_text_coord;
+	pos = gl_Position;
 }								

@@ -1,14 +1,134 @@
 project(core)
 
+INCLUDE_DIRECTORIES(
+	${core_SOURCE_DIR}/include/
+)
+
 #########################################################################################
-#											#
-#				      SOURCE FILES		        		#
-#										        #
+#											                                            #
+#				                    INCLUDE FILES		        	                    #
+#										                                                #
+#########################################################################################
+
+FILE (GLOB INCLUDE_ROOT
+	include/*.hpp
+	include/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_ROOT})
+SOURCE_GROUP("include"
+  FILES
+    ${INCLUDE_ROOT}
+)
+
+FILE(GLOB INCLUDE_DATA
+	include/data/*.hpp
+	include/data/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_DATA})
+SOURCE_GROUP("include\\data"
+  FILES
+    ${INCLUDE_DATA}
+)
+
+FILE(GLOB INCLUDE_MODEL
+	include/data/model/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_MODEL})
+SOURCE_GROUP("include\\data\\model"
+  FILES
+    ${INCLUDE_MODEL}
+)
+
+FILE(GLOB INCLUDE_ES
+	include/es/*.h
+	include/es/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES})
+SOURCE_GROUP("include\\es"
+  FILES
+    ${INCLUDE_ES}
+)
+
+FILE(GLOB INCLUDE_ES_SYSTEM
+	include/es/system/*.h
+	include/es/system/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES_SYSTEM})
+SOURCE_GROUP("include\\es\\system"
+  FILES
+    ${INCLUDE_ES_SYSTEM}
+)
+
+FILE(GLOB INCLUDE_ES_COMPONENT
+	include/es/component/*.h
+	include/es/component/*.hpp
+)
+LIST(APPEND core_SRC ${INCLUDE_ES_COMPONENT})
+SOURCE_GROUP("include\\es\\component"
+  FILES
+    ${INCLUDE_ES_COMPONENT}
+)
+
+
+FILE (GLOB INCLUDE_GRAPHICS
+	include/graphics/*.cpp
+	include/graphics/*.hpp
+	include/graphics/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_GRAPHICS})
+SOURCE_GROUP("include\\graphics"
+  FILES
+    ${INCLUDE_GRAPHICS}
+)
+
+FILE (GLOB INCLUDE_GRAPHICS_SHADER
+	include/graphics/shader_executor/*.hpp
+	include/graphics/shader_executor/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_GRAPHICS_SHADER})
+SOURCE_GROUP("include\\graphics\\shader_executor"
+  FILES
+    ${INCLUDE_GRAPHICS_SHADER}
+)
+
+FILE(GLOB INCLUDE_LIBROCKET
+	include/librocket/*.hpp
+	include/librocket/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_LIBROCKET})
+SOURCE_GROUP("include\\librocket"
+  FILES
+    ${INCLUDE_LIBROCKET}
+)
+
+FILE(GLOB INCLUDE_MATH
+	include/math/*.hpp
+	include/math/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_MATH})
+SOURCE_GROUP("include\\math"
+  FILES
+    ${INCLUDE_MATH}
+)
+
+FILE(GLOB INCLUDE_PLATFORM
+	include/platform/*.hpp
+	include/platform/*.h
+)
+LIST(APPEND core_SRC ${INCLUDE_PLATFORM})
+SOURCE_GROUP("include\\platform"
+  FILES
+    ${INCLUDE_PLATFORM}
+)
+
+#########################################################################################
+#											                                            #
+#				                    SOURCE FILES		        	                    #
+#										                                                #
 #########################################################################################
 
 FILE (GLOB SRC_ROOT
 	src/*.cpp                
-	src/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_ROOT})
 SOURCE_GROUP("src"
@@ -18,7 +138,6 @@ SOURCE_GROUP("src"
 
 FILE(GLOB SRC_DATA
 	src/data/*.cpp
-	src/data/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_DATA})
 SOURCE_GROUP("src\\data"
@@ -27,7 +146,6 @@ SOURCE_GROUP("src\\data"
 )
 
 FILE(GLOB SRC_MODEL
-	src/data/model/*.h
 	src/data/model/*.c
 )
 LIST(APPEND core_SRC ${SRC_MODEL})
@@ -37,7 +155,6 @@ SOURCE_GROUP("src\\data\\model"
 )
 
 FILE(GLOB SRC_ES 
-	src/es/*.hpp
 	src/es/*.cpp
 )  
 LIST(APPEND core_SRC ${SRC_ES})
@@ -46,9 +163,35 @@ SOURCE_GROUP("src\\es"
     ${SRC_ES}
 )
 
+FILE(GLOB SRC_ES_COMPONENT
+	src/es/component/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_ES_COMPONENT})
+SOURCE_GROUP("src\\es\\component"
+  FILES
+    ${SRC_ES_COMPONENT}
+)
+
+FILE(GLOB SRC_ES_SYSTEM
+	src/es/system/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_ES_SYSTEM})
+SOURCE_GROUP("src\\es\\system"
+  FILES
+    ${SRC_ES_SYSTEM}
+)
+
+FILE(GLOB SRC_ES
+	src/es/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_ES})
+SOURCE_GROUP("src\\es"
+  FILES
+    ${SRC_ES}
+)
+
 FILE (GLOB SRC_GRAPHICS
 	src/graphics/*.cpp
-	src/graphics/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_GRAPHICS})
 SOURCE_GROUP("src\\graphics"
@@ -56,9 +199,17 @@ SOURCE_GROUP("src\\graphics"
     ${SRC_GRAPHICS}
 )
 
+FILE (GLOB SRC_GRAPHICS_SHADER
+	src/graphics/shader_executor/*.cpp
+)
+LIST(APPEND core_SRC ${SRC_GRAPHICS_SHADER})
+SOURCE_GROUP("src\\graphics\\shader_executor"
+  FILES
+    ${SRC_GRAPHICS_SHADER}
+)
+
 FILE(GLOB SRC_LIBROCKET
 	src/librocket/*.cpp
-	src/librocket/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_LIBROCKET})
 SOURCE_GROUP("src\\librocket"
@@ -68,7 +219,6 @@ SOURCE_GROUP("src\\librocket"
 
 FILE(GLOB SRC_MATH
 	src/math/*.cpp
-	src/math/*.hpp
 )
 LIST(APPEND core_SRC ${SRC_MATH})
 SOURCE_GROUP("src\\math"
@@ -76,21 +226,10 @@ SOURCE_GROUP("src\\math"
     ${SRC_MATH}
 )
 
-FILE(GLOB SRC_PLATFORM
-	src/platform/*.cpp
-	src/platform/*.hpp
-)
-LIST(APPEND core_SRC ${SRC_PLATFORM})
-SOURCE_GROUP("src\\platform"
-  FILES
-    ${SRC_PLATFORM}
-)
-	
-
 #########################################################################################
-#										        #
-#			               RESOURCES    		                        #
-#										        #
+#										                                                #
+#			                         RESOURCES    		                                #
+#										                                                #
 #########################################################################################
 
 FILE(GLOB RES_ROOT
@@ -147,6 +286,18 @@ SOURCE_GROUP("resources\\skybox"
 #########################################################################################
 
 add_library (core ${core_SRC})
-target_link_libraries(core platform ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} ${LUA_LIBRARIES} ${Boost_LIBRARY_DIRS} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES})
+
+target_link_libraries(core platform 
+	${SDL2_LIBRARY} 
+	${SDL2_IMAGE_LIBRARIES} 
+	${LUA_LIBRARIES} 
+	${GLEW_LIBRARIES} 
+	${OPENGL_LIBRARIES} 
+	${Boost_CHRONO_LIBRARY} 
+	${Boost_DATE_TIME_LIBRARY} 
+	${Boost_SYSTEM_LIBRARY} 
+	${Boost_THREAD_LIBRARY} 
+    ${Boost_FILESYSTEM_LIBRARIES}
+)
 
 install(TARGETS core ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

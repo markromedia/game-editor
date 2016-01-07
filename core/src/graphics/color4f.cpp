@@ -1,6 +1,6 @@
-#include "color4f.hpp"
+#include "graphics/color4f.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 Color4f::Color4f(float r, float g, float b, float a) : r(r), g(g), b(b), a(a)
 {
@@ -8,7 +8,7 @@ Color4f::Color4f(float r, float g, float b, float a) : r(r), g(g), b(b), a(a)
 
 
 
-void Graphics::Color4f::rbga( float r, float g, float b, float a )
+void graphics::Color4f::rbga( float r, float g, float b, float a )
 {
 	this->r = r;
 	this->g = g;

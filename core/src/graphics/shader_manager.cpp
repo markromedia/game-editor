@@ -1,9 +1,9 @@
-#include "shader_manager.hpp"
-#include "../platform/FileSystem.hpp"
+#include "graphics/shader_manager.hpp"
+#include "platform/FileSystem.hpp"
 
 GLubyte* loadFile(std::string filename)
 {
-	return (GLubyte*) FileSystem::LoadFileContents(filename);
+	return (GLubyte*) FileSystem::LoadFileContents(filename, false);
 }
 
 ShaderManager* ShaderManager::instance = NULL;

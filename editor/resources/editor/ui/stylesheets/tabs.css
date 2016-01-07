@@ -1,0 +1,171 @@
+/* line 3, ../sass/tabs.scss */
+.tabs {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 1.7em auto;
+}
+/* line 10, ../sass/tabs.scss */
+.tabs section {
+  position: absolute;
+  display: inline-block;
+  top: 22px;
+  left: 0;
+  padding: 0;
+  background-color: #525252;
+  z-index: 0;
+  width: 100%;
+  height: 554px;
+}
+/* line 21, ../sass/tabs.scss */
+.tabs section :first-child {
+  z-index: 1;
+}
+/* line 25, ../sass/tabs.scss */
+.tabs section h2 {
+  position: absolute;
+  font-size: 12px;
+  font-weight: normal;
+  width: 124px;
+  height: 22px;
+  top: -30px;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  color: white;
+  background-color: #525252;
+  border-width: 1px 1px 1px 1px;
+  border-color: black;
+  border-style: solid;
+}
+/* line 41, ../sass/tabs.scss */
+.tabs section h2 a {
+  display: block;
+  width: 100%;
+  line-height: 1.8em;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  outline: 0 none;
+}
+/* line 54, ../sass/tabs.scss */
+.tabs :nth-child(2) h2 {
+  left: 125px;
+}
+
+/**
+ *
+ * DIRECTORY LIST STYLES
+ *
+ */
+/* line 64, ../sass/tabs.scss */
+#directory-list {
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+/* line 71, ../sass/tabs.scss */
+#directory-list li {
+  padding: 2px;
+  color: white;
+  font-size: 11px;
+  padding-left: 5px;
+  height: 16px;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 79, ../sass/tabs.scss */
+#directory-list li:hover {
+  cursor: pointer;
+}
+/* line 83, ../sass/tabs.scss */
+#directory-list li div {
+  display: inline-block;
+  width: 20px;
+}
+/* line 88, ../sass/tabs.scss */
+#directory-list li img {
+  display: inline-block;
+  width: 15px;
+  padding: 0;
+  margin: 0;
+}
+/* line 97, ../sass/tabs.scss */
+#directory-list li * {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+/* line 102, ../sass/tabs.scss */
+#directory-list :nth-child(odd) {
+  background-color: #414141;
+}
+/* line 107, ../sass/tabs.scss */
+#directory-list :nth-child(even) {
+  background-color: #313131;
+}
+
+/***
+ * ENTITY LIST
+ */
+/* line 116, ../sass/tabs.scss */
+#entity-list {
+  margin-left: -20px;
+  margin-top: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 11px;
+}
+
+/* line 128, ../sass/tabs.scss */
+.collapsibleList li {
+  cursor: auto;
+}
+/* line 132, ../sass/tabs.scss */
+.collapsibleList li ul {
+  list-style: none;
+  padding: 0;
+  margin-left: -20px;
+  width: 250px;
+  list-style-position: inside;
+}
+/* line 139, ../sass/tabs.scss */
+.collapsibleList li ul li {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url("../res/collapsible-list-item.png") no-repeat 2% 50%;
+  cursor: auto;
+  padding-left: 25px;
+  background-size: 15px 15px;
+}
+/* line 147, ../sass/tabs.scss */
+.collapsibleList li ul :last-child {
+  background: url("../res/collapsible-list-last.png") no-repeat 2% 50%;
+  background-size: 15px 15px;
+}
+/* line 153, ../sass/tabs.scss */
+.collapsibleList li :nth-child(odd) {
+  background-color: #414141;
+}
+/* line 157, ../sass/tabs.scss */
+.collapsibleList li :nth-child(even) {
+  background-color: #313131;
+}
+/* line 162, ../sass/tabs.scss */
+.collapsibleList li.collapsibleListOpen {
+  list-style-image: url("../res/collapsible-list-button-open.png");
+  cursor: pointer;
+}
+/* line 168, ../sass/tabs.scss */
+.collapsibleList li.collapsibleListClosed {
+  list-style-image: url("../res/collapsible-list-button-closed.png");
+  cursor: pointer;
+}

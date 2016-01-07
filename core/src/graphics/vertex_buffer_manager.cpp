@@ -1,8 +1,8 @@
-#include "vertex_buffer_manager.hpp"
+#include "graphics/vertex_buffer_manager.hpp"
 
-#include "vertex_buffer.hpp"
+#include "graphics/vertex_buffer.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 VertexBufferManager* VertexBufferManager::instance = NULL;
 
@@ -29,9 +29,9 @@ VertexBuffer* VertexBufferManager::GetBuffer(int flags, int max_vertices, int ma
 }
 
 
-VertexBuffer* Graphics::VertexBufferManager::GetBuffer( int flags /*= 0*/ )
+VertexBuffer* graphics::VertexBufferManager::GetBuffer( int flags /*= 0*/ )
 {
-	return 	Graphics::VertexBufferManager::GetBuffer(flags, DEFAULT_MAX_INDICES, DEFAULT_MAX_INDICES);
+	return 	graphics::VertexBufferManager::GetBuffer(flags, DEFAULT_MAX_INDICES, DEFAULT_MAX_INDICES);
 }
 
 
