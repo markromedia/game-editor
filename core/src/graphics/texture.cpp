@@ -1,15 +1,23 @@
-#include "texture.hpp"
+#include "graphics/texture.hpp"
 
 #include <string>
-#include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "gllogger.hpp"
-#include "../logger.hpp"
-#include "../platform//FileSystem.hpp"
+#include "graphics/gllogger.hpp"
+#include "logger.hpp"
+#include "platform/FileSystem.hpp"
 
-using namespace Graphics;
+using namespace graphics;
+
+Texture::Texture(GLenum texture_format, int width, int height)
+{
+	this->texture_format = texture_format;
+	this->texture_width = width;
+	this->texture_height = height;
+	this->loaded = true; //incase someone tried to call LoadTexture()
+	glGenTextures( 1, &texture_id );
+}
 
 Texture::Texture(std::string filename) {
 	this->filename = filename;	
@@ -24,8 +32,12 @@ Texture::Texture(const Texture &source)
 
 void Texture::LoadTexture()
 {
+	if (this->loaded)
+	{
+		return;
+	}
+
 	SDL_Surface *surface;	// This surface will tell us the details of the image
-	GLenum texture_format;
 	GLint  nOfColors;
 
 	bool success = false;
@@ -102,4 +114,35 @@ void Texture::LoadTexture()
 	if ( surface ) { 
 		SDL_FreeSurface( surface );
 	}
+}
+
+void Texture::SetTextureData(void* data, GLenum data_type, GLint internal_format)
+{
+	glBindTexture( GL_TEXTURE_2D, texture_id );
+
+	// Set the texture's stretching properties
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	// Edit the texture object's image data using the information SDL_Surface gives us
+	glTexImage2D( GL_TEXTURE_2D, 0, internal_format, this->texture_width, this->texture_height, 0,
+		texture_format, data_type, data );
+	CHECK_GL_ERROR();
+}
+
+void Texture::SetTextureSubData(void* data, int offset_x, int offset_y, int width, int height, GLenum data_type, GLint internal_format)
+{
+	glBindTexture( GL_TEXTURE_2D, texture_id );
+
+	// Set the texture's stretching properties
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	glTexSubImage2D(GL_TEXTURE_2D, 0, offset_x, offset_y, width, height, internal_format, data_type, data);
 }

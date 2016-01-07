@@ -9,63 +9,76 @@
 //#include <Rocket/Core.h>
 #include <boost/lexical_cast.hpp>
 
-#include "constants.cpp"
 #include "logger.hpp"
 #include "graphics/color4f.hpp"
-#include "graphics/quad.hpp"
 #include "graphics/texture.hpp"
 #include "graphics/texture_manager.hpp"
-#include "graphics/frame.hpp"
 #include "graphics/render_operation.hpp"
 #include "graphics/render_op_manager.hpp"
 #include "graphics/vertex_buffer_manager.hpp"
-#include "graphics/vertex_buffer.hpp"
-#include "graphics/vertex_data.hpp"
+#include "graphics/render_queue.hpp"
+#include "graphics/transform.hpp"
 #include "data/model_loader.hpp"
+#include "es/system/entity_system.hpp"
+#include "es/system/transform_system.hpp"
+#include "graphics/primitives.hpp"
+
 #include "terrain.hpp"
 
-Graphics::RenderOperation* render_model1;
-Graphics::RenderOperation* render_model2;
-Graphics::RenderOperation* render_wire_frame;
+graphics::RenderOperation* render_model1;
+graphics::RenderOperation* render_model2;
+graphics::RenderOperation* render_wire_frame;
 
 float rot;
 bool render1Enabled = true;
-bool render2Enabled = false;
+bool render2Enabled = true;
 
-int render_1_model = ModelLoader::TEAPOT;
+int render_1_model = ModelLoader::ENEMY;
 int render_2_model = ModelLoader::TORUS;
 
 Terrain terrain;
 
 void initModels()
 {
-	rot = 0;
-	Game::PerspectiveCamera->SetWorldPosition( 0, 0, 100);
-	Game::PerspectiveCamera->Orient(0 , 0, 0);
+    EntitySystem::Init();
 
+	rot = 0;
 	if (render1Enabled) {
-		float x_pos = 0, y_pos = 100, z_pos = -400;
-		render_model1 = Graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
-		render_model1->Color.rbga(1, 0, 0, 1);
-		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
-		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
-		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
-		render_model1->ModelMatrix = model_matrix;
-		render_model1->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/enemy_text02.bmp");
+		float x_pos = 0, y_pos = 0, z_pos = 0;
+        Entity* e = EntitySystem::CreateEntity();
+		TransformComponent* transform = TransformSystem::CreateComponent()
+			->translate(x_pos, y_pos, z_pos)
+			->rotate(0, 0, 0)
+			->uniform_scale(0.1f);
+		e->add_component(transform);
+
+		render_model1 = graphics::RenderOperationManager::GetDrawModelOp(render_1_model);
+
+		render_model1->ModelMatrix = transform->getMatrix();
+		render_model1->_material->
+                _primary_color(graphics::Color4f(1, 0, 0, 1))->
+                _is_lit(false)->
+                _diffuse_texture(graphics::TextureManager::GetTexture("resources/enemy_text02.bmp"));
 	}
 
 	if (render2Enabled) {
-		float x_pos = 0, y_pos = 0, z_pos = -200;
-		render_model2 = Graphics::RenderOperationManager::GetDrawModelOp(render_2_model);
-		render_model2->Color.rbga(1, 0, 0, 1);
-		glm::vec3 t_vec = glm::vec3(x_pos, y_pos, z_pos);
-		glm::mat4 model_matrix = glm::translate(glm::mat4(1.0), t_vec);;
-		//model_matrix = glm::rotate(model_matrix, 0.0f, glm::vec3(1, 0, 0));
-		render_model2->ModelMatrix = model_matrix;
-		render_model2->Diffuse_Texture = Graphics::TextureManager::GetTexture("resources/falcon_toon.bmp");
+        float x_pos = 0, y_pos = 0, z_pos = 0, line_thickness = 1;
+		int rows = 20, cols = 20, spacing = 20;
+		graphics::Color4f color(.5,.5, .5, 1);
+        render_model2 = new graphics::RenderOperation();
+        render_model2->Operation_Type = graphics::RenderOperation::DRAW_MODEL;
+        render_model2->_material
+                ->_is_lit(false)
+                ->_is_colored(true);
+        render_model2->VertexBuffer = graphics::VertexBufferManager::GetBuffer(USE_COLOR | USE_TEXTURE | USE_NORMAL, (rows + cols + 2) * 8, (rows + cols + 2) * 36);
+		graphics::Primitives::CreateGrid(render_model2->VertexBuffer, rows, cols, spacing, spacing, line_thickness, &color);
+        
+        graphics::Transform transform;
+        transform.translate(x_pos, y_pos, z_pos);
+		render_model2->ModelMatrix = transform.getMatrix();
 	}
 
-	terrain.CreateGrid(8, 8, 100, 100);
+	//terrain.CreateGrid(128, 128, 500);
 }
 
 void GameScene::Init()
@@ -73,91 +86,37 @@ void GameScene::Init()
 	initModels();
 
 	//init skybox
-	Skybox.Setup();
+	skybox.Setup();
 
 	//load textures
-	Graphics::TextureManager::LoadTextures();
+	graphics::TextureManager::LoadTextures();
 	//create vbos
-	Graphics::VertexBufferManager::CreateBuffers();
-	
-	//load librocket font/document
-	//Rocket::Core::FontDatabase::LoadFontFace("resources\\rocket\\Oloron.TTF");
-	//document = Game::LibRocketContext->LoadDocument("resources\\rocket\\frame_rate.rml");
-
-	//if (document != NULL)
-	//{
-	//	document->Show();	
-	//}
+	graphics::VertexBufferManager::CreateBuffers();
 }
 
 void GameScene::Update(float dt)
 {
+	render_model1->ModelMatrix = TransformSystem::Find("")->getMatrix();
+
 	Logger::GetInstance()->StartLogPreformance();
 
 	//update orientations of camera
 	Game::PerspectiveCamera->update(dt);
 	Game::SkyboxCamera->update(dt);
+	
+	Game::OrthoCamera->update(dt);
 
 	//draw skybox
-	Skybox.Update();
+    skybox.Update();
 
 	//draw terraom
-	terrain.Render();
+	//terrain.Render();
 
     
 	//draw models
 	if (render1Enabled)
-		Game::ScreenFrame->QueueRenderOperation(render_model1, Game::PerspectiveCamera);
+        graphics::RenderQueue::QueueRenderOperation(render_model1, Game::PerspectiveCamera);
 	if (render2Enabled)
-		Game::ScreenFrame->QueueRenderOperation(render_model2, Game::PerspectiveCamera);
-	//librocket up top of everything
-	Logger::GetInstance()->LogPreformance("GameScene::UpdateLibRocket");
-	UpdateLibRocket();
-	Logger::GetInstance()->StopPreformance("GameScene::UpdateLibRocket");
-
-	Logger::GetInstance()->LogPreformance("GameScene::Render");
-	Render();
-	Logger::GetInstance()->StopPreformance("GameScene::Render");
-
-	Logger::GetInstance()->StopLogPreformance();
+        graphics::RenderQueue::QueueRenderOperation(render_model2, Game::PerspectiveCamera);
 }
-
-void GameScene::Render()
-{
-	//clear the screen
-	glClearColor(1, 1, 1, 1);
-	//glClearColor(0, 0, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	Logger::GetInstance()->LogPreformance("VertexBufferManager::UpdateBuffers");
-	//update all the vbos
-	Graphics::VertexBufferManager::UpdateBuffers();
-	Logger::GetInstance()->StopPreformance("VertexBufferManager::UpdateBuffers");
-
-	Logger::GetInstance()->LogPreformance("ScreenFrame::Render");
-	//tell frame to render
-
-	Game::ScreenFrame->Render();
-	Logger::GetInstance()->StopPreformance("ScreenFrame::Render");
-
-	//tell rocket to render
-	Logger::GetInstance()->LogPreformance("LibRocket::Render");
-	//Game::LibRocketContext->Render();
-	Logger::GetInstance()->StopPreformance("LibRocket::Render");
-	
-	//Swap our back buffer to the front
-	Logger::GetInstance()->LogPreformance("SDL::SwapWindow");
-	SDL_GL_SwapWindow(Game::SDLWindow);
-	//glFinish();
-	Logger::GetInstance()->StopPreformance("SDL::SwapWindow");
-	CHECK_GL_ERROR();
-}
-
-void GameScene::UpdateLibRocket()
-{
-	//set FPS and draw librocket stuff
-	int fps = ((Game::FrameRate + 0.5f) * 100) / 100; const std::string fps_str = boost::lexical_cast<std::string>(fps);
-	//document->GetElementById("framerate")->SetInnerRML(Rocket::Core::String(fps_str.c_str()));
-
-	//Game::LibRocketContext->Update();
-}
+    

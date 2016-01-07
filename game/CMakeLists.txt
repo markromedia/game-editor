@@ -7,14 +7,7 @@ project(game)
 #########################################################################################
 
 INCLUDE_DIRECTORIES(
-	${core_SOURCE_DIR}/src/
-	${core_SOURCE_DIR}/src/data
-	${core_SOURCE_DIR}/src/data/model
-	${core_SOURCE_DIR}/src/es
-	${core_SOURCE_DIR}/src/graphics
-	${core_SOURCE_DIR}/src/librocket
-	${core_SOURCE_DIR}/src/math
-	${core_SOURCE_DIR}/src/platform
+	${core_SOURCE_DIR}/include/
 )
 
 #########################################################################################
@@ -25,6 +18,7 @@ INCLUDE_DIRECTORIES(
 FILE (GLOB SRC_ROOT
 	src/*.cpp                
 	src/*.hpp
+    src/*.h
 )
 LIST(APPEND game_SRC ${SRC_ROOT})
 SOURCE_GROUP("src"
@@ -59,6 +53,7 @@ add_executable(game ${game_SRC})
 add_library (game_lib ${game_SRC})
 
 target_link_libraries(game core)
+target_link_libraries(game_lib core)
 
 #copy core projects resources
 add_custom_command(TARGET game PRE_BUILD 

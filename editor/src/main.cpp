@@ -2,12 +2,14 @@
 
 #include <iostream>
 #include <string>
-#include "sdl_app.hpp"
+#include "editor_sdl_app.hpp"
+
+
 
 
 int main(int argc, char* argv[])
 {
-	SdlApp sdlApp;
+	EditorSdlApp sdlApp;
 	return sdlApp.OnExecute();
 }
 

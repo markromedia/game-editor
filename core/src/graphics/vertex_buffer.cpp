@@ -1,9 +1,9 @@
-#include "vertex_buffer.hpp"
+#include "graphics/vertex_buffer.hpp"
 
-#include "vertex_data.hpp"
-#include "gllogger.hpp"
+#include "graphics/vertex_data.hpp"
+#include "graphics/gllogger.hpp"
 
-using namespace Graphics;
+using namespace graphics;
 
 VertexBuffer::VertexBuffer(unsigned int flags, int max_vertices, int max_indices) : flags(flags), max_vertices(max_vertices), max_indices(max_indices)
 {
@@ -152,4 +152,53 @@ void VertexBuffer::CreateTriangle( Vertex* v1, Vertex* v2, Vertex* v3 )
 	indices_buffer.push_back(v1->index);
 	indices_buffer.push_back(v2->index);
 	indices_buffer.push_back(v3->index);
+}
+
+void VertexBuffer::Bind(int position_idx, int color_idx, int normal_idx, int texture_idx) 
+{
+	//bind VAO
+    glBindVertexArray(this->vao_ptr);
+	//bind VBO
+	glBindBuffer(GL_ARRAY_BUFFER, this->iva_ptr);
+	
+	//point to the vertices
+	glEnableVertexAttribArray(position_idx);
+	glVertexAttribPointer(position_idx, 3, GL_FLOAT, GL_FALSE, this->vertex_size, (const GLvoid*) this->position_offset);
+
+	//point to color
+	if (USE_COLOR & flags)
+	{
+		glEnableVertexAttribArray(color_idx);
+		glVertexAttribPointer(color_idx, 4, GL_FLOAT, GL_FALSE, this->vertex_size , (const GLvoid*) this->color_offset);
+	} else if (ONE_FLOAT_COLOR & flags)
+	{
+		glEnableVertexAttribArray(color_idx);
+		glVertexAttribPointer(color_idx, 1, GL_FLOAT, GL_FALSE, this->vertex_size , (const GLvoid*) this->color_offset);
+	}
+
+	//point to normals
+	if (USE_NORMAL & flags) 
+	{
+		glEnableVertexAttribArray(normal_idx);
+		glVertexAttribPointer(normal_idx, 3, GL_FLOAT, GL_FALSE, this->vertex_size , (const GLvoid*) this->normal_offset);
+	}
+	
+	//point to the texture
+	if (USE_TEXTURE & flags) 
+	{
+		glEnableVertexAttribArray(texture_idx);
+		glVertexAttribPointer(texture_idx, 2, GL_FLOAT, GL_FALSE, this->vertex_size , (const GLvoid*) this->texture_offset);
+	}
+
+	//bind the ibo
+	if (!(DISABLE_IBO & flags))
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indices_ptr);	
+	}
+}
+
+void VertexBuffer::Unbind() {
+	glBindVertexArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

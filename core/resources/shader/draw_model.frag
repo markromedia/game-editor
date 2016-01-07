@@ -24,6 +24,7 @@ const float c_zero = 0.0;
 const float c_one = 1.0;
 
 //uniforms
+uniform bool u_uses_lighting;
 uniform mat4 u_modelview_matrix;
 uniform mat4 u_mvp_matrix;
 uniform material_properties u_material;
@@ -44,6 +45,7 @@ uniform bool u_has_illumination_texture;
 uniform sampler2D s_illumination_texture;
 
 uniform vec4 u_primary_color;
+uniform bool u_uses_colored_vertices;
 
 //varyings
 in vec2 v_text_coord;
@@ -107,25 +109,29 @@ apply_linear_fog_factor(vec4 color)
 }
 
 void main()									
-{												
-	vec3 normal = normalize(v_normal); //renormalize incase interpolating screws up our lengths
-	vec4 color = calc_directional_light(normal);
-	//vec4 color = calc_toon_shading(normal);
+{
+    vec4 color = vec4(1, 1, 1, 1);
+
+    if (u_has_diffuse_texture)
+    {
+        vec2 flipped_texcoord = vec2(v_text_coord.x, 1.0 - v_text_coord.y);
+        color = texture(s_diffuse_texture, flipped_texcoord);
+    }
+
+    if (u_uses_lighting) {
+        vec3 normal = normalize(v_normal); //renormalize incase interpolating screws up our lengths
+        color = calc_directional_light(normal);
+    }
+
+    if (u_uses_colored_vertices)
+    {
+        color = v_color;
+    }
+	else 
+	{
+		color[3] = 1; //make sure alpha is on
+	}
 	
-	if (u_has_diffuse_texture) 
-	{
-		color = 0.7f * texture(s_diffuse_texture, v_text_coord) + .3 * color;
-	}
-
-	if (u_has_illumination_texture)
-	{
-		vec4 il = texture(s_illumination_texture, v_text_coord);
-		if (il.z > .3)
-		{
-			color += vec4(u_primary_color[3], u_primary_color[3], u_primary_color[3], u_primary_color[3]) * vec4(1, 1, 1, 1);
-		}
-	}
-
-	color[3] = 1; //make sure alpha is on
-	fragColor = apply_linear_fog_factor(color); //apply any fog
+	//fragColor = apply_linear_fog_factor(color); //apply any fog
+    fragColor = color;
 }												

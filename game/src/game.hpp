@@ -9,8 +9,9 @@
 // INCLUDES
 #include <SDL.h>
 //#include <Rocket/Core.h>
-#include "graphics/frame.hpp"
 #include "graphics/camera.hpp"
+
+#include "camera_control.hpp"
 
 //forward declaration
 class Scene; 
@@ -22,6 +23,8 @@ private:
 	std::vector<float>			frame_times;
 	/// Adds a frame time.
 	void addFrameTime(float f);
+
+	CameraControl* cameraControl;
 public:
 	/// Default constructor.
 	Game(void);
@@ -34,6 +37,9 @@ public:
 	/// @param	Event any possibly sdl event (such as input). can be null
 	void Update(float dt);
 
+	/// Renders this object.
+	void Render();
+
 	/// Executes the event action.
 	///
 	/// @param [in,out]	Event	If non-null, the event.
@@ -42,23 +48,18 @@ public:
 	/// @summary	The current scene.
 	Scene*								current_scene;
 
-	/// These are injected by sdl
-	static SDL_Window*					SDLWindow;
-	static SDL_GLContext				OpenGLContext;
-
 	// The librocket context
 	//static Rocket::Core::Context*		LibRocketContext;
-
-	/// @summary	The main drawable frame
-	static Graphics::Frame*				ScreenFrame;
 
 	// the curent framerate/previous frame times
 	static float						FrameRate, update_time, render_time;
 
 	/// the cameras
-	static Graphics::Camera				*PerspectiveCamera;
-	static Graphics::Camera				*OrthoCamera;
-	static Graphics::Camera				*SkyboxCamera;
+	static graphics::Camera				*PerspectiveCamera;
+	static graphics::Camera				*OrthoCamera;
+	static graphics::Camera				*SkyboxCamera;
+
+
 };
 
 ///-----------------------------------------------------------------------------------------------

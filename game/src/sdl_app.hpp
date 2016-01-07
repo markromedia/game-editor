@@ -20,7 +20,6 @@
 #include "librocket/librocket_renderer.hpp"
 #include "librocket/librocket_system.hpp"
 #include "game.hpp"
-#include "constants.cpp"
 #include "graphics/glstate.hpp"
 #include "logger.hpp"
 
