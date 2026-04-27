@@ -9,19 +9,19 @@
 namespace  graphics {
 
     struct MaterialTextureBinding {
-        unsigned int uniform_has_texture;
-        unsigned int uniform_texture_id;
+        GLint uniform_has_texture;
+        GLint uniform_texture_id;
     };
 
     struct MaterialGLBinding {
-        unsigned int material_uniform_ambient_color;
-        unsigned int material_uniform_diffuse_color;
-        unsigned int material_uniform_specular_color;
-        unsigned int material_uniform_specular_exponent;
-        unsigned int uniform_primary_color;
+        GLint material_uniform_ambient_color;
+        GLint material_uniform_diffuse_color;
+        GLint material_uniform_specular_color;
+        GLint material_uniform_specular_exponent;
+        GLint uniform_primary_color;
 
-        unsigned int uniform_uses_colored_vertices;
-        unsigned int uniform_uses_lighting;
+        GLint uniform_uses_colored_vertices;
+        GLint uniform_uses_lighting;
 
         MaterialTextureBinding diffuse_texture;
         MaterialTextureBinding toon_texture;

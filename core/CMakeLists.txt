@@ -290,7 +290,6 @@ add_library (core ${core_SRC})
 target_link_libraries(core platform 
 	${SDL2_LIBRARY} 
 	${SDL2_IMAGE_LIBRARIES} 
-	${LUA_LIBRARIES} 
 	${GLEW_LIBRARIES} 
 	${OPENGL_LIBRARIES} 
 	${Boost_CHRONO_LIBRARY} 
@@ -299,5 +298,9 @@ target_link_libraries(core platform
 	${Boost_THREAD_LIBRARY} 
     ${Boost_FILESYSTEM_LIBRARIES}
 )
+
+if(FLIGHT_ENABLE_LUA)
+	target_link_libraries(core ${LUA_LIBRARIES})
+endif()
 
 install(TARGETS core ARCHIVE DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

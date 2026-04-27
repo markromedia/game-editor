@@ -30,36 +30,36 @@ namespace graphics {
 	private:
 		GLuint programObject;
 		
-		GLuint mvp_matrix_uniform;
-		GLuint model_view_matrix_uniform;
+		GLint mvp_matrix_uniform;
+		GLint model_view_matrix_uniform;
 
-		GLuint has_diffuse_texture_uniform;
-		GLuint diffuse_texture_sampler_uniform;
+		GLint has_diffuse_texture_uniform;
+		GLint diffuse_texture_sampler_uniform;
 		
-		GLuint has_toon_texture_uniform;
-		GLuint toon_texture_sampler_uniform;
+		GLint has_toon_texture_uniform;
+		GLint toon_texture_sampler_uniform;
 
-		GLuint has_illumination_texture_uniform;
-		GLuint illumination_texture_sampler_uniform;
+		GLint has_illumination_texture_uniform;
+		GLint illumination_texture_sampler_uniform;
 
-		GLuint fog_max_distance_uniform;
-		GLuint fog_min_distance_uniform;
+		GLint fog_max_distance_uniform;
+		GLint fog_min_distance_uniform;
 
-		GLuint primary_color_uniform;
-        GLuint uses_colored_vertices;
+		GLint primary_color_uniform;
+        GLint uses_colored_vertices;
         
-        GLuint uses_lighting;
+        GLint uses_lighting;
 
-		GLuint light_uniform_direction;
-		GLuint light_uniform_halfplane;
-		GLuint light_uniform_ambient_color;
-		GLuint light_uniform_diffuse_color;
-		GLuint light_uniform_specular_color;
+		GLint light_uniform_direction;
+		GLint light_uniform_halfplane;
+		GLint light_uniform_ambient_color;
+		GLint light_uniform_diffuse_color;
+		GLint light_uniform_specular_color;
 		
-		GLuint material_uniform_ambient_color;
-		GLuint material_uniform_diffuse_color;
-		GLuint material_uniform_specular_color;
-		GLuint material_uniform_specular_exponent;
+		GLint material_uniform_ambient_color;
+		GLint material_uniform_diffuse_color;
+		GLint material_uniform_specular_color;
+		GLint material_uniform_specular_exponent;
 		
 		glm::mat4 model_view_mat;
 		glm::mat4 model_view_projection_mat;

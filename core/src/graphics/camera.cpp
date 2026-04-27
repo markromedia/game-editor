@@ -92,17 +92,17 @@ void graphics::Camera::LookAt(glm::vec3 position)
 
 void graphics::Camera::RotateX( float angle_in_radians )
 {
-
+	Rotate(angle_in_radians, getRightVector());
 }
 
 void graphics::Camera::RotateY( float angle_in_radians )
 {
-
+	Rotate(angle_in_radians, glm::vec3(0, 1, 0));
 }
 
 void graphics::Camera::RotateZ( float angle_in_radians )
 {
-
+	Rotate(angle_in_radians, getForwardVector());
 }
 
 
