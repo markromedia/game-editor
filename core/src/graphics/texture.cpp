@@ -37,7 +37,7 @@ void Texture::LoadTexture()
 		return;
 	}
 
-	SDL_Surface *surface;	// This surface will tell us the details of the image
+	SDL_Surface *surface = NULL;	// This surface will tell us the details of the image
 	GLint  nOfColors;
 
 	bool success = false;
@@ -89,6 +89,7 @@ void Texture::LoadTexture()
 
 		// Bind the texture object
 		glBindTexture( GL_TEXTURE_2D, texture_id );
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		// Set the texture's stretching properties
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
@@ -98,13 +99,16 @@ void Texture::LoadTexture()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		// Edit the texture object's image data using the information SDL_Surface gives us
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0,
+		GLint internal_format = texture_format == GL_RGBA || texture_format == GL_BGRA ? GL_RGBA : GL_RGB;
+		glTexImage2D( GL_TEXTURE_2D, 0, internal_format, surface->w, surface->h, 0,
 			texture_format, GL_UNSIGNED_BYTE, surface->pixels );
 		CHECK_GL_ERROR();
+		this->loaded = true;
 	} 
 	else {
 		std::string s = "SDL could not load " + filename;
 		LOG_ERROR(s.c_str());
+		LOG_ERROR(SDL_GetError());
 		CHECK_GL_ERROR();
 
 		SDL_Quit();

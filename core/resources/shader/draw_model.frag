@@ -120,7 +120,7 @@ void main()
 
     if (u_uses_lighting) {
         vec3 normal = normalize(v_normal); //renormalize incase interpolating screws up our lengths
-        color = calc_directional_light(normal);
+        color *= calc_directional_light(normal);
     }
 
     if (u_uses_colored_vertices)

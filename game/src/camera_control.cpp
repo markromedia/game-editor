@@ -118,13 +118,11 @@ void CameraControl::OnEvent(SDL_Event* Event)
 		break;
 	}
 	case SDL_MOUSEMOTION : {
-		//-rotations correspond to up and left
-		int dy = -Event->motion.yrel;
+		int dx = Event->motion.xrel;
+		int dy = Event->motion.yrel;
 
-		int dx = -Event->motion.xrel;
-
-		camera_node->RotateX(MATH_DEG_TO_RAD(dx));
-		camera_node->RotateY(MATH_DEG_TO_RAD(dy));
+		camera_node->RotateY(MATH_DEG_TO_RAD(dx));
+		camera_node->RotateX(MATH_DEG_TO_RAD(dy));
 		break;
 	}
 	}

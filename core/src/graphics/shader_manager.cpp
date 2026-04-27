@@ -36,7 +36,7 @@ ShaderObject* ShaderManager::_createShader( GLenum type, std::string filename )
 	shaders.push_back(shader);
 
 	//clean up file contents
-	delete file_contents;
+	delete[] file_contents;
 
 	return shader;
 }

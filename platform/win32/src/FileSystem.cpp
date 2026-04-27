@@ -7,12 +7,6 @@
 #include <set>
 
 #include <algorithm>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/thread/thread.hpp> 
-
-#define BOOST_FILESYSTEM_VERSION 3
-#define BOOST_FILESYSTEM_NO_DEPRECATED
-#include <boost/filesystem.hpp>
 
 std::vector<void (*)(std::string modified_file)> FileSystem::_change_listeners = std::vector<void (*)(std::string modified_file)>();
 
@@ -94,40 +88,43 @@ void FileSystem::ListenForDirectoryChanges(std::string directory)
 				
             }
         }
-		boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+		Sleep(2000);
     }
 }
 
 std::vector<File> FileSystem::ListDirectoryContents(std::string directory)
 {
-	  std::vector<File> files;
-    
-    if (!boost::filesystem::exists(directory)) return files;
-    
-    if (boost::filesystem::is_directory(directory))
-    {
-        boost::filesystem::directory_iterator it(directory);
-        boost::filesystem::directory_iterator endit;
-        while(it != endit)
-        {
-            if (boost::filesystem::is_regular_file(*it))
-            {
-                std::string filename = it->path().filename().string();
-                File f = {filename, false};
-                files.push_back(f);
-            }
-            if (boost::filesystem::is_directory(*it))
-            {
-                std::string filename = it->path().filename().string();
-                File f = {filename, true};
-                files.push_back(f);
-            }
+	std::vector<File> files;
+	std::string search_path = directory;
 
-            ++it;
-        }
-    }
-    
-    return files;;
+	if (!search_path.empty() && search_path.back() != '/' && search_path.back() != '\\')
+	{
+		search_path.append("\\");
+	}
+	search_path.append("*");
+
+	WIN32_FIND_DATAA find_data;
+	HANDLE find_handle = FindFirstFileA(search_path.c_str(), &find_data);
+	if (find_handle == INVALID_HANDLE_VALUE)
+	{
+		return files;
+	}
+
+	do
+	{
+		std::string filename(find_data.cFileName);
+		if (filename == "." || filename == "..")
+		{
+			continue;
+		}
+
+		bool is_directory = (find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+		File f = {filename, is_directory};
+		files.push_back(f);
+	} while (FindNextFileA(find_handle, &find_data) != 0);
+
+	FindClose(find_handle);
+	return files;
 }
 
 
@@ -142,18 +139,9 @@ unsigned char* FileSystem::LoadFileContents(std::string filename, bool path_is_a
 	file.open(filepath, std::ios::in);
 	unsigned long len = getFileLength(file);
 
-	unsigned char* shaderSrc = (unsigned char*) new char[len+1];
-	shaderSrc[len] = 0;  // len isn't always strlen cause some characters are stripped in ascii read...
-	// it is important to 0-terminate the real length later, len is just max possible value...
-
-	unsigned int i=0;
-	while (file.good())
-	{
-		shaderSrc[i++] = file.get();       // get character from file
-		if (i>len) i=len;				   // coding guidelines...
-	}
-
-	shaderSrc[i] = 0;  // 0 terminate it.
+	unsigned char* shaderSrc = new unsigned char[len + 1];
+	file.read(reinterpret_cast<char*>(shaderSrc), len);
+	shaderSrc[file.gcount()] = 0;
 	file.close();
 
 	return shaderSrc;

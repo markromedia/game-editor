@@ -91,11 +91,11 @@ bool SdlApp::OnInit()
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 
-    Screen::Init(300, 200);
+    Screen::Init(1200, 800);
 
     if((SDLWindow = SDL_CreateWindow("Flight",
-            0,
-            0,
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
             Screen::Width(),
             Screen::Height(),
             SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN)) == NULL) {
@@ -133,6 +133,7 @@ bool SdlApp::OnInit()
 	LOG_DEBUG("Initializing GLEW");
     glewExperimental = GL_TRUE;
 	glewInit();
+	glGetError();
 	CHECK_GL_ERROR();
 
 	/* set viewport */

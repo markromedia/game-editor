@@ -61,8 +61,11 @@ void DrawModelExecutor::Init()
 	mvp_matrix_uniform = glGetUniformLocation(programObject, "u_mvp_matrix");
 	model_view_matrix_uniform = glGetUniformLocation(programObject, "u_modelview_matrix");
 	has_diffuse_texture_uniform = glGetUniformLocation(programObject, "u_has_diffuse_texture");
+	diffuse_texture_sampler_uniform = glGetUniformLocation(programObject, "s_diffuse_texture");
 	has_toon_texture_uniform = glGetUniformLocation(programObject, "u_has_toon_texture");
+	toon_texture_sampler_uniform = glGetUniformLocation(programObject, "s_toon_texture");
 	has_illumination_texture_uniform = glGetUniformLocation(programObject, "u_has_illumination_texture");
+	illumination_texture_sampler_uniform = glGetUniformLocation(programObject, "s_illumination_texture");
 	primary_color_uniform = glGetUniformLocation(programObject, "u_primary_color");
     uses_colored_vertices = glGetUniformLocation(programObject, "u_uses_colored_vertices");
     uses_lighting = glGetUniformLocation(programObject, "u_uses_lighting");
@@ -151,6 +154,13 @@ void graphics::DrawModelExecutor::SetUniforms(RenderOperation* render)
         };
         render->_material->Bind(binding);
     }
+
+	if (diffuse_texture_sampler_uniform >= 0)
+		glUniform1i(diffuse_texture_sampler_uniform, 0);
+	if (toon_texture_sampler_uniform >= 0)
+		glUniform1i(toon_texture_sampler_uniform, 1);
+	if (illumination_texture_sampler_uniform >= 0)
+		glUniform1i(illumination_texture_sampler_uniform, 2);
 
 	//set fog
 	glUniform1f(fog_min_distance_uniform,1000);
